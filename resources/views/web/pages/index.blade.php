@@ -137,40 +137,6 @@
 
       </div>
 
-      {{-- <div class="grid gap-3 grid-cols-2">
-        <div>
-          <form action="{{url('guess-score')}}" method="post">
-          @csrf
-          @foreach ($matches as $match)
-              <div class="">
-                  {{$match->team1}}  vs {{$match->team2}}
-
-                    @if (count($myguess) !== 0 )
-                      @foreach ($myguess as $guess)
-                        @if ($guess->guessing_score_a !== NULL && $guess->guessing_score_b !== NULL)
-                            <input type="number" name="guess_scorea_{{$match->id}}"
-                            value="{{$guess->guessing_score_a}}"
-                            ></input>
-                            <input type="number" name="guess_scoreb_{{$match->id}}"
-                            value="{{$guess->guessing_score_b}}"
-                            ></input>
-                        @endif
-                      @endforeach
-                    @endif
-                    <input type="number" name="guess_scorea_{{$match->id}}"
-                    value=""
-                    ></input>
-                    <input type="number" name="guess_scoreb_{{$match->id}}"
-                    value=""
-                    ></input>
-
-                    <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Blue</button>
-                </div>
-          @endforeach
-        </form>
-
-        </div>
-      </div> --}}
     </div>
 
 </main>
