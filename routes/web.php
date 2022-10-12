@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FacebookLoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\GoogleLoginController;
@@ -34,6 +35,10 @@ Route::group(['middleware' => ['guest']], function() {
      /* Google Social Login */
     Route::get('/login/google', [GoogleLoginController::class,'redirect'])->name('login.google-redirect');
     Route::get('/login/google/callback', [GoogleLoginController::class,'callback'])->name('login.google-callback');
+
+    /* facebook Login */
+    Route::get('/login/facebook', [FacebookLoginController::class, 'redirect'])->name('login.facebook-redirect');
+    Route::get('login/facebook/callback', [FacebookLoginController::class, 'callback'])->name('login.facebook-callback');
 
 });
 
