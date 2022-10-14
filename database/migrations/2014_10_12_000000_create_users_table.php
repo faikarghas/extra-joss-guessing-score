@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->string('username')->nullable();
             $table->tinyInteger('role')->default('0');
             $table->integer('total_point')->default('0');

@@ -36,5 +36,12 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'), //'add Your Client Secret',
         'redirect' => env('GOOGLE_LOGIN_REDIRECT') // 'http://127.0.0.1:8000/login/google/callback',
     ],
+    /* Social Media */
+    'facebook' => [
+        'client_id'     => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect'      => env('FACEBOOK_LOGIN_REDIRECT'),
+        // 'redirect'      => 'http://localhost:8000/auth/facebook/callback',
+    ],
 
 ];
