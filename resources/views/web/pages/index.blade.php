@@ -20,7 +20,7 @@
         <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
       </a>
 
-      Not login
+      <p>IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</p>
       @endguest
 
     <div class="container mx-auto">

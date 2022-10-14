@@ -17,6 +17,8 @@ use App\Http\Controllers\Web\GoogleLoginController;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
 
+Route::get('/ex',[HomeController::class,'ex'])->name('ex');
+
 
 Route::group(['middleware' => ['guest']], function() {
     // /**

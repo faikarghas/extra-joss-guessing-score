@@ -1,0 +1,34 @@
+  @foreach ($matches as $match)
+                <div class="basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group A Matchday 1of 3</span>
+                    <div class="flex flex-wrap">
+                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                            <li class="mb-2 flex items-center">
+                                <img src="{{asset('/images/countries/qatar.png')}}" class="h-[30px]"/>
+                                <p class="text-white font-sans ml-4 text-[17px] leading-tight">Qatar</p>
+                            </li>
+                            <li class="flex items-center">
+                                <img src="{{asset('/images/countries/equador.png')}}" class="h-[30px]"/>
+                                <p class="text-white font-sans ml-4 text-[17px] leading-tight">Equador</p>
+                            </li>
+                        </ul>
+                        <div class="basis-1/2 flex items-center justify-center">
+                            {{-- SCORE --}}
+                            {{-- <ul class="score">
+                                <li class="mb-2 flex items-center">
+                                    <p class="text-white font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                </li>
+                                <li class="flex items-center">
+                                    <p class="text-white font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                </li>
+                            </ul> --}}
+                            {{-- EDIT --}}
+                            {{-- <div class="bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div> --}}
+                            {{-- TEBAK --}}
+                            <div class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[113px] text-center cursor-pointer">Tebak Skor</div>
+
+                            {{-- REWARD --}}
+                        </div>
+                    </div>
+                </div>
+                @endforeach

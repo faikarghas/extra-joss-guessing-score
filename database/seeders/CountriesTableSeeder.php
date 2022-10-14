@@ -196,7 +196,9 @@ class CountriesTableSeeder extends Seeder
 	            'id_team_b' => rand(1,32),
 	            'score_a' => rand(0,5),
 	            'score_b' => rand(0,5),
-                'round' => $matchday[rand(0,2)],
+                'round' => 'Group Stage 1',
+
+                // 'round' => $matchday[rand(0,2)],
                 // 'expired_time' => '',
                 // 'match_time' => ''
 	        ]);

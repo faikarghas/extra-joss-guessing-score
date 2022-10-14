@@ -30,6 +30,9 @@ import { getCurrentDate } from './utils/index';
             const homePage = new Home();
             // Init all functionality
             homePage.init();
+            homePage.guessModal();
+            homePage.kirimForm();
+            homePage.closeModal();
 
             console.log(
                 Window.list

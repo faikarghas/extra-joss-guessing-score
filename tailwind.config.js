@@ -7,7 +7,12 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        head: ['BebasNeue-Regular'],
+        sans: ['WorkSans-Regular'],
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin')

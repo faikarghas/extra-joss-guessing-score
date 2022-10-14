@@ -3,3 +3,16 @@
 @tailwind utilities;
 
 
+@font-face {
+    font-family: 'BebasNeue-Regular';
+    src: url('/public/fonts/BebasNeue-Regular.woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'WorkSans-Regular';
+    src: url('/public/fonts/WorkSans-Regular.woff');
+    font-weight: 400;
+    font-style: normal;
+}

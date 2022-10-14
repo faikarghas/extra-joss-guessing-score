@@ -40,7 +40,7 @@ class HomeController extends Controller
         // Daftar pertandingan
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","expired_time")
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","match_expired_time")
         ->where([["fmatches.round","Group Stage 1"]])
         ->get();
 
@@ -51,14 +51,14 @@ class HomeController extends Controller
         $matches2 = Guessing::leftJoin('fmatches','guessings.id_match','=','fmatches.id')
         ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","guessing_score_a","guessing_score_b","score_a","score_b","round","stadium","match_time","expired_time")
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","guessing_score_a","guessing_score_b","score_a","score_b","round","stadium","match_time","match_expired_time")
         ->get();
 
         //klasemen
         $klasemens = User::orderBy('total_point','DESC')
         ->orderBy('name','ASC')
         ->get();
-        
+
         $myguess = [];
         if (Auth::check()) {
             // Tebakan per user
@@ -171,23 +171,27 @@ class HomeController extends Controller
     }
 
     public function storeOrUpdateScore(Request $request,$id_match){
-        $someName = $request->except('_token');
+        $req = $request->all();
+
 
 
         Guessing::updateOrCreate(
             ['id_user'=>Auth::user()->id, 'id_match'=> $id_match],
-            ['guessing_score_a' => $someName['guess_score_a'], 'guessing_score_b' => $someName['guess_score_b']]
+            ['guessing_score_a' => $req['guess_score_a'], 'guessing_score_b' => $req['guess_score_b']]
         );
         // $someName['guess_scorea_'];
 
-        // dd($someName);
+        return response()->json([
+            'code' => '200',
+            'message' => 'success'
+        ]);
     }
 
     public function guess($id_match){
 
         $match = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","round","stadium","match_time","expired_time")
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","round","stadium","match_time","match_expired_time")
         ->where([["fmatches.id","=",$id_match],["fmatches.round","Group Stage 1"]])
         ->get();
 
@@ -205,6 +209,23 @@ class HomeController extends Controller
             'myguess' => $myguess
         ];
         return view('web.pages.match',$data);
+    }
+
+    public function ex(){
+
+         // Daftar pertandingan
+         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","match_expired_time")
+         ->where([["fmatches.round","Group Stage 1"]])
+         ->get();
+ 
+        // dd($matches);
+        $data = [
+            'matches' => $matches
+        ];
+
+        return view('web.pages.ex',$data);
     }
 
 }
