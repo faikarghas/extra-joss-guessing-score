@@ -23,77 +23,78 @@ class HomeController extends Controller
     public function index()
     {
         // User yg menebak benar
-        $userGuess = Guessing::select('guessings.id','guessings.id_user','guessings.id_match','guessing_score_a','guessing_score_b','status')
-        ->leftJoin('users','guessings.id_user','=','users.id')
-        ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
-        ->whereRaw(
-            '(
-                CASE
-                    WHEN ( guessings.guessing_score_a = fmatches.score_a AND
-                    guessings.guessing_score_b = fmatches.score_b ) THEN true ELSE false
-                END
-            )'
-        )
-        ->where([['fmatches.match_status','=',1]])
-        ->get();
+        // $userGuess = Guessing::select('guessings.id','guessings.id_user','guessings.id_match','guessing_score_a','guessing_score_b','status')
+        // ->leftJoin('users','guessings.id_user','=','users.id')
+        // ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+        // ->whereRaw(
+        //     '(
+        //         CASE
+        //             WHEN ( guessings.guessing_score_a = fmatches.score_a AND
+        //             guessings.guessing_score_b = fmatches.score_b ) THEN true ELSE false
+        //         END
+        //     )'
+        // )
+        // ->where([['fmatches.match_status','=',1]])
+        // ->get();
 
         // Daftar pertandingan
-        $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","match_expired_time")
-        ->where([["fmatches.round","Group Stage 1"]])
-        ->get();
+        // $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        // ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        // ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","expired_time")
+        // ->where([["fmatches.round","Group Stage 1"]])
+        // ->get();
 
 
         // dd($matches);
 
         // Daftar tebakan user
-        $matches2 = Guessing::leftJoin('fmatches','guessings.id_match','=','fmatches.id')
-        ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","guessing_score_a","guessing_score_b","score_a","score_b","round","stadium","match_time","match_expired_time")
-        ->get();
+        // $matches2 = Guessing::leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+        // ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        // ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        // ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","guessing_score_a","guessing_score_b","score_a","score_b","round","stadium","match_time","expired_time")
+        // ->get();
 
         //klasemen
-        $klasemens = User::orderBy('total_point','DESC')
-        ->orderBy('name','ASC')
-        ->get();
-
+        // $klasemens = User::orderBy('total_point','DESC')
+        // ->orderBy('name','ASC')
+        // ->get();
+        
         $myguess = [];
-        if (Auth::check()) {
-            // Tebakan per user
-            $myguess = Guessing::leftJoin('users','guessings.id_user','=','users.id')
-            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
-            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-            ->where('guessings.id_user',Auth::user()->id)
-            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b')
-            ->get();
-        }
+        // if (Auth::check()) {
+        //     // Tebakan per user
+        //     $myguess = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+        //     ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+        //     ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        //     ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        //     ->where('guessings.id_user',Auth::user()->id)
+        //     ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b')
+        //     ->get();
+        // }
 
-        $test = Fmatch::where('round','Group Stage 1')
-        ->leftJoin('guessings', 'fmatches.id','guessings.id_match')
-        ->where('id_user',11)
-        ->get();
+        // $test = Fmatch::where('round','Group Stage 1')
+        // ->leftJoin('guessings', 'fmatches.id','guessings.id_match')
+        // ->where('id_user',11)
+        // ->get();
 
-        $userDetail=[];
-        if (Auth::check()) {
-            $userDetail = [
-                'email' => Auth::user()->email,
-                'name' => Auth::user()->name,
-                'point' => Auth::user()->total_point,
-            ];
-        }
+        // $userDetail=[];
+        // if (Auth::check()) {
+        //     $userDetail = [
+        //         'email' => Auth::user()->email,
+        //         'name' => Auth::user()->name,
+        //         'point' => Auth::user()->total_point,
+        //     ];
+        // }
 
 
-        $data = [
-            'klasemens' => $klasemens,
-            'matches' => $matches,
-            'myguess' => $myguess,
-            'userDetail' => $userDetail
-        ];
+        // $data = [
+        //     'klasemens' => $klasemens,
+        //     'matches' => $matches,
+        //     'myguess' => $myguess,
+        //     'userDetail' => $userDetail
+        // ];
 
-        return view('web.pages.index',$data);
+        // return view('web.pages.index',$data);
+        return view('web.pages.index');
     }
 
     /**
