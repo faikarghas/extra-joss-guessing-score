@@ -4,6 +4,8 @@ use App\Http\Controllers\FacebookLoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\GoogleLoginController;
+use App\Http\Controllers\Admin\DasboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,23 +73,13 @@ All Admin Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-});
-  
-/*------------------------------------------
---------------------------------------------
-All Admin Routes List
---------------------------------------------
---------------------------------------------*/
-Route::middleware(['auth', 'user-access:manager'])->group(function () {
-  
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    //Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 Route::get('logout', function ()
 {
     auth()->logout();
     Session()->flush();
-
     return Redirect::to('/');
 })->name('logout');

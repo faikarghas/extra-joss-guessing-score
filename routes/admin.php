@@ -17,25 +17,22 @@ use Illuminate\Http\Request;
 |
 */
 
-
-
-// Route::get('/', function() {
-//     print('I am an admin');
-// });
-
-//Dashboard
-Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
-//Slider
-Route::resource('/sliders', \App\Http\Controllers\Admin\SliderController::class);
-//Categories
-Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class);
-Route::get('/categories/select', [\App\Http\Controllers\Admin\CategoryController::class, 'select'])->name('categories.select');
-//Posts
-Route::get('/posts/details/{id}', [\App\Http\Controllers\Admin\PostController::class, 'details'])->name('posts.details');
-Route::resource('/posts', \App\Http\Controllers\Admin\PostController::class);
-Route::resource('/postimages', \App\Http\Controllers\Admin\PostImagesController::class);
-//User
-
-
-
-
+//Route::group(['prefix'=>'dashboard', 'middleware'=> ['web','auth','user-access:admin']], function() {
+Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
+  //Dashboard
+  Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+  //Slider
+  Route::resource('/sliders', \App\Http\Controllers\Admin\SliderController::class);
+  //Categories
+  Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class);
+  Route::get('/categories/select', [\App\Http\Controllers\Admin\CategoryController::class, 'select'])->name('categories.select');
+  //Posts
+  Route::get('/posts/details/{id}', [\App\Http\Controllers\Admin\PostController::class, 'details'])->name('posts.details');
+  Route::resource('/posts', \App\Http\Controllers\Admin\PostController::class);
+  Route::resource('/postimages', \App\Http\Controllers\Admin\PostImagesController::class);
+  //User
+  // file manager
+  Route::group(['prefix' => 'filemanager'], function () {
+    UniSharp\LaravelFilemanager\Lfm::routes();
+  });
+});
