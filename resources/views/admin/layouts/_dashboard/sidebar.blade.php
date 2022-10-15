@@ -1,67 +1,60 @@
-<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-  <div class="sb-sidenav-menu">
-     <div class="nav">
-        <a class="nav-link {{ set_active('dashboard.index') }}" href="{{ route('dashboard.index') }}">
-           <div class="sb-nav-link-icon">
-              <i class="fas fa-tachometer-alt"></i>
-           </div>
-           Dashboard
-        </a>
-        <div class="sb-sidenav-menu-heading">HomePage</div>
-        <div class="sb-sidenav-menu-heading">Pages</div>
-        {{-- posts --}}
-        <a class="nav-link {{ set_active(['posts.index','posts.create', 'posts.edit']) }}" " href="{{ route('posts.index') }}">
-           <div class="sb-nav-link-icon">
-              <i class="far fa-newspaper"></i>
-           </div>
-           Posts
-        </a>
-        {{-- categories --}}
-        <a class="nav-link {{ set_active(['categories.index','categories.create', 'categories.edit']) }}" href="{{ route('categories.index', ) }}">
-           <div class="sb-nav-link-icon">
-              <i class="fas fa-bookmark"></i>
-           </div>
-           Categories
-        </a>
-        <div class="sb-sidenav-menu-heading">Games / Quiz</div>
-        {{-- Team --}}
-        <a class="nav-link {{ set_active(['categories.index','categories.create', 'categories.edit']) }}" href="{{ route('categories.index', ) }}">
-         <div class="sb-nav-link-icon">
-            <i class="fas fa-bookmark"></i>
-         </div>
-         Teams
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+   <div class="app-brand demo">
+     <a href="index.html" class="app-brand-link">
+       <span class="app-brand-logo demo">
+
+       </span>
+       <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+     </a>
+
+     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+       <i class="bx bx-chevron-left bx-sm align-middle"></i>
+     </a>
+   </div>
+
+   <div class="menu-inner-shadow"></div>
+
+   <ul class="menu-inner py-1">
+     <!-- Dashboard -->
+     <li class="menu-item">
+       <a href="index.html" class="menu-link">
+         <i class="menu-icon tf-icons bx bx-home-circle"></i>
+         <div data-i18n="Analytics">Dashboard</div>
+       </a>
+     </li>
+     <li class="menu-item">
+      <a href="index.html" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <div data-i18n="Analytics">Slider / Banner</div>
       </a>
-        {{-- Matches --}}
-         <a class="nav-link {{ set_active(['categories.index','categories.create', 'categories.edit']) }}" href="{{ route('categories.index', ) }}">
-            <div class="sb-nav-link-icon">
-               <i class="fas fa-bookmark"></i>
-            </div>
-            Matches
-         </a>
-        <a class="nav-link {{ set_active(['categories.index','categories.create', 'categories.edit']) }}" href="{{ route('categories.index', ) }}">
-         <div class="sb-nav-link-icon">
-            <i class="fas fa-bookmark"></i>
-         </div>
-         Questions
-      </a>
-      {{-- Matches --}}
-      <a class="nav-link {{ set_active(['categories.index','categories.create', 'categories.edit']) }}" href="{{ route('categories.index', ) }}">
-         <div class="sb-nav-link-icon">
-            <i class="fas fa-bookmark"></i>
-         </div>
-         Answer
+    </li>
+     <li class="menu-header small text-uppercase">
+       <span class="menu-header-text">Pages</span>
+     </li>
+     <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div data-i18n="Layouts">Posts</div>
       </a>
 
-        <div class="sb-sidenav-menu-heading">Users</div>
-        
-        
-        
-       
-       
-     </div>
-  </div>
-  <div class="sb-sidenav-footer">
-     <div class="small">Logged in as:</div>
-     <!-- show username -->
-  </div>
-</nav>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="layouts-without-menu.html" class="menu-link">
+            <div data-i18n="Without menu">Create</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="layouts-without-navbar.html" class="menu-link">
+            <div data-i18n="Without navbar">Lists</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+     <!-- Components -->
+     <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
+     <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
+     <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+   </ul>
+ </aside>
+ <!-- / Menu -->
