@@ -33,7 +33,9 @@ import { getCurrentDate } from './utils/index';
             homePage.guessModal();
             homePage.kirimForm();
             homePage.closeModal();
-
+            homePage.closeModalLogin();
+            homePage.loginModal();
+            
             console.log(
                 Window.list
             );

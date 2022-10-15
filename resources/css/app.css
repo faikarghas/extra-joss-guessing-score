@@ -16,3 +16,87 @@
     font-weight: 400;
     font-style: normal;
 }
+
+.close{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+}
+
+.close div{
+    width: 44px;
+    height: 44px;
+    background-color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+.modal-form .mb-12{
+    margin-bottom: 3rem;
+}
+
+.modal-form .mb-4{
+    margin-bottom: 1rem;
+}
+
+.modal-form .form-tebak{
+    background-color: transparent;
+    border:1px solid #383838;
+    color: white;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    height: 32px;
+    width: 100%;
+    border-radius: 1.5rem;
+}
+
+.modal-form button{
+    color: white;
+    border-radius: 1.5rem;
+    width: 100%;
+    background-color: #A0A0A0;
+    font-family: 'WorkSans-Regular';
+    text-align: center;
+    padding: 0.625rem 1.25rem;
+}
+
+.modal-form .basis60{
+    flex-basis: 60%;
+}
+
+.modal-form .basis40{
+    flex-basis: 40%;
+}
+
+.modal-form .mr-3{
+    margin-right: 0.75rem;
+}
+
+.modal-form .label{
+    display: flex;
+    width: 150px;
+}
+.modal-form .basis40 span{
+    display: block;
+    color: white;
+    font-size: 24px;
+    font-family: 'WorkSans-Regular';
+    font-weight: 900;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 20px transparent inset !important;
+}
+
+@media (min-width:1024px) {
+    .modal-form .form-tebak{
+        width: 130px;
+    }
+}

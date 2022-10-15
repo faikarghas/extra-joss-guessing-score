@@ -40,7 +40,7 @@ Route::group(['middleware' => ['guest']], function() {
 
     /* facebook Login */
     Route::get('/login/facebook', [FacebookLoginController::class, 'redirect'])->name('login.facebook-redirect');
-    Route::get('login/facebook/callback', [FacebookLoginController::class, 'callback'])->name('login.facebook-callback');
+    Route::get('/login/facebook/callback', [FacebookLoginController::class, 'callback'])->name('login.facebook-callback');
 
 });
 
@@ -51,7 +51,7 @@ Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
 Auth::routes();
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 
 
 /*------------------------------------------

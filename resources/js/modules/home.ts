@@ -26,30 +26,34 @@ export class Home {
                 $('.modal-form').append(
                     `
                     <div class="form-wrapper flex flex-wrap">
-                    <div class="close top-[18px] right-[18px] absolute">
-                        <div class="w-[44px] h-[44px] bg-white rounded-full flex items-center justify-center cursor-pointer">
+                    <div class="close">
+                        <div class="">
                             <img src="${base_url}/images/close.png" />
                         </div>
                     </div>
-                    <div class="basis-[60%]">
+                    <div class="basis60">
                         <h2 class="text-[#FCEF0A] leading-[1] text-[40px] font-head mb-12">MASUKAN SKOR ANDA</h2>
                         <form class="">
                             <div class="flex items-center mb-4">
-                                <img class="mr-3" width="32px" src="${base_url}/images/countries/${team1?.toLowerCase()}.png" />
-                                <span class="text-white font-sans mr-6">${team1}</span>
-                                <input class="form-tebak bg-transparent border-[#383838] text-white py-1 h-[32px] w-full lg:w-[130px] rounded-3xl" type="number" name="guess_score_a"
+                                <div class="label">
+                                    <img class="mr-3" width="32px" src="${base_url}/images/countries/${team1?.toLowerCase()}.png" />
+                                    <span class="text-white font-sans mr-6">${team1}</span>
+                                </div>
+                                <input class="form-tebak" type="number" name="guess_score_a"
                                 value=""></input>
                             </div>
                             <div class="flex items-center mb-12">
-                                <img class="mr-3" width="32px" src="${base_url}/images/countries/${team2?.toLowerCase()}.png" />
-                                <span class="text-white font-sans mr-6">${team2}</span>
-                                <input class="form-tebak bg-transparent border-[#383838] text-white py-1 h-[32px] w-full lg:w-[130px] rounded-3xl" type="number" name="guess_score_b"
+                                <div class="label">
+                                    <img class="mr-3" width="32px" src="${base_url}/images/countries/${team2?.toLowerCase()}.png" />
+                                    <span class="text-white font-sans mr-6">${team2}</span>
+                                </div>
+                                <input class="form-tebak" type="number" name="guess_score_b"
                                 value=""></input>
                             </div>
-                            <button data-im=${id} class="kirim-tebakan text-white bg-gradient-to-r rounded-3xl w-full bg-[#A0A0A0] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium text-sm px-5 py-2.5 text-center">Kirim</button>
+                            <button data-im=${id} class="kirim-tebakan">Kirim</button>
                         </form>
                     </div>
-                    <div class="basis-[40%] flex items-end justify-end">
+                    <div class="basis40 flex items-end justify-end">
                         <div class="flex items-center">
                             <img class="mr-1" width="22px" src="${base_url}/images/acv.png" />
                             <span class="block text-white text-[24px] font-black font-sans">1.000 Poin</span>
@@ -65,7 +69,7 @@ export class Home {
     kirimForm(): void {
         $('.modal-form').on('click','button.kirim-tebakan',function (e) {
             e.preventDefault()
-
+            $(this).html('Loading...')
             let id = $(this).attr('data-im');
             let guess_score_a = $(".form-tebak[name=guess_score_a]").val()
             let guess_score_b = $(".form-tebak[name=guess_score_b]").val()
@@ -78,8 +82,23 @@ export class Home {
                     'guess_score_a':guess_score_a,
                     'guess_score_b':guess_score_b
                 },
+                error: function(xhr, error){
+                    // console.debug(xhr); console.debug(error);
+                    if (xhr.status === 500) {
+                        $('.kirim-tebakan').html('Gagal Terkirim')
+
+                        setTimeout(() => {
+                            $(this).html('Kirim')
+                        }, 2500);
+                    }
+                },
                 success:function(data){
-                   console.log(data);
+                    $(this).html('Terkirim')
+
+                    setTimeout(() => {
+                        $(this).html('Kirim')
+                    }, 2500);
+
                 }
             });
 
@@ -94,6 +113,20 @@ export class Home {
 
             // delete appended content from modal
             $('.form-wrapper').remove()
+        })
+    }
+
+    closeModalLogin(): void {
+        $('.close-login').on('click',function () {
+            // close modal
+            $('.modal-login').css('display','none')
+
+        })
+    }
+
+    loginModal(): void{
+        $('.log').on('click',function () {
+            $('.modal-login').css('display','block')
         })
     }
 
