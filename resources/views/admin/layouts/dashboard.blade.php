@@ -21,8 +21,8 @@
    <link rel="stylesheet" href="{{ asset('vendor/my-auth/css/auth.css') }}">
    <link rel="stylesheet" href="{{ asset('vendor/my-dashboard/css/demo.css') }}">
    <link rel="stylesheet" href="{{ asset('vendor/my-dashboard/js/perfect-scrollbar/perfect-scrollbar.css') }}">
-   {{-- <script src="{{ asset('vendor/my-dashboard/js/helpers.js') }}">
-   <script src="{{ asset('vendor/my-dashboard/js/config.js') }}"> --}}
+   <script src="{{ asset('vendor/my-dashboard/js/helpers.js') }}">
+   <script src="{{ asset('vendor/my-dashboard/js/config.js') }}">
    
     {{-- css:external --}}
     @stack('css-external')
@@ -59,11 +59,13 @@
    </div>
    
    <!-- scripts -->
-   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
-   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-   <script src="{{ asset('vendor/my-dashboard/js/perfect-scrollbar/perfect-scrollbar.js') }}">  
-   <script src="{{ asset('vendor/my-dashboard/js/menu.js') }}"> 
-   <script src="{{ asset('vendor/my-dashboard/js/main.js') }}"> 
+   <script src="{{ asset('vendor/my-dashboard/js/jquery/jquery.js') }}"></script>
+   <script src="{{ asset('vendor/my-dashboard/js/bootstrap.js') }}"></script>
+   <script src="{{ asset('vendor/my-dashboard/js/popper/popper.js') }}"></script> 
+   <script src="{{ asset('vendor/my-dashboard/js/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+   <script src="{{ asset('vendor/my-dashboard/js/menu.js') }}"></script>
+   <script src="{{ asset('vendor/my-dashboard/js/apex-charts/apexcharts.js') }}"></script>  
+   <script src="{{ asset('vendor/my-dashboard/js/main.js') }}"></script>
     
    {{-- sweet alert --}}
    @include('sweetalert::alert')

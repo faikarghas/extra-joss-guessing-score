@@ -31,30 +31,90 @@
      <li class="menu-header small text-uppercase">
        <span class="menu-header-text">Pages</span>
      </li>
+      <!-- Pages -->
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <div data-i18n="Layouts">Posts</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="layouts-without-menu.html" class="menu-link">
+              <div data-i18n="Without menu">List</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="layouts-without-navbar.html" class="menu-link">
+              <div data-i18n="Without navbar">Create</div>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+     <!-- Components -->
+     <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
      <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-layout"></i>
-        <div data-i18n="Layouts">Posts</div>
+        <div data-i18n="Layouts">Footbals</div>
       </a>
-
       <ul class="menu-sub">
         <li class="menu-item">
           <a href="layouts-without-menu.html" class="menu-link">
-            <div data-i18n="Without menu">Create</div>
+            <div data-i18n="Without menu">List Teams</div>
           </a>
         </li>
         <li class="menu-item">
           <a href="layouts-without-navbar.html" class="menu-link">
-            <div data-i18n="Without navbar">Lists</div>
+            <div data-i18n="Without navbar">List Matches</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="layouts-without-navbar.html" class="menu-link">
+            <div data-i18n="Without navbar">Create Matches</div>
           </a>
         </li>
       </ul>
     </li>
 
-     <!-- Components -->
-     <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
+    <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div data-i18n="Layouts">Quiz</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="layouts-without-menu.html" class="menu-link">
+            <div data-i18n="Without menu">List Quiz</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="layouts-without-navbar.html" class="menu-link">
+            <div data-i18n="Without navbar">Create Quiz</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="layouts-without-menu.html" class="menu-link">
+            <div data-i18n="Without menu">List Answer</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="layouts-without-navbar.html" class="menu-link">
+            <div data-i18n="Without navbar">Create Answer</div>
+          </a>
+        </li>
+      </ul>
+    </li>
      <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
+     <li class="menu-item">
+      <a href="tables-basic.html" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-table"></i>
+        <div data-i18n="Tables">Participant</div>
+      </a>
+    </li>
      <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
    </ul>
  </aside>
  <!-- / Menu -->
+ <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
