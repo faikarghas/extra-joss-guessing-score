@@ -30,6 +30,8 @@ Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
   Route::get('/posts/details/{id}', [\App\Http\Controllers\Admin\PostController::class, 'details'])->name('posts.details');
   Route::resource('/posts', \App\Http\Controllers\Admin\PostController::class);
   Route::resource('/postimages', \App\Http\Controllers\Admin\PostImagesController::class);
+  Route::resource('/teams', \App\Http\Controllers\Admin\TeamsController::class);
+  Route::resource('/matchs', \App\Http\Controllers\Admin\FmatchController::class);
   //User
   // file manager
   Route::group(['prefix' => 'filemanager'], function () {

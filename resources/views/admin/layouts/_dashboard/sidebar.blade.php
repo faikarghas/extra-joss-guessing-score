@@ -4,7 +4,7 @@
        <span class="app-brand-logo demo">
 
        </span>
-       <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+       <span class="app-brand-text demo menu-text fw-bolder ms-2">ExtraJoss</span>
      </a>
 
      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -16,15 +16,15 @@
 
    <ul class="menu-inner py-1">
      <!-- Dashboard -->
-     <li class="menu-item">
-       <a href="index.html" class="menu-link">
+     <li class="menu-item {{ set_active('dashboard.index') }}">
+       <a href="{{ route('dashboard.index') }}" class="menu-link">
          <i class="menu-icon tf-icons bx bx-home-circle"></i>
          <div data-i18n="Analytics">Dashboard</div>
        </a>
      </li>
-     <li class="menu-item">
-      <a href="index.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+     <li class="menu-item {{ set_active(['sliders.index','sliders.create', 'sliders.edit']) }}">
+      <a href="{{ route('sliders.index') }}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-image"></i>
         <div data-i18n="Analytics">Slider / Banner</div>
       </a>
     </li>
@@ -32,19 +32,19 @@
        <span class="menu-header-text">Pages</span>
      </li>
       <!-- Pages -->
-      <li class="menu-item">
+      <li class="menu-item {{ set_active(['posts.index','posts.create', 'posts.edit']) }} {{ set_open(['posts.index','posts.create', 'posts.edit']) }} ">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-layout"></i>
+          <i class="menu-icon tf-icons bx bx-news"></i>
           <div data-i18n="Layouts">Posts</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item">
-            <a href="layouts-without-menu.html" class="menu-link">
+          <li class="menu-item {{ set_active(['posts.index']) }} ">
+            <a href="{{ route('posts.index') }}" class="menu-link">
               <div data-i18n="Without menu">List</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="layouts-without-navbar.html" class="menu-link">
+          <li class="menu-item {{ set_active(['posts.create']) }}">
+            <a href="{{ route('posts.create') }}" class="menu-link">
               <div data-i18n="Without navbar">Create</div>
             </a>
           </li>
@@ -53,24 +53,24 @@
 
      <!-- Components -->
      <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
-     <li class="menu-item">
+     <li class="menu-item {{ set_active(['teams.index','matchs.create', 'matchs.edit']) }} {{ set_open(['teams.index','matchs.index', 'teams.edit', 'matchs.create']) }} ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <i class="menu-icon tf-icons bx bx-football"></i>
         <div data-i18n="Layouts">Footbals</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="layouts-without-menu.html" class="menu-link">
+        <li class="menu-item {{ set_active(['teams.index']) }} ">
+          <a href="{{ route('teams.index') }}" class="menu-link">
             <div data-i18n="Without menu">List Teams</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="layouts-without-navbar.html" class="menu-link">
+        <li class="menu-item {{ set_active(['matchs.index']) }}">
+          <a href="{{ route('matchs.index') }}" class="menu-link">
             <div data-i18n="Without navbar">List Matches</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="layouts-without-navbar.html" class="menu-link">
+        <li class="menu-item {{ set_active(['matchs.create']) }}">
+          <a href="{{ route('matchs.create') }}" class="menu-link">
             <div data-i18n="Without navbar">Create Matches</div>
           </a>
         </li>
@@ -79,7 +79,7 @@
 
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <i class="menu-icon tf-icons bx bxs-message-check"></i>
         <div data-i18n="Layouts">Quiz</div>
       </a>
       <ul class="menu-sub">
@@ -108,7 +108,7 @@
      <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
      <li class="menu-item">
       <a href="tables-basic.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-table"></i>
+        <i class="menu-icon tf-icons bx bx-group"></i>
         <div data-i18n="Tables">Participant</div>
       </a>
     </li>
