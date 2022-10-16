@@ -9,39 +9,10 @@
    <div class="row">
       <div class="col-md-8">
          <div class="card mb-4">
-            <h5 class="card-header">Match Add</h5>
+            <h5 class="card-header">Quiz Add</h5>
             <div class="card-body">
                <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Team 1</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-               </div>
-               <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Team 2</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-               </div>
-               <div class="mb-3">
-                  <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
-                  <div>
-                     <input
-                        class="form-control"
-                        type="datetime-local"
-                        value="2021-06-18T12:30:00"
-                        id="html5-datetime-local-input"
-                     />
-                  </div>
-               </div>
-               <div class="mb-3">
-                  <label for="defaultFormControlInput" class="form-label">Result Team 1</label>
+                  <label for="defaultFormControlInput" class="form-label">Questions</label>
                   <input
                      type="text"
                      class="form-control"
@@ -50,16 +21,7 @@
                      aria-describedby="defaultFormControlHelp"
                   />
                </div>
-               <div class="mb-3">
-                  <label for="defaultFormControlInput" class="form-label">Result Team 2</label>
-                  <input
-                     type="text"
-                     class="form-control"
-                     id="defaultFormControlInput"
-                     placeholder="John Doe"
-                     aria-describedby="defaultFormControlHelp"
-                  />
-               </div>
+               
                <button type="submit" class="btn btn-primary">Send</button>
             </div>
          </div>

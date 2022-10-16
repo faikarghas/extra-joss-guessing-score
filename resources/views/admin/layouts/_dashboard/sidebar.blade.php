@@ -77,43 +77,34 @@
       </ul>
     </li>
 
-    <li class="menu-item">
+    <li class="menu-item {{ set_active(['quizs.index','quizs.create', 'quizs.edit']) }} {{ set_open(['quizs.index','quizs.create']) }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bxs-message-check"></i>
         <div data-i18n="Layouts">Quiz</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="layouts-without-menu.html" class="menu-link">
+        <li class="menu-item {{ set_active(['quizs.index']) }}">
+          <a href="{{ route('quizs.index') }}" class="menu-link">
             <div data-i18n="Without menu">List Quiz</div>
           </a>
         </li>
-        <li class="menu-item">
-          <a href="layouts-without-navbar.html" class="menu-link">
+        <li class="menu-item  {{ set_active(['quizs.create']) }}">
+          <a href="{{ route('quizs.create') }}" class="menu-link">
             <div data-i18n="Without navbar">Create Quiz</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="layouts-without-menu.html" class="menu-link">
-            <div data-i18n="Without menu">List Answer</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="layouts-without-navbar.html" class="menu-link">
-            <div data-i18n="Without navbar">Create Answer</div>
           </a>
         </li>
       </ul>
     </li>
-     <li class="menu-header small text-uppercase"><span class="menu-header-text">User</span></li>
-     <li class="menu-item">
-      <a href="tables-basic.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-group"></i>
-        <div data-i18n="Tables">Participant</div>
-      </a>
-    </li>
-     <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
-   </ul>
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">User</span></li>
+      <li class="menu-item  {{ set_active(['users.index']) }}">
+        <a href="{{ route('users.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-group"></i>
+          <div data-i18n="Tables">Participant</div>
+        </a>
+      </li>
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+  </ul>
  </aside>
  <!-- / Menu -->
  <!-- Overlay -->
