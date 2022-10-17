@@ -34,6 +34,7 @@
     cursor: pointer;
 }
 
+/* TEBAK SKOR MODAL */
 
 .modal-form .mb-12{
     margin-bottom: 3rem;
@@ -100,3 +101,89 @@ input:-webkit-autofill:active{
         width: 130px;
     }
 }
+
+/*END TEBAK SKOR MODAL */
+
+/* MODAL QUIZ */
+
+.modal-quiz .quiz-wrapper h3{
+    color: #FCEF0A;
+    font-family: 'BebasNeue-Regular';
+    font-size: 35px;
+    margin-bottom: 45px;
+    line-height: 35px;
+}
+
+.modal-quiz .quiz-wrapper .answer-box fieldset{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.modal-quiz .quiz-wrapper .answer-box .choosebox{
+    align-items: center;
+    margin-bottom: 1.8rem;
+    flex-basis: 50%;
+}
+
+.modal-quiz .quiz-wrapper .answer-box input{
+    background-color: black;
+    border: 1px solid white;
+    width: 1rem;
+    height: 1rem;
+}
+
+.modal-quiz .quiz-wrapper .answer-box input:focus{
+    background-color: black;
+    border: 1px solid white;
+    box-shadow: none;
+}
+
+.modal-quiz .quiz-wrapper .answer-box label{
+    color: white;
+    font-family: 'WorkSans-Regular';
+    font-weight: 600;
+    margin-left: 0.8rem;
+}
+
+.modal-quiz .act-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.modal-quiz .act-wrapper .btn-quiz{
+    color: white;
+    background-color: grey;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    height: 100%;
+    width: 80%;
+}
+
+.modal-quiz .act-wrapper .basis-act{
+    flex-basis: 50%;
+}
+
+.modal-quiz .act-wrapper .point-qz{
+    display: flex;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 5px;
+    justify-content: center;
+}
+
+.modal-quiz .act-wrapper .point-qz img{
+    width: 18px;
+    object-fit: contain;
+    margin-right: 5px;
+}
+
+.modal-quiz .act-wrapper .point-qz h5{
+    color: white;
+    font-family: 'WorkSans-Regular';
+    font-size: 24px;
+    font-weight: 700;
+}
+
+

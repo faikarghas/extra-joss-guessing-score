@@ -4,7 +4,7 @@ import './bootstrap';
 import 'flowbite';
 
 // Modules
-import { Home } from './modules/home';
+import { Auth, Quiz, GuessScore } from './modules';
 
 // Utils
 import { getCurrentDate } from './utils/index';
@@ -27,15 +27,26 @@ import { getCurrentDate } from './utils/index';
              * Home Modules
              */
 
-            const homePage = new Home();
+            const auth = new Auth();
+            const guess = new GuessScore();
+            const quiz = new Quiz(0,3);
+
             // Init all functionality
-            homePage.init();
-            homePage.guessModal();
-            homePage.kirimForm();
-            homePage.closeModal();
-            homePage.closeModalLogin();
-            homePage.loginModal();
-            
+            auth.closeModalLogin();
+            auth.closeModalRegister();
+            auth.openLoginModal();
+            auth.openRegisterModal();
+
+            guess.openGuessModal();
+            guess.kirimForm();
+            guess.closeModal();
+
+            quiz.openQuizModal();
+            quiz.kirimJawabanQuiz();
+            quiz.nextQuiz();
+            quiz.storeCheckedInput();
+            quiz.closeQuizModal();
+
             console.log(
                 Window.list
             );
