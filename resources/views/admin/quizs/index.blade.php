@@ -8,7 +8,6 @@
 {{ Breadcrumbs::render('posts') }}
 @endsection
 @section('content')
-
 <!-- Basic Bootstrap Table -->
 <div class="card">
    <h5 class="card-header">List Quiz</h5>

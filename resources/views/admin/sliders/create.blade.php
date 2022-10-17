@@ -7,144 +7,78 @@
 @endsection
 @section('content')
 <div class="row">
-   <div class="col-md-12">
+   <div class="col-md-8">
       <form  action="{{  route('sliders.store') }}" method="POST">
          @csrf
-         <div class="card">
-            <div class="card-body">
-               <div class="row d-flex align-items-stretch">
-                  <div class="col-md-8">
-                     <!-- title -->
-                     <div class="form-group">
-                        <label for="input_post_title" class="font-weight-bold">Title</label>
-                        <input id="input_post_title" name="title" type="text" placeholder="" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}"/>
-                        @error('title')
-                           <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
-                           </span>
-                        @enderror
-                     </div>
-                     <!-- thumbnail -->
-                     <div class="form-group">
-                        <label for="input_post_thumbnail" class="font-weight-bold">
-                           Images For Desktop
-                        </label>
-                        <div class="input-group">
-                           <div class="input-group-prepend">
-                              <button id="button_post_imagesDesktop" data-input="input_post_imagesDesktop"
-                                 class="btn btn-primary" type="button">
-                                 Browse
-                              </button>
-                           </div>
-                           <input id="input_post_imagesDesktop" name="image_desktop" value="{{ old('image_desktop') }}" type="text" class="form-control"
-                              placeholder="" readonly />
-                        </div>
-                     </div>
-                     <!-- description -->
-
-                     <div class="form-group">
-                        <label for="input_post_thumbnail" class="font-weight-bold">
-                           Images For Mobile
-                        </label>
-                        <div class="input-group">
-                           <div class="input-group-prepend">
-                              <button id="button_post_imagesMobile" data-input="input_post_imagesMobile"
-                                 class="btn btn-primary" type="button">
-                                 Browse
-                              </button>
-                           </div>
-                           <input id="input_post_imagesMobile" name="image_mobile" value="{{ old('image_mobile') }}" type="text" class="form-control"
-                              placeholder="" readonly />
-                        </div>
-                     </div>
-                     
-                  </div>
-                  <div class="col-md-4">
-                     <!-- catgeory -->
-                     {{-- <div class="form-group">
-                        <label for="input_post_description" class="font-weight-bold">
-                           Category
-                        </label>
-                        <div class="form-control overflow-auto" style="height: 886px">
-                           <!-- List category -->
-                              @include('admin.posts._category-list',[
-                                 'categories' => $categories
-                              ])
-                           <!-- List category -->
-                        </div>
-                     </div> --}}
-
-                     {{-- collapse for detail publish, feature image, category --}}
-                     <div class="accordion" id="accordionExample">
-                        <div class="card">
-                          <div class="card-header" id="headingOne">
-                            <h2 class="mb-0">
-                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <b>Publish</b>
-                              </button>
-                            </h2>
-                          </div>
-                      
-                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                              <div class="form-group">
-                                 <label for="select_post_status" class="font-weight-bold">
-                                    Status
-                                 </label>
-                                 <select id="select_post_status" name="status" class="custom-select @error('status') is-invalid @enderror"> 
-                                    <option value="">Please Select ..</option>
-                                    @foreach ($statuses as $key =>$value)
-                                       <option value="{{ $key }}" {{ old('status') == $key ? "selected" : null }}> {{ $value }}</option>
-                                    @endforeach   
-                                 </select>
-                                 @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                 @enderror
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+         <div class="card mb-4">
+            <h5 class="card-header">Banner Add</h5>
+            <div class="card-body">  
+               <div class="mb-3">
+                  <label for="input_post_title" class="form-label">Title</label>
+                  <input 
+                     id="input_post_title" 
+                     name="title" 
+                     type="text" 
+                     placeholder="" 
+                     class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}"
+                  />
+                  @error('title')
+                     <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                  @enderror
+               </div>
+               <!-- Images For Desktop -->
+               <div class="mb-3">
+                  <label for="input_post_thumbnail" class="form-label">Images For Desktop</label>
+                  <div class="input-group">
+                     <button 
+                        id="button_post_imagesDesktop" 
+                        data-input="input_post_imagesDesktop"
+                        class="btn btn-outline-primary" 
+                        type="button">Browse
+                     </button>
+                     <input id="input_post_imagesDesktop" 
+                        name="image_desktop" 
+                        value="{{ old('image_desktop') }}" 
+                        type="text" 
+                        class="form-control"
+                        placeholder="" readonly 
+                     />
                   </div>
                </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <!-- tag -->
-                     {{-- <div class="form-group">
-                        <label for="select_post_tag" class="font-weight-bold">
-                           Tag
-                        </label>
-                        <select id="select_post_tag" name="tag" data-placeholder="" class="custom-select w-100"
-                           multiple>
-                           <option value="tag1">tag 1</option>
-                           <option value="tag2">tag 2</option>
-                        </select>
-                     </div> --}}
-                     <!-- status -->
-                     {{-- <div class="form-group">
-                        <label for="select_post_status" class="font-weight-bold">
-                           Status
-                        </label>
-                        <select id="select_post_status" name="status" class="custom-select">
-                           <option value="draft">Draft</option>
-                           <option value="publish">Publish</option>
-                        </select>
-                     </div> --}}
+               <!-- Images For Mobile -->
+               <div class="mb-3">
+                  <label for="input_post_thumbnail" class="form-label">Images For Mobile</label>
+                  <div class="input-group">
+                     <button 
+                        id="button_post_imagesMobile" 
+                        data-input="input_post_imagesMobile"
+                        class="btn btn-outline-primary"
+                        type="button">Browse
+                     </button>
+                     <input 
+                        id="input_post_imagesMobile" 
+                        name="image_mobile" 
+                        value="{{ old('image_mobile') }}" 
+                        type="text" 
+                        class="form-control"
+                        placeholder="" 
+                        readonly />
                   </div>
                </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="float-right">
-                        <a class="btn btn-warning px-4" href="">Back</a>
-                        <button type="submit" class="btn btn-primary px-4">
-                           Save
-                        </button>
-                     </div>
-                  </div>
+               <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Publish</label>
+                  <select  id="select_post_status" name="status" class="form-select @error('status') is-invalid @enderror">
+                     <option value="">Please Select</option>
+                     @foreach ($statuses as $key =>$value)
+                        <option value="{{ $key }}" {{ old('status') == $key ? "selected" : null }}> {{ $value }}</option>
+                     @endforeach 
+                  </select>
                </div>
-            </div>
+               <a class="btn btn-warning px-4" href="">Back</a>
+               <button type="submit" class="btn btn-primary px-4">Save</button>
+            </div>          
          </div>
       </form>
    </div>
