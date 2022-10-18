@@ -22,8 +22,8 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
-        return view('admin.posts.index',compact('posts'));
+        $datas = Post::all();
+        return view('admin.posts.index',compact('datas'));
     }
     /**
      * Show the form for creating a new resource.
@@ -86,7 +86,7 @@ class PostController extends Controller
                 'title' => 'required|string|max:100',
                 'slug' => 'required|string|unique:posts,slug',
                 'content' => 'required|string',
-                'category' => 'required',
+                
                 'status' => 'required'
             ]
         );
@@ -184,7 +184,6 @@ class PostController extends Controller
         
         return view('admin.posts.edit',[
             'post' => $post,
-            'categories' => Category::with('descendants')->onlyParent()->get(),
             'statuses' => $this->statuses(),
         ]);
     }

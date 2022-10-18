@@ -28,7 +28,7 @@
             <tr>
                <td><strong>{{ $row->name }}</strong></td>
                <td>{{ $row->group }}</td>
-               <td>{{ $row->group }}</td>
+               <td><img src="{{ $row->flag_image_path }}" width="35"></td>
                <td><span class="badge bg-label-success me-1">Quilefied</span></td>
                <td>
                   <div class="dropdown">
@@ -36,10 +36,10 @@
                        <i class="bx bx-dots-vertical-rounded"></i>
                      </button>
                      <div class="dropdown-menu">
-                       <a class="dropdown-item" href="javascript:void(0);"
+                       <a class="dropdown-item" href="{{ route('teams.edit',[$row->id]) }}"
                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
                        >
-                       <a class="dropdown-item" href="javascript:void(0);"
+                       <a class="dropdown-item" href="{{ route('teams.show',[$row->id]) }}"
                          ><i class="bx bx-video-recording me-1"></i> View Matchs</a
                        >
                      </div>

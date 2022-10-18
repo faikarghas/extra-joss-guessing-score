@@ -168,82 +168,30 @@ class TeamsController extends Controller
     }
 
     
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
+    public function edit($id)
     {
         
-        
-        return view('admin.posts.edit',[
-            'post' => $post,
-            'categories' => Category::with('descendants')->onlyParent()->get(),
-            'statuses' => $this->statuses(),
-        ]);
+        $datas = array(
+            'team' => Countries::find($id)
+        );
+        return view('admin.teams.edit')->with($datas);     
+       
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
-        //dd($request->thumbnail);
-
-
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'title' => 'required|string|max:100',
-                'slug' => 'required|string|unique:posts,slug,'. $post->id,
-                'content' => 'required|string',
-                'category' => 'required',
-                'status' => 'required'
-            ]
-        );
-        if ($validator->fails()){
-            return redirect()->back()->withInput($request->all())->withErrors($validator);
-        }
-
-        DB::beginTransaction();
         
-        $now = date('Y-m-d H:i'); //Fomat Date and time //you are overwriting this variable below
-        $now = $request->publishDate; //should be course_date
+
         
-        try {
-            $post->update([
-                'title' => $request->title,
-                 'subtitle' => $request->subtitle,
-                'slug' => $request->slug,
-                //'thumbnail' => parse_url($request->thumbnail)['path'],
-                'thumbnail' => $request->thumbnail,
-              'image' => $request->image,
-                'description' => $request->description,
-                'content' => $request->content,
-                'status' => $request->status,
-                'category' => $request->category,
-                'publish_date' => $now,
-                'user_id' => Auth::user()->id,
-            ]);
-            $post->categories()->sync($request->category);
-            Alert::success('Update Post', 'Berhasil');
-            //return redirect()->route('posts.index');
-            return redirect()->back();
-        } catch (\throwable $th){
-            DB::rollBack(); 
-            Alert::error('Tambah Post', 'error'.$th->getMessage());
-            return redirect()->back()->withInput($request->all());
-        } finally{
-            DB::commit();
-        }
+        $image =  basename($request->input('image'));
+    
+        $team = Countries::find($id);
+        $team->name = $request->input('name');
+        $team->flag_image = $image;
+        $team->flag_image_path = $request->input('image');
+        $team->save();
+        Alert::success('Update Teams', 'Berhasil');
+        return redirect()->back();
     }
     /**
      * Remove the specified resource from storage.

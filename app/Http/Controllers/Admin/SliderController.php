@@ -20,8 +20,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $slider = Slider::all();
-        return view('admin.sliders.index',compact('slider'));
+        $datas = Slider::all();
+        return view('admin.sliders.index',compact('datas'));
     }
     /**
      * Show the form for creating a new resource.

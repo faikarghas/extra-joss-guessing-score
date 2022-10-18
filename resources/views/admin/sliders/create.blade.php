@@ -36,7 +36,7 @@
                         id="button_post_imagesDesktop" 
                         data-input="input_post_imagesDesktop"
                         class="btn btn-outline-primary" 
-                        type="button">Browse
+                        type="button">Browse>
                      </button>
                      <input id="input_post_imagesDesktop" 
                         name="image_desktop" 

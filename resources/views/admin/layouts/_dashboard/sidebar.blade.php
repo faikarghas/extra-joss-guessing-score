@@ -53,13 +53,13 @@
 
      <!-- Components -->
      <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
-     <li class="menu-item {{ set_active(['teams.index','matchs.create', 'matchs.edit']) }} {{ set_open(['teams.index','matchs.index', 'teams.edit', 'matchs.create']) }} ">
+     <li class="menu-item {{ set_active(['teams.index','teams.edit','matchs.create', 'matchs.edit']) }} {{ set_open(['teams.index','matchs.index', 'teams.edit', 'matchs.create']) }} ">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-football"></i>
         <div data-i18n="Layouts">Footbals</div>
       </a>
       <ul class="menu-sub">
-        <li class="menu-item {{ set_active(['teams.index']) }} ">
+        <li class="menu-item {{ set_active(['teams.index','teams.edit']) }} ">
           <a href="{{ route('teams.index') }}" class="menu-link">
             <div data-i18n="Without menu">List Teams</div>
           </a>
