@@ -207,7 +207,6 @@ class PostController extends Controller
                 'title' => 'required|string|max:100',
                 'slug' => 'required|string|unique:posts,slug,'. $post->id,
                 'content' => 'required|string',
-                'category' => 'required',
                 'status' => 'required'
             ]
         );
@@ -223,21 +222,17 @@ class PostController extends Controller
         try {
             $post->update([
                 'title' => $request->title,
-                 'subtitle' => $request->subtitle,
                 'slug' => $request->slug,
                 //'thumbnail' => parse_url($request->thumbnail)['path'],
                 'thumbnail' => $request->thumbnail,
-              'image' => $request->image,
-                'description' => $request->description,
+                'image' => $request->image,
                 'content' => $request->content,
                 'status' => $request->status,
-                'category' => $request->category,
                 'publish_date' => $now,
                 'user_id' => Auth::user()->id,
             ]);
-            $post->categories()->sync($request->category);
+            
             Alert::success('Update Post', 'Berhasil');
-            //return redirect()->route('posts.index');
             return redirect()->back();
         } catch (\throwable $th){
             DB::rollBack(); 

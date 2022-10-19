@@ -36,6 +36,13 @@
                 <a class="dropdown-item" href="{{ route('sliders.create') }}"
                     ><i class="bx bx-video-recording me-1"></i>Create</a
                 >
+                <form action="{{ route('sliders.destroy',['slider'=>$row]) }}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <a class="dropdown-item" href="#", role="alert" alert-text="{{ $row->title }}" onclick="this.closest('form').submit();return false;">
+                    <i class="bx bx-trash me-1"></i>delete
+                  </a>
+                </form>
               </div>
           </div>
         </td>

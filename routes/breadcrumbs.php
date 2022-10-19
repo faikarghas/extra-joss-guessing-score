@@ -231,11 +231,3 @@
     $trail->parent('dashboard');
     $trail->push('Facilities', route('posts.details',[$postId]));
   });
-  
-  
-
-  // // Home > Blog > [Category]
-  // Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
-  //     $trail->parent('blog');
-  //     $trail->push($category->title, route('category', $category));
-  // });

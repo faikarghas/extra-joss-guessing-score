@@ -41,7 +41,7 @@
                      <input
                         class="form-control"
                         type="datetime-local"
-                        value="2021-06-18T12:30:00"
+                        value="2022-11-20T12:00:00"
                         id="html5-datetime-local-input"
                         name="match_time"
                         value="{{ old('match_time', $fmatch->match_time) }}"

@@ -174,7 +174,7 @@ class FmatchController extends Controller
         
         $fmatch->save();
         Alert::success('Update Teams', 'Berhasil');
-        return redirect()->back();
+        return redirect()->route('matchs.index');
 
     }
     

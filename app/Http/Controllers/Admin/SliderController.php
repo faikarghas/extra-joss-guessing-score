@@ -44,30 +44,6 @@ class SliderController extends Controller
     public function store(Request $request)
     {
        
-
-        //$images = $request->images;
-        //$image = explode(",", $images);
-        // if (!empty($image)){
-        //     dd('data tidak kosong');
-        // }
-        // 
-        //dd($image);
-
-        //dd($image[0],parse_url($image[0])['path']);
-        // get filename
-        //dd(basename($image[0]));
-        // get path 
-        //dd(pathinfo($image[0])['dirname']);
-        //dd(pathinfo($image[0]));
-        // get path without host
-        //$dirname = pathinfo($image[0])['dirname'];
-        //dd($dirname);
-        //get path without host
-        //dd(parse_url($dirname)['path']);
-        //$host = request()->getHttpHost(); 
-        //dd(parse_url($image[0])['host']);
-
-
         $validator = Validator::make(
             $request->all(),
             [
@@ -79,14 +55,6 @@ class SliderController extends Controller
         if ($validator->fails()){
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
-
-        // // proses insert
-        // if($request->file('images_desktop')){
-        //     $file= $request->file('images_desktop');
-        //     $filename= date('YmdHi').$file->getClientOriginalName();
-        // } else {
-        //     $filename="";
-        // }
 
         $imageDesktop = $request->image_desktop;
         $uri_segments = explode('/', $imageDesktop);
@@ -110,26 +78,7 @@ class SliderController extends Controller
                 'user_id' => Auth::user()->id,
             ]);
 
-            // $images = $request->images;
-            // $image = explode(",", $images);
-
-            // $images = $request->images;
-            // $imagess = explode(",", $images);
-            // $imagesss = array_filter($imagess);
-
-            // if (!empty($imagesss)){
-            //     foreach ($imagesss as $value ){
-            //         $dirname = pathinfo($value)['dirname'];
-            //         PostImages::create([
-            //             'images' => basename($value),
-            //             'path' => parse_url($dirname)['path'],
-            //             'full_path' => $value,
-            //             'post_id'=>$post->id
-            //         ]);
-            //     }       
-            // }
-
-            Alert::success('Tambah Post', 'Berhasil');
+            Alert::success('Tambah Slider ', 'Berhasil');
             return redirect()->route('sliders.index');
         } catch (\throwable $th){
             DB::rollBack(); 
@@ -148,12 +97,7 @@ class SliderController extends Controller
      */
     public function show(Slider $slider)
     {
-        //
-        //dd($post);
-
-        //$post = Post::orderBy('order', 'ASC')->where('post_id',)->get();
-        
-        //return view('admin.slider.detail',compact('post'));
+       
         return view('admin.slider.detail');
 
     }

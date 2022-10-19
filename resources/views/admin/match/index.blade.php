@@ -31,9 +31,9 @@
                <td><strong>{{ $row->countries_one->name }}</strong></td>
                <td><strong>{{ $row->countries_two->name}}</strong></td>
                <td>{{ $row->score_a }} - {{ $row->score_b }}</td>
-               <td><span class="badge bg-label-success me-1">{{ $row->round_match->title }}</span></td>
-               <td><span class="badge bg-label-warning me-1">{{ $row->match_status}}</span></td>
-               <td><span class="badge bg-label-success me-1">{{ $row->match_time}}</span></td>
+               <td><span class="badge rounded-pill bg-success me-1">{{ $row->round_match->title }}</span></td>
+               <td><span class="badge rounded-pill bg-warning me-1">{{ $row->match_status}}</span></td>
+               <td><span class="badge rounded-pill bg-primary me-1">{{ $row->match_time}}</span></td>
                <td>
                   <div class="dropdown">
                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
