@@ -28,19 +28,19 @@
        <tbody class="table-border-bottom-0">
          @foreach ($datas as $row)
             <tr>
-               <td><strong>{{ $row->id_team_a }}</strong></td>
-               <td><strong>{{ $row->id_team_b }}</strong></td>
+               <td><strong>{{ $row->countries_one->name }}</strong></td>
+               <td><strong>{{ $row->countries_two->name}}</strong></td>
                <td>{{ $row->score_a }} - {{ $row->score_b }}</td>
-               <td><span class="badge bg-label-success me-1">Quilefied</span></td>
-               <td><span class="badge bg-label-warning me-1">Ongoing</span></td>
-               <td><span class="badge bg-label-success me-1">22:00 WIB</span></td>
+               <td><span class="badge bg-label-success me-1">{{ $row->round_match->title }}</span></td>
+               <td><span class="badge bg-label-warning me-1">{{ $row->match_status}}</span></td>
+               <td><span class="badge bg-label-success me-1">{{ $row->match_time}}</span></td>
                <td>
                   <div class="dropdown">
                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                        <i class="bx bx-dots-vertical-rounded"></i>
                      </button>
                      <div class="dropdown-menu">
-                       <a class="dropdown-item" href="javascript:void(0);"
+                       <a class="dropdown-item" href="{{ route('matchs.edit',[$row->id]) }}"
                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
                        >
                      </div>

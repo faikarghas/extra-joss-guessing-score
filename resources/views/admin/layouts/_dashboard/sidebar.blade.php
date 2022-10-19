@@ -77,7 +77,7 @@
       </ul>
     </li>
 
-    <li class="menu-item {{ set_active(['quizs.index','quizs.create', 'quizs.edit']) }} {{ set_open(['quizs.index','quizs.create']) }}">
+    <li class="menu-item {{ set_active(['quizs.index','quizs.create', 'quizs.edit', 'quizchoices.create']) }} {{ set_open(['quizs.index','quizs.create','quizchoices.create']) }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bxs-message-check"></i>
         <div data-i18n="Layouts">Quiz</div>
@@ -91,6 +91,11 @@
         <li class="menu-item  {{ set_active(['quizs.create']) }}">
           <a href="{{ route('quizs.create') }}" class="menu-link">
             <div data-i18n="Without navbar">Create Quiz</div>
+          </a>
+        </li>
+        <li class="menu-item  {{ set_active(['quizchoices.create']) }}">
+          <a href="{{ route('quizchoices.create') }}" class="menu-link">
+            <div data-i18n="Without navbar">Create Quiz Option</div>
           </a>
         </li>
       </ul>

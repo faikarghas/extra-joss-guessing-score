@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller; 
 
 use App\Models\Countries;
+use App\Models\Round;
 use App\Models\Fmatch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,8 @@ class FmatchController extends Controller
      */
     public function index()
     {
-        $datas = Fmatch::all();
+        $datas = Fmatch::with('countries_one', 'countries_two', 'round_match')->get();
+        //dd($datas);
         return view('admin.match.index',compact('datas'));
     }
     /**
@@ -30,8 +32,10 @@ class FmatchController extends Controller
      */
     public function create()
     {
-       
         return view('admin.match.create',[
+            'country' => Countries::all(),
+            'round' => Round::all(),            
+            'match_status' => $this->match_status()
     
         ]);
     }
@@ -45,45 +49,12 @@ class FmatchController extends Controller
     public function store(Request $request)
     {
        
-
-        //$images = $request->images;
-        //$image = explode(",", $images);
-
-
-        // if (!empty($image)){
-        //     dd('data tidak kosong');
-        // }
-
-
-        // 
-        //dd($image);
-
-        //dd($image[0],parse_url($image[0])['path']);
-        // get filename
-        //dd(basename($image[0]));
-        // get path 
-        //dd(pathinfo($image[0])['dirname']);
-
-        //dd(pathinfo($image[0]));
-        // get path without host
-        //$dirname = pathinfo($image[0])['dirname'];
-        //dd($dirname);
-        //get path without host
-        //dd(parse_url($dirname)['path']);
-
-        
-        //$host = request()->getHttpHost(); 
-        //dd(parse_url($image[0])['host']);
-
-
         $validator = Validator::make(
             $request->all(),
             [
-                'title' => 'required|string|max:100',
-                'slug' => 'required|string|unique:posts,slug',
-                'content' => 'required|string',
-                'category' => 'required',
-                'status' => 'required'
+                'id_team_a' => 'required',
+                'id_team_b' => 'required',
+                'match_time' => 'required',
             ]
         );
 
@@ -94,45 +65,22 @@ class FmatchController extends Controller
 
         DB::beginTransaction();
         try {
-            $post = Post::create([
-                'title' => $request->title,
-                'subtitle' => $request->subtitle,
-                'slug' => $request->slug,
-                'thumbnail' =>$request->thumbnail,
-                'image' => $request->image,
-                'description' => $request->description,
-                'content' => $request->content,
-                'status' => $request->status,
-                'category' => $request->category,
+            $fmatch = Fmatch::create([
+                'id_team_a' => $request->id_team_a,
+                'id_team_b' => $request->id_team_b,
+                'match_time' => $request->match_time,
+                'score_a' =>$request->score_a,
+                'score_b' =>$request->score_b,
+                'match_status' => $request->match_status,
+                'round' => $request->round,
                 'user_id' => Auth::user()->id,
+                
             ]);
-
-            $post->categories()->attach($request->category);
-
-            $images = $request->images;
-            $image = explode(",", $images);
-
-            $images = $request->images;
-            $imagess = explode(",", $images);
-            $imagesss = array_filter($imagess);
-
-
-            if (!empty($imagesss)){
-                foreach ($imagesss as $value ){
-                    $dirname = pathinfo($value)['dirname'];
-                    PostImages::create([
-                        'images' => basename($value),
-                        'path' => parse_url($dirname)['path'],
-                        'full_path' => $value,
-                        'post_id'=>$post->id
-                    ]);
-                }       
-            }
-            Alert::success('Tambah Post', 'Berhasil');
-            return redirect()->route('posts.index');
+            Alert::success('Tambah Matchs', 'Berhasil');
+            return redirect()->route('matchs.index');
         } catch (\throwable $th){
             DB::rollBack(); 
-            Alert::error('Tambah Post', 'error'.$th->getMessage());
+            Alert::error('Tambah Matchs', 'error'.$th->getMessage());
             return redirect()->back()->withInput($request->all());
         } finally{
             DB::commit();
@@ -174,15 +122,20 @@ class FmatchController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
         
         
-        return view('admin.posts.edit',[
-            'post' => $post,
-            'categories' => Category::with('descendants')->onlyParent()->get(),
-            'statuses' => $this->statuses(),
-        ]);
+        $datas = array(
+            'fmatch' => Fmatch::find($id),
+            'round' => Round::all(),
+            'country' => Countries::all(),
+            'match_status' => $this->match_status(),
+            
+        );
+
+
+        return view('admin.match.edit')->with($datas);     
     }
 
     /**
@@ -192,7 +145,7 @@ class FmatchController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         //
         //dd($request->thumbnail);
@@ -201,55 +154,30 @@ class FmatchController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title' => 'required|string|max:100',
-                'slug' => 'required|string|unique:posts,slug,'. $post->id,
-                'content' => 'required|string',
-                'category' => 'required',
-                'status' => 'required'
+                'id_team_a' => 'required',
+                
             ]
         );
         if ($validator->fails()){
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
 
-        DB::beginTransaction();
+        $fmatch = Fmatch::find($id);
+        $fmatch->id_team_a= $request->input('id_team_a');
+        $fmatch->id_team_b= $request->input('id_team_b');
+        $fmatch->score_a= $request->input('score_a');
+        $fmatch->score_b= $request->input('score_b');
+        $fmatch->match_time= $request->input('match_time');
+        $fmatch->round= $request->input('round');
+        $fmatch->match_status= $request->input('match_status');
         
-        $now = date('Y-m-d H:i'); //Fomat Date and time //you are overwriting this variable below
-        $now = $request->publishDate; //should be course_date
         
-        try {
-            $post->update([
-                'title' => $request->title,
-                 'subtitle' => $request->subtitle,
-                'slug' => $request->slug,
-                //'thumbnail' => parse_url($request->thumbnail)['path'],
-                'thumbnail' => $request->thumbnail,
-              'image' => $request->image,
-                'description' => $request->description,
-                'content' => $request->content,
-                'status' => $request->status,
-                'category' => $request->category,
-                'publish_date' => $now,
-                'user_id' => Auth::user()->id,
-            ]);
-            $post->categories()->sync($request->category);
-            Alert::success('Update Post', 'Berhasil');
-            //return redirect()->route('posts.index');
-            return redirect()->back();
-        } catch (\throwable $th){
-            DB::rollBack(); 
-            Alert::error('Tambah Post', 'error'.$th->getMessage());
-            return redirect()->back()->withInput($request->all());
-        } finally{
-            DB::commit();
-        }
+        $fmatch->save();
+        Alert::success('Update Teams', 'Berhasil');
+        return redirect()->back();
+
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Post $post)
     {
         try {
@@ -261,11 +189,11 @@ class FmatchController extends Controller
         return redirect()->back();
     }
 
-    private function statuses(){
+    private function match_status(){
 
         return [
-            'draft' => 'draft',
-            'publish' => 'publish',
+            'OPEN' => 'OPEN',
+            'CLOSE' => 'CLOSE',
         ];
     }
 }

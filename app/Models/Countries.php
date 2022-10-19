@@ -19,4 +19,6 @@ class Countries extends Model
         'group',
         'flag_image',
     ];
+
+    
 }

@@ -6,27 +6,35 @@
   {{ Breadcrumbs::render('add_category') }}
 @endsection
 @section('content')
+<form  action="{{  route('quizs.store') }}" method="POST">
+   @csrf
    <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-9">
          <div class="card mb-4">
             <h5 class="card-header">Quiz Add</h5>
             <div class="card-body">
                <div class="mb-3">
-                  <label for="defaultFormControlInput" class="form-label">Questions</label>
-                  <input
-                     type="text"
-                     class="form-control"
-                     id="defaultFormControlInput"
-                     placeholder="John Doe"
-                     aria-describedby="defaultFormControlHelp"
-                  />
+                  <label for="defaultFormControlInput" class="col-md-2 col-form-label">Questions</label>
+                  <div>
+                     <input
+                        type="text"
+                        class="form-control"
+                        id="defaultFormControlInput"
+                        placeholder="John Doe"
+                        aria-describedby="defaultFormControlHelp"
+                        name="question"
+                     />
+                  </div>
                </div>
                
-               <button type="submit" class="btn btn-primary">Send</button>
+               
+               <button type="submit" class="btn btn-primary">Save</button>
             </div>
          </div>
       </div>
+      
    </div>
+</form>
 @endsection
 @push('javascript-external')
   <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>

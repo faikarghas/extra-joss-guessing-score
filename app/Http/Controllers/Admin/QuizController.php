@@ -47,46 +47,12 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-       
-
-        //$images = $request->images;
-        //$image = explode(",", $images);
-
-
-        // if (!empty($image)){
-        //     dd('data tidak kosong');
-        // }
-
-
-        // 
-        //dd($image);
-
-        //dd($image[0],parse_url($image[0])['path']);
-        // get filename
-        //dd(basename($image[0]));
-        // get path 
-        //dd(pathinfo($image[0])['dirname']);
-
-        //dd(pathinfo($image[0]));
-        // get path without host
-        //$dirname = pathinfo($image[0])['dirname'];
-        //dd($dirname);
-        //get path without host
-        //dd(parse_url($dirname)['path']);
-
-        
-        //$host = request()->getHttpHost(); 
-        //dd(parse_url($image[0])['host']);
-
 
         $validator = Validator::make(
             $request->all(),
             [
-                'title' => 'required|string|max:100',
-                'slug' => 'required|string|unique:posts,slug',
-                'content' => 'required|string',
-                'category' => 'required',
-                'status' => 'required'
+                'question' => 'required|string|max:100',
+                
             ]
         );
 
@@ -97,45 +63,19 @@ class QuizController extends Controller
 
         DB::beginTransaction();
         try {
-            $post = Post::create([
-                'title' => $request->title,
-                'subtitle' => $request->subtitle,
-                'slug' => $request->slug,
-                'thumbnail' =>$request->thumbnail,
-                'image' => $request->image,
-                'description' => $request->description,
-                'content' => $request->content,
-                'status' => $request->status,
-                'category' => $request->category,
+            $post = Questions::create([
+                'question' => $request->question,
+                'question_id' => QuestionChoices::create([
+                    "question" => $request->question
+                  ])->id,
                 'user_id' => Auth::user()->id,
             ]);
 
-            $post->categories()->attach($request->category);
-
-            $images = $request->images;
-            $image = explode(",", $images);
-
-            $images = $request->images;
-            $imagess = explode(",", $images);
-            $imagesss = array_filter($imagess);
-
-
-            if (!empty($imagesss)){
-                foreach ($imagesss as $value ){
-                    $dirname = pathinfo($value)['dirname'];
-                    PostImages::create([
-                        'images' => basename($value),
-                        'path' => parse_url($dirname)['path'],
-                        'full_path' => $value,
-                        'post_id'=>$post->id
-                    ]);
-                }       
-            }
-            Alert::success('Tambah Post', 'Berhasil');
-            return redirect()->route('posts.index');
+            Alert::success('Tambah Qestion Berhasil', 'Berhasil');
+            return redirect()->route('quizs.index');
         } catch (\throwable $th){
             DB::rollBack(); 
-            Alert::error('Tambah Post', 'error'.$th->getMessage());
+            Alert::error('Tambah Question', 'error'.$th->getMessage());
             return redirect()->back()->withInput($request->all());
         } finally{
             DB::commit();

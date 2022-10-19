@@ -33,6 +33,7 @@ Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
   Route::resource('/teams', \App\Http\Controllers\Admin\TeamsController::class);
   Route::resource('/matchs', \App\Http\Controllers\Admin\FmatchController::class);
   Route::resource('/quizs', \App\Http\Controllers\Admin\QuizController::class);
+  Route::resource('/quizchoices', \App\Http\Controllers\Admin\QuestionChoiceController::class);
   Route::resource('/users', \App\Http\Controllers\Admin\UserController::class);
   //User
   // file manager

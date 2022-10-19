@@ -8,16 +8,7 @@ class Questions extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'subtitle',
-        'slug',
-        'thumbnail',
-        'image',
-        'description',
-        'content',
-        'status',
-        'publish_date',
-        'user_id'
+        'question',
     ];
 
 

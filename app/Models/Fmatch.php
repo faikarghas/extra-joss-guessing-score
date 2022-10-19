@@ -25,4 +25,16 @@ class Fmatch extends Model
         'expired_time',
         'match_time'
     ];
+    public function countries_one()
+    {
+        return $this->belongsTo(Countries::class,'id_team_a','id');
+    }
+    public function countries_two()
+    {
+        return $this->belongsTo(Countries::class,'id_team_b','id');
+    }
+    public function round_match()
+    {
+        return $this->belongsTo(Round::class,'round','id');
+    }
 }
