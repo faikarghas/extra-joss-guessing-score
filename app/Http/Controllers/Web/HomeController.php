@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Models\Questions;
+use App\Models\QuestionChoices;
 use App\Models\User;
 use App\Models\Guessing;
 use App\Models\Fmatch;
@@ -244,14 +246,15 @@ class HomeController extends Controller
         return view('adminHome');
     }
   
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function managerHome()
+    public function getQuiz()
     {
-        return view('managerHome');
+        $soal = Questions::all();
+        $option =  QuestionChoices::all();
+
+        
+        return response()->json(array('soal'=>$soal,'jawaban'=>$option));
+
+
     }
 
 }
