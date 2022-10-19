@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\DasboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/getquiz',[HomeController::class,'getquiz']);
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
 
