@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+
+
         // User yg menebak benar
         // $userGuess = Guessing::select('guessings.id','guessings.id_user','guessings.id_match','guessing_score_a','guessing_score_b','status')
         // ->leftJoin('users','guessings.id_user','=','users.id')
@@ -38,11 +44,11 @@ class HomeController extends Controller
         // ->get();
 
         // Daftar pertandingan
-        // $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-        // ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        // ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","expired_time")
-        // ->where([["fmatches.round","Group Stage 1"]])
-        // ->get();
+        $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","expired_time")
+        ->where([["fmatches.round","Group Stage 1"]])
+        ->get();
 
 
         // dd($matches);
@@ -86,15 +92,14 @@ class HomeController extends Controller
         // }
 
 
-        // $data = [
-        //     'klasemens' => $klasemens,
-        //     'matches' => $matches,
-        //     'myguess' => $myguess,
-        //     'userDetail' => $userDetail
-        // ];
+        $data = [
+            //'klasemens' => $klasemens,
+            'matches' => $matches,
+            //'myguess' => $myguess,
+            //'userDetail' => $userDetail
+        ];
 
-        // return view('web.pages.index',$data);
-        return view('web.pages.index');
+        return view('web.pages.index',$data);
     }
 
     /**
