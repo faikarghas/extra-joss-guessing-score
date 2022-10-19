@@ -14,11 +14,10 @@ use App\Models\Fmatch;
 use App\Lib\UpdatePointHelper;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-
-    
 
     /**
      * Display a listing of the resource.
@@ -53,8 +52,6 @@ class HomeController extends Controller
         ->where([["fmatches.match_status","OPEN"]])
         ->get();
 
-
-        // dd($matches);
 
         // Daftar tebakan user
         // $matches2 = Guessing::leftJoin('fmatches','guessings.id_match','=','fmatches.id')
@@ -180,13 +177,12 @@ class HomeController extends Controller
     public function storeOrUpdateScore(Request $request,$id_match){
         $req = $request->all();
 
-
-
         Guessing::updateOrCreate(
             ['id_user'=>Auth::user()->id, 'id_match'=> $id_match],
-            ['guessing_score_a' => $req['guess_score_a'], 'guessing_score_b' => $req['guess_score_b']]
+            ['guessing_score_a' => $req['guess_score_a'],
+             'guessing_score_b' => $req['guess_score_b'],
+             'is_guess' => 1]
         );
-        // $someName['guess_scorea_'];
 
         return response()->json([
             'code' => '200',
@@ -221,19 +217,68 @@ class HomeController extends Controller
     public function ex(){
 
          // Daftar pertandingan
-         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
-         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round")
-         ->where([["fmatches.match_status","OPEN"]])
-         ->get();
- 
-        // dd($matches);
+        $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status")
+        ->where([["fmatches.match_status","OPEN"]])
+        ->get();
+
+        // GMT +8
+        $cn = Carbon::now()->toDateTimeString();
+        $datetime = date($cn);
+        $timestamp = strtotime($datetime);
+        $time = $timestamp + (8 * 60 * 60);
+        $currentTime = date("Y-m-d H:i:s", $time);
+        $myguess = [];
+
+        if (Auth::check()) {
+            // Tebakan per user
+            $myguess = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.match_status","OPEN"]])
+            ->get();
+
+            // dd($myguess);
+        }
+
         $data = [
-            'matches' => $matches
+            'matches' => $matches,
+            'currentTime' => $currentTime,
+            'myguess' => $myguess
         ];
 
         return view('web.pages.ex',$data);
+    }
+
+    public function daftar(){
+        return view('web.pages.register');
+    }
+
+    public function masuk(){
+        return view('web.pages.login');
+    }
+
+    public function storeGuess(){
+        $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status")
+        ->get();
+
+        foreach ($matches as $key => $match) {
+            Guessing::updateOrCreate([
+                'id_user'   => Auth::user()->id,
+                'id_match'  => $match->id,
+            ],[
+                'guessing_score_a' => 0,
+                'guessing_score_b' => 0,
+            ]);
+        }
     }
 
      /**
@@ -245,15 +290,13 @@ class HomeController extends Controller
     {
         return view('adminHome');
     }
-  
+
     public function getQuiz()
     {
         $soal = Questions::all();
         $option =  QuestionChoices::all();
 
-        
         return response()->json(array('soal'=>$soal,'jawaban'=>$option));
-
 
     }
 

@@ -32,11 +32,20 @@
                     </li>
                     <li>
                         <ul class="m-0 px-6 py-1 flex bg-black rounded-3xl">
+                            @guest
                             <li class="log flex items-center list-none cursor-pointer">
                                 <img alt="icon user" src="{{asset('images/user.png')}}" class="w-[14px] mr-2 pb-1"/>
-                                <p class="font-head text-[#FFEC00] text-[20px] leading-[18px]">MASUK</p></li>
+                                <a href="{{route('masuk')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">MASUK</a></li>
                             <li class="flex items-center list-none font-head text-[#FFEC00] text-[20px] mx-2">|</li>
-                            <li class="reg flex items-center list-none cursor-pointer"><p class="font-head text-[#FFEC00] text-[20px] leading-[20px]">DAFTAR</p></li>
+                            <li class="reg flex items-center list-none cursor-pointer"><a href="{{route('daftar')}}" class="font-head text-[#FFEC00] text-[20px] leading-[20px]">DAFTAR</a></li>
+                            @endguest
+                            @auth
+                            <li class="flex items-center list-none cursor-pointer">
+                                <img alt="icon user" src="{{asset('images/user.png')}}" class="w-[14px] mr-2 pb-1"/>
+                                <p class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->name }}</p></li>
+                            <li class="flex items-center list-none font-head text-[#FFEC00] text-[20px] mx-2">|</li>
+                            <li class="flex items-center list-none cursor-pointer"><a href="{{ route('logout') }}" class="font-head text-[#FFEC00] text-[20px] leading-[20px]">LOGOUT</a></li>
+                            @endauth
                         </ul>
                     </li>
                 </ul>
@@ -115,79 +124,169 @@
         {{-- TEBAK SCORE  --}}
         <div class="flex flex-row flex-wrap lg:flex-nowrap gap-2">
             <div class="basis-full lg:basis-1/2 flex flex-wrap bg-[#202124]">
-                @foreach ($matches as $key => $match)
-                @if ($key < 8)
-                <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
-                    <div class="flex flex-wrap">
-                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
-                            <li class="mb-2 flex items-center">
-                                <img src="{{asset('/images/countries/qatar.png')}}" class="h-[20px] xl:h-[30px]"/>
-                                <p class="text-white font-sans ml-4 text-[17px] leading-tight">{{$match->team1}}</p>
-                            </li>
-                            <li class="flex items-center">
-                                <img src="{{asset('/images/countries/equador.png')}}" class="h-[20px] xl:h-[30px]"/>
-                                <p class="text-white font-sans ml-4 text-[17px] leading-tight">{{$match->team2}}</p>
-                            </li>
-                        </ul>
-                        <div class="basis-1/2 flex items-center justify-center">
-                            {{-- SCORE --}}
-                            {{-- <ul class="score">
+                @auth
+                @foreach ($myguess as $key => $match)
+                    @if ($key < 8)
+                    <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                        <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} {{$match->id_guess}}</span>
+                        <div class="flex flex-wrap">
+                            <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                 <li class="mb-2 flex items-center">
-                                    <p class="text-white font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                    <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                    <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                 </li>
                                 <li class="flex items-center">
-                                    <p class="text-white font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                    <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                    <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                 </li>
-                            </ul> --}}
-                            {{-- EDIT --}}
-                            {{-- <div class="bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div> --}}
-                            {{-- TEBAK --}}
-                            <div data-idMatch={{$match->id}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor{{$match->id}}</div>
-                            {{-- REWARD --}}
+                            </ul>
+                            <div class="basis-1/2 flex items-center justify-center">
+                                <?php
+                                    $datetime = date($match->match_time);
+                                    $timestamp = strtotime($datetime);
+                                    $time = $timestamp - (1 * 60 * 60);
+                                    $datetime = date("Y-m-d H:i:s", $time);
+
+                                    $d1 = new DateTime($currentTime);
+                                    $d2 = new DateTime($datetime);
+                                ?>
+                                @if ($d1 < $d2)
+                                    {{-- belum expire --}}
+                                    @if ($match->is_guess == 0)
+                                    {{-- belum tebak skor --}}
+                                    <div data-idMatch={{$match->id_guess}} data-flag1={{$match->flag_team2}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</div>
+                                    @else
+                                    {{-- sudah tebak skor --}}
+                                    <ul class="score">
+                                        <li class="flex items-center">
+                                            <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
+                                        </li>
+                                    </ul>
+                                    <div class="bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
+                                    @endif
+                                @else
+                                    @if ($match->is_guess == 1)
+                                        {{-- sudah expire dan sudah tebak skor --}}
+                                        <ul class="score">
+                                            <li class="flex items-center">
+                                                <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
+                                            </li>
+                                        </ul>
+                                        <div class="bg-[#6D6D6D] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
+                                    @else
+                                        {{-- sudah expire dan belum tebak skor --}}
+                                        <ul class="score">
+                                            <li class="flex items-center">
+                                                <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                            </li>
+                                        </ul>
+                                        <div class="flex items-center ml-4">
+                                            <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                            <div>
+                                                <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                @endif
+                    @endif
                 @endforeach
+                @else
+                    @foreach ($matches as $key => $match)
+                        @if ($key < 8)
+                        <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
+                            <div class="flex flex-wrap">
+                                <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                                    <li class="mb-2 flex items-center">
+                                        <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                    </li>
+                                </ul>
+                                <div class="basis-1/2 flex items-center justify-center">
+                                    <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
+                @endauth
             </div>
             <div class="basis-full lg:basis-1/2 flex flex-wrap bg-[#202124]">
-                @foreach ($matches as $key => $match)
-                @if ($key > 8)
-                <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
-                    <div class="flex flex-wrap">
-                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
-                            <li class="mb-2 flex items-center">
-                                <img src="{{asset('/images/countries/qatar.png')}}" class="h-[30px]"/>
-                                <p class="text-white font-sans ml-4 text-[17px] leading-tight">{{$match->team1}}</p>
-                            </li>
-                            <li class="flex items-center">
-                                <img src="{{asset('/images/countries/equador.png')}}" class="h-[30px]"/>
-                                <p class="text-white font-sans ml-4 text-[17px] leading-tight">{{$match->team2}}</p>
-                            </li>
-                        </ul>
-                        <div class="basis-1/2 flex items-center justify-center">
-                            {{-- SCORE --}}
-                            {{-- <ul class="score">
+                @auth
+                @foreach ($myguess as $key => $match)
+                    @if ($key >= 8)
+                    <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                        <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
+                        <div class="flex flex-wrap">
+                            <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                 <li class="mb-2 flex items-center">
-                                    <p class="text-white font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                    <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                    <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                 </li>
                                 <li class="flex items-center">
-                                    <p class="text-white font-sans ml-4 text-[22px] font-bold leading-tight">0</p>
+                                    <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                    <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                 </li>
-                            </ul> --}}
-                            {{-- EDIT --}}
-                            {{-- <div class="bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div> --}}
-                            {{-- TEBAK --}}
-                            <div data-idMatch={{$match->id}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[113px] text-center cursor-pointer">Tebak Skor{{$match->id}}</div>
+                            </ul>
+                            <div class="basis-1/2 flex items-center justify-center">
+                                <?php
+                                    $datetime = date($match->match_time);
+                                    $timestamp = strtotime($datetime);
+                                    $time = $timestamp - (1 * 60 * 60);
+                                    $datetime = date("Y-m-d H:i:s", $time);
 
-                            {{-- REWARD --}}
+                                    $d1 = new DateTime($currentTime);
+                                    $d2 = new DateTime($datetime);
+                                ?>
+                                @if ($d1 < $d2)
+                                    <div data-idMatch={{$match->id_guess}} data-flag1={{$match->flag_team1}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</div>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                @endif
+                    @endif
                 @endforeach
+                @else
+                    @foreach ($matches as $key => $match)
+                        @if ($key > 8)
+                        <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
+                            <div class="flex flex-wrap">
+                                <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                                    <li class="mb-2 flex items-center">
+                                        <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                    </li>
+                                </ul>
+                                <div class="basis-1/2 flex items-center justify-center">
+                                    <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
+                @endauth
             </div>
         </div>
     </section>
@@ -197,91 +296,7 @@
     <div class="modal-form hidden flex-wrap bg-black w-[400px] md:w-[600px] p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
 
     {{-- MODAL QUIZ --}}
-    <div class="modal-quiz hidden flex-wrap bg-black w-[400px] md:w-[750px] py-14 px-20 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+    @include('web.components.modal.quiz')
 
-        <div class="close">
-            <div class="">
-                <img src="{{asset('/images/close.png')}}" />
-            </div>
-        </div>
-        <div class="act-wrapper">
-            <div class="basis-act">
-                <button class="btn-quiz act-quiz">Pertanyaan Selanjutnya</button>
-            </div>
-            <div class="point-qz basis-act">
-                <img src="{{asset('images/acv.png')}}" />
-                <h5>1000 POIN</h5>
-            </div>
-        </div>
-    </div>
-
-    {{-- MODAL LOGIN --}}
-    <div class="hidden modal-login w-full h-full fixed top-0 left-0 bg-[#FFEC00] px-14 py-20">
-        <div class="bg-white flex flex-wrap py-14 px-20 relative justify-between">
-            <div class="close-login absolute top-[35px] right-[35px] cursor-pointer                       ">
-                <div class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
-                    <img src="{{asset('/images/close-w.png')}}" />
-                </div>
-            </div>
-            <div class="basis-full">
-                <h2 class="font-head text-[60px]">MASUK</h2>
-            </div>
-            <div class="basis-full lg:basis-[48%] relative">
-                <form>
-                  <div class="relative z-0 mb-6 w-full group">
-                        <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">EMAIL ADDRESS</label>
-                        <input type="email" name="floating_email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required="">
-                  </div>
-                  <div class="relative z-0 mb-6 w-full group">
-                        <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">PASSWORD</label>
-                        <input type="password" name="floating_password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="Password" required="">
-                  </div>
-                  <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">LOG IN</button>
-                </form>
-                <div class="absolute right-[-15%] top-[50%] translate-y-[-50%] ">OR</div>
-            </div>
-            <div class="basis-full lg:basis-[48%]">
-                <span class="block font-sans text-center mb-5 text-[#A0A0A0]"> atau login dengan </span>
-                <a href="{{ url('login/google') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto mb-4 font-sans font-black"><img width="26px" alt="google logo" class="mr-16" src="{{asset('images/google.png')}}"/>Continue With Google</a>
-
-                <a href="{{ url('/login/facebook') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto font-sans font-black"><img width="26px" alt="fb logo" class="mr-16" src="{{asset('images/facebook.png')}}"/>Continue With Facebook</a>
-            </div>
-        </div>
-        <div class="pt-8">
-            <img alt="logo extra joss" class="m-auto" src="{{asset('/images/logo.png')}}"/>
-        </div>
-    </div>
-
-    {{-- MODAL REGISTER --}}
-    <div class="hidden modal-register w-full h-full fixed top-0 left-0 bg-[#FFEC00] px-14 py-20">
-        <div class="bg-white flex flex-wrap py-8 px-20 relative justify-between">
-            <div class="close-register absolute top-[15px] right-[15px] cursor-pointer">
-                <div class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
-                    <img src="{{asset('/images/close-w.png')}}" />
-                </div>
-            </div>
-            <div class="basis-full flex justify-between">
-                <h2 class="font-head text-[60px]">DAFTAR</h2>
-                <h2 class="font-head text-[60px] text-[#FFA800] flex">DAPATKAN <img class="object-contain w-[30px]" src="{{asset('/images/acv.png')}}" />  60 Poin AWAL!</h2>
-            </div>
-            <div class="basis-full relative">
-                <form>
-                  <div class="relative z-0 mb-6 w-full group">
-                        <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">EMAIL ADDRESS</label>
-                        <input type="email" name="floating_email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required="">
-                  </div>
-                  <div class="relative z-0 mb-6 w-full group">
-                        <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">PASSWORD</label>
-                        <input type="password" name="floating_password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="Password" required="">
-                  </div>
-                  <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">KIRIM</button>
-                </form>
-                <div class="absolute right-[-15%] top-[50%] translate-y-[-50%]">OR</div>
-            </div>
-        </div>
-        <div class="pt-8">
-            <img alt="logo extra joss" class="m-auto" src="{{asset('/images/logo.png')}}"/>
-        </div>
-    </div>
 </main>
 @endsection

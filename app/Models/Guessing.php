@@ -21,5 +21,6 @@ class Guessing extends Model
         'guessing_score_b',
         'guessing_result',
         'status',
+        'is_guess'
     ];
 }

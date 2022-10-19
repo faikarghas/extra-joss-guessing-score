@@ -76,27 +76,25 @@ export class GuessScore {
 
             $.ajax({
                 type:'POST',
-                url:`http://127.0.0.1:8000/guess-score/${id}`,
+                url:`${base_url}/guess-score/${id}`,
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data  :{
                     'guess_score_a':guess_score_a,
                     'guess_score_b':guess_score_b
                 },
                 error: function(xhr, error){
-                    // console.debug(xhr); console.debug(error);
                     if (xhr.status === 500) {
                         $('.kirim-tebakan').html('Gagal Terkirim')
 
                         setTimeout(() => {
-                            $(this).html('Kirim')
+                            $('.kirim-tebakan').html('Kirim')
                         }, 2500);
                     }
                 },
                 success:function(data){
-                    $(this).html('Terkirim')
-
+                    $('.kirim-tebakan').html('Terkirim')
                     setTimeout(() => {
-                        $(this).html('Kirim')
+                        $('.kirim-tebakan').html('Kirim')
                     }, 2500);
 
                 }
@@ -123,6 +121,9 @@ export class GuessScore {
                 let id = $(this).attr('data-idMatch');
                 let team1 = $(this).attr('data-team1');
                 let team2 = $(this).attr('data-team2');
+                let flagteam1 = $(this).attr('data-flag1');
+                let flagteam2 = $(this).attr('data-flag2');
+
 
                 $('.modal-form').css('display','block')
 
@@ -139,7 +140,7 @@ export class GuessScore {
                         <form class="">
                             <div class="flex items-center mb-4">
                                 <div class="label">
-                                    <img class="mr-3" width="32px" src="${base_url}/images/countries/${team1?.toLowerCase()}.png" />
+                                    <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam1}" />
                                     <span class="text-white font-sans mr-6">${team1}</span>
                                 </div>
                                 <input class="form-tebak" type="number" name="guess_score_a"
@@ -147,7 +148,7 @@ export class GuessScore {
                             </div>
                             <div class="flex items-center mb-12">
                                 <div class="label">
-                                    <img class="mr-3" width="32px" src="${base_url}/images/countries/${team2?.toLowerCase()}.png" />
+                                    <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam2}" />
                                     <span class="text-white font-sans mr-6">${team2}</span>
                                 </div>
                                 <input class="form-tebak" type="number" name="guess_score_b"

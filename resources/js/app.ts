@@ -32,11 +32,6 @@ import { getCurrentDate } from './utils/index';
             const quiz = new Quiz(0,3);
 
             // Init all functionality
-            auth.closeModalLogin();
-            auth.closeModalRegister();
-            auth.openLoginModal();
-            auth.openRegisterModal();
-
             guess.openGuessModal();
             guess.kirimForm();
             guess.closeModal();
