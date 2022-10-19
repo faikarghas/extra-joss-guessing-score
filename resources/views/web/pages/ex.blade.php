@@ -143,7 +143,7 @@
                             {{-- EDIT --}}
                             {{-- <div class="bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div> --}}
                             {{-- TEBAK --}}
-                            <div data-idMatch={{$match->id}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[113px] text-center cursor-pointer">Tebak Skor{{$match->id}}</div>
+                            <div data-idMatch={{$match->id}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor{{$match->id}}</div>
                             {{-- REWARD --}}
                         </div>
                     </div>

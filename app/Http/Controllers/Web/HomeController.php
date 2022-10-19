@@ -46,8 +46,9 @@ class HomeController extends Controller
         // Daftar pertandingan
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","expired_time")
-        ->where([["fmatches.round","Group Stage 1"]])
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round")
+        ->where([["fmatches.match_status","OPEN"]])
         ->get();
 
 
@@ -64,8 +65,7 @@ class HomeController extends Controller
         // $klasemens = User::orderBy('total_point','DESC')
         // ->orderBy('name','ASC')
         // ->get();
-        
-        $myguess = [];
+
         // if (Auth::check()) {
         //     // Tebakan per user
         //     $myguess = Guessing::leftJoin('users','guessings.id_user','=','users.id')
@@ -90,7 +90,6 @@ class HomeController extends Controller
         //         'point' => Auth::user()->total_point,
         //     ];
         // }
-
 
         $data = [
             //'klasemens' => $klasemens,
@@ -222,8 +221,9 @@ class HomeController extends Controller
          // Daftar pertandingan
          $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
          ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","round","stadium","match_time","match_expired_time")
-         ->where([["fmatches.round","Group Stage 1"]])
+         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round")
+         ->where([["fmatches.match_status","OPEN"]])
          ->get();
  
         // dd($matches);
