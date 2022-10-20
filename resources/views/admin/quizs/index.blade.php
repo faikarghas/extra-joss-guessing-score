@@ -34,9 +34,6 @@
                        <a class="dropdown-item" href="{{ route('quizs.edit',$row->id) }}"
                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
                        >
-                       {{-- <a class="dropdown-item" href="{{ route('posts.edit') }}"
-                         ><i class="bx bx-edit-alt me-1"></i> view answer</a
-                       > --}}
                        <form action="{{ route('quizs.destroy',[$row->id]) }}" method="post">
                         @csrf
                         @method('DELETE')

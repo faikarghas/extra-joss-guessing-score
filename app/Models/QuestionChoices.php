@@ -16,7 +16,7 @@ class QuestionChoices extends Model
     public function question()
     {
         //return $this->belongsTo(Question::class, 'question_id', 'question_id');
-        return $this->hasOne(Question::class, 'id', 'question_id');
+        return $this->belongsTo(Questions::class);
     }
     
 }

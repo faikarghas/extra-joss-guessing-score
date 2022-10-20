@@ -123,8 +123,16 @@ class QuizController extends Controller
         
         $datas = array(
             'question' => Questions::find($id),
+            'options' =>  Questions::with(['choices'])->where('id',$id)->get(),
         );
 
+        //$options =  Questions::with(['choices'])->where('id',$id)->get();
+        //dd($options);
+
+        // $question = Questions::with(['choices'])->where('id',$id)->get();
+        // dd($question);
+        //$question =  Questions::with('choices')->get();
+        //dd($options);
 
         return view('admin.quizs.edit')->with($datas);   
     }
@@ -138,10 +146,7 @@ class QuizController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //
-        //dd($request->thumbnail);
-
-
+      
         $question = Questions::find($id);
         $question->question= $request->input('question');
         $question->save();

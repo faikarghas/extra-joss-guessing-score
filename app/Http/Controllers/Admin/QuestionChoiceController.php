@@ -115,6 +115,16 @@ class QuestionChoiceController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $questionChoice = QuestionChoices::find($id);
+        $questionChoice->choice= $request->input('choice');
+        $questionChoice->point= $request->input('point');
+        $questionChoice->save();
+        Alert::success('Update Question', 'Berhasil');
+        return redirect()->back();
+        
+
+
     }
 
     /**

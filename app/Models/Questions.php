@@ -14,7 +14,7 @@ class Questions extends Model
 
     public function choices()
     {
-        return $this->hasMany(QuestionChoices::class, 'question_id');
+        return $this->hasMany(QuestionChoices::class,'question_id','id');
     }
 
     public function correctChoicesCount() {
