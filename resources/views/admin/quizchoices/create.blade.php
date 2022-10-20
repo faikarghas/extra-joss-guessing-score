@@ -18,7 +18,7 @@
                   <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="question_id">
                     <option value="">Select Question</option>
                     @foreach ($quiz as $row)
-                     <option value="{{$row->question_id}}">{{$row->question}}</option>
+                     <option value="{{$row->id}}">{{$row->question}}</option>
                     @endforeach 
                   </select>
                </div>
@@ -48,8 +48,6 @@
                      />
                   </div>
                </div>
-               
-               
                <button type="submit" class="btn btn-primary">Save</button>
             </div>
          </div>

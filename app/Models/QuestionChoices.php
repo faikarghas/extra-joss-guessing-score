@@ -10,12 +10,13 @@ class QuestionChoices extends Model
     protected $fillable = [
         'question_id',
         'choice',
-        'point',
+        'point'
     ];
+
+    protected $table = 'question_choices';
 
     public function question()
     {
-        //return $this->belongsTo(Question::class, 'question_id', 'question_id');
         return $this->belongsTo(Questions::class);
     }
     

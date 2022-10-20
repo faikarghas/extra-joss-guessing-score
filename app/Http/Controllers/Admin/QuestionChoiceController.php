@@ -34,7 +34,7 @@ class QuestionChoiceController extends Controller
 
         return view('admin.quizchoices.create',[
             'quiz' =>Questions::all(),
-            // 'statuses' => $this->statuses(),
+         
         ]);
     }
 
@@ -47,14 +47,13 @@ class QuestionChoiceController extends Controller
     public function store(Request $request)
     {
         //
-
+        //dd($request);
         $validator = Validator::make(
             $request->all(),
             [
                 'question_id' => 'required',
                 'choice' => 'required',
-                'point' => 'required',
-                
+                'point' => 'required',    
             ]
         );
 
