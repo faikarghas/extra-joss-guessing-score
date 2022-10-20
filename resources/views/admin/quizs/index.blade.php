@@ -31,9 +31,19 @@
                        <i class="bx bx-dots-vertical-rounded"></i>
                      </button>
                      <div class="dropdown-menu">
-                       <a class="dropdown-item" href="javascript:void(0);"
+                       <a class="dropdown-item" href="{{ route('quizs.edit',$row->id) }}"
                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
                        >
+                       {{-- <a class="dropdown-item" href="{{ route('posts.edit') }}"
+                         ><i class="bx bx-edit-alt me-1"></i> view answer</a
+                       > --}}
+                       <form action="{{ route('quizs.destroy',[$row->id]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <a class="dropdown-item" href="#", role="alert" alert-text="{{ $row->question }}" onclick="this.closest('form').submit();return false;">
+                          <i class="bx bx-trash me-1"></i>delete
+                        </a>
+                       </form>
                      </div>
                    </div>
                </td>

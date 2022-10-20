@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 |
 */
 
+//test 
+
+
+
 //Route::group(['prefix'=>'dashboard', 'middleware'=> ['web','auth','user-access:admin']], function() {
 Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
   //Dashboard
@@ -35,6 +39,11 @@ Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
   Route::resource('/quizs', \App\Http\Controllers\Admin\QuizController::class);
   Route::resource('/quizchoices', \App\Http\Controllers\Admin\QuestionChoiceController::class);
   Route::resource('/users', \App\Http\Controllers\Admin\UserController::class);
+
+  Route::get('/startquiz', [\App\Http\Controllers\Admin\StartQuizController::class, 'index']);
+  Route::get('/startquiz/getquiz', [\App\Http\Controllers\Admin\StartQuizController::class, 'getquiz']);
+  
+
   //User
   // file manager
   Route::group(['prefix' => 'filemanager'], function () {
