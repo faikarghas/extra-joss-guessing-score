@@ -288,12 +288,7 @@ class HomeController extends Controller
         return view('web.pages.login');
     }
 
-    public function belanja(){
-        return view('web.pages.belanja');
-    }
-
-
-    // DAFTAR HARUS MENYERTAKAN INI
+    
     public function storeGuess(){
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
