@@ -42,6 +42,8 @@ Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
 
   Route::get('/startquiz', [\App\Http\Controllers\Admin\StartQuizController::class, 'index']);
   Route::get('/startquiz/getquiz', [\App\Http\Controllers\Admin\StartQuizController::class, 'getquiz']);
+
+  Route::put('/matchs/updatestatus/{id}', [\App\Http\Controllers\Admin\FmatchController::class, 'update_status'])->name('matchs.updatestatus');;
   
 
   //User

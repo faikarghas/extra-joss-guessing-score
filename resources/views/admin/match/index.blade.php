@@ -20,8 +20,9 @@
            <th>Team B</th>
            <th>Result</th>
            <th>Round</th>
-           <th>Status</th>
+           <th>Match Status</th>
            <th>Match Time</th>
+           <th>Status</th>
            <th>Actions</th>
          </tr>
        </thead>
@@ -33,7 +34,16 @@
                <td>{{ $row->score_a }} - {{ $row->score_b }}</td>
                <td><span class="badge rounded-pill bg-success me-1">{{ $row->round_match->title }}</span></td>
                <td><span class="badge rounded-pill bg-warning me-1">{{ $row->match_status}}</span></td>
-               <td><span class="badge rounded-pill bg-primary me-1">{{ $row->match_time}}</span></td>
+               <td><span class="badge rounded-pill bg-primary me-1">{{ $row->id}}</span></td>
+               <td>
+                  <form method="post" action="{{ route('matchs.updatestatus',$row->id) }}" id="form">
+                     @csrf
+                     @method('PUT')
+                  <div class="form-check form-switch mb-2">
+                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" value="1git " {{  ($row->status == '1' ? ' checked' : '') }} />
+                  </div>
+                  </form>
+               </td>
                <td>
                   <div class="dropdown">
                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -57,6 +67,11 @@
 @push('javascript-internal')
    <script>
       $(document).ready(function(){
+
+         $('.form-check-input').on('change',function(){
+            $('#form').submit();
+         });
+
          // event delete category
          $("form[role='alert']").submit(function(event){
             event.preventDefault(); 

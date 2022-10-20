@@ -314,10 +314,13 @@ class HomeController extends Controller
 
     public function getQuiz()
     {
-        $soal = Questions::all();
-        $option =  QuestionChoices::all();
+       // $soal = Questions::all();
+        //$option =  QuestionChoices::all();
 
-        return response()->json(array('soal'=>$soal,'jawaban'=>$option));
+        $options =  Questions::with(['choices'])->get()->toJson(JSON_PRETTY_PRINT);
+
+        dd($options);
+        return response()->json(array('soal'=>$options));
 
     }
 
