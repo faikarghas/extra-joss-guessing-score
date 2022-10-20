@@ -29,13 +29,14 @@ import { getCurrentDate } from './utils/index';
 
             const auth = new Auth();
             const guess = new GuessScore();
-            const quiz = new Quiz(0,3);
+            const quiz = new Quiz(0,2);
 
             // Init all functionality
             guess.openGuessModal();
             guess.tebakSkor();
             guess.closeModal();
 
+            quiz.getQuiz()
             quiz.openQuizModal();
             quiz.kirimJawabanQuiz();
             quiz.nextQuiz();

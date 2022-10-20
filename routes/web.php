@@ -23,6 +23,7 @@ Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
 Route::get('/ex',[HomeController::class,'ex'])->name('ex');
 Route::get('/daftar',[HomeController::class,'daftar'])->name('daftar');
 Route::get('/masuk',[HomeController::class,'masuk'])->name('masuk');
+Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
 Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
 
 

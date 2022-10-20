@@ -92,8 +92,6 @@ export class GuessScore {
                     }
                 },
                 success:function(data){
-                    console.log(data);
-                    
                     $('.kirim-tebakan').html('Terkirim')
                     setTimeout(() => {
                         $('.kirim-tebakan').html('Kirim')
@@ -179,11 +177,16 @@ export class Quiz{
     currentPage:number
     totalQuestion:number
     result: Array<any>
+    listQuiz: Array<any>
+    listOption: Array<any>
+
 
     constructor(currentPage:number,totalQuestion:number) {
         this.currentPage = currentPage;
         this.totalQuestion = totalQuestion;
         this.result = [];
+        this.listQuiz = [];
+        this.listOption = [];
     }
 
     closeQuizModal(): void{
@@ -194,91 +197,91 @@ export class Quiz{
     }
 
     openQuizModal(): void{
-        $('.qz').on('click',function () {
-            $('.modal-quiz').css('display','block')
+        $('.tebak-quiz').on('click','.qz', () => {
+            $('.qz').html('loading...');
 
-            let question = bankQuiz[0]
-            $('.modal-quiz').prepend(
-                `
-                <div class="quiz-wrapper flex flex-col">
-                    <h3>${question.pertanyaan}</h3>
-                    <div class="answer-box">
-                        <fieldset>
-                            <div class="choosebox">
-                                <input id="country-option-1" type="radio" name="answer${question.id}" value=${question.jawaban.a} >
-                                <label for="country-option-1" class="">${question.jawaban.a}</label>
-                            </div>
+            $.ajax({
+                type:'GET',
+                url:`${base_url}/getquiz`,
+                error: function(xhr, error){
+                    if (xhr.status === 500) {
+                    }
+                },
+                success:(data) => {
+                    $('.qz').html('lihat quiz');
+                    $('.modal-quiz').css('display','block')
+                    
+                    this.listQuiz = data.question
+                    this.listOption = data.option
 
-                            <div class="choosebox">
-                                <input id="country-option-2" type="radio" name="answer${question.id}" value=${question.jawaban.b} >
-                                <label for="country-option-2" class="">${question.jawaban.b}</label>
-                            </div>
+                    let question = this.listQuiz[0]
+                    let option = this.listOption
 
-                            <div class="choosebox">
-                                <input id="country-option-3" type="radio" name="answer${question.id}" value=${question.jawaban.c} >
-                                <label for="country-option-3" class="">${question.jawaban.c}</label>
+                    $('.modal-quiz').prepend(
+                        `
+                        <div class="quiz-wrapper flex flex-col">
+                            <h3>${question.question}</h3>
+                            <div class="answer-box">
+                            <fieldset>
+                            </fieldset>
                             </div>
+                        </div>
+                        `
+                    )
 
-                            <div class="choosebox">
-                                <input id="country-option-4" type="radio" name="answer${question.id}" value=${question.jawaban.d} >
-                                <label for="country-option-4" class="">${question.jawaban.d}</label>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-                `
-            )
+                    let filteredOption = option.filter((val,key)=>{
+                        return val.question_id == question.id
+                    })
+
+                    filteredOption.forEach(val => {
+                        $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" type="radio" name="answer${val.question_id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
+                    });
+                }
+            })
+
         })
     }
 
     nextQuiz(): void{
         let cp = this.currentPage
         let tq = this.totalQuestion
-        $('.modal-quiz').on('click','button.act-quiz',function (e) {
+        let lq = this.listQuiz
+        let lo = this.listOption
+        $('.modal-quiz').on('click','button.act-quiz', (e) => {
 
             if (cp >= tq - 1 ) return;
 
             if (cp == tq - 2) {
-               $(this).addClass('send-answer')
-               $(this).removeClass('act-quiz')
-               $(this).html('Kirim')
-               $(this).css('background-color','#FF0000')
+               $(e.target).addClass('send-answer')
+               $(e.target).removeClass('act-quiz')
+               $(e.target).html('Kirim')
+               $(e.target).css('background-color','#FF0000')
             }
 
             cp = cp + 1
-            let question = bankQuiz[cp]
+            let question = this.listQuiz[cp]
+            let option = this.listOption
 
             $('.quiz-wrapper').remove()
             $('.modal-quiz').prepend(
                 `
                 <div class="quiz-wrapper flex flex-col">
-                    <h3>${question.pertanyaan}</h3>
+                    <h3>${question.question}</h3>
                     <div class="answer-box">
-                        <fieldset>
-                            <div class="choosebox">
-                                <input id="country-option-1" type="radio" name="answer${question.id}" value=${question.jawaban.a} >
-                                <label for="country-option-1" class="">${question.jawaban.a}</label>
-                            </div>
-
-                            <div class="choosebox">
-                                <input id="country-option-2" type="radio" name="answer${question.id}" value=${question.jawaban.b} >
-                                <label for="country-option-2" class="">${question.jawaban.b}</label>
-                            </div>
-
-                            <div class="choosebox">
-                                <input id="country-option-3" type="radio" name="answer${question.id}" value=${question.jawaban.c} >
-                                <label for="country-option-3" class="">${question.jawaban.c}</label>
-                            </div>
-
-                            <div class="choosebox">
-                                <input id="country-option-4" type="radio" name="answer${question.id}" value=${question.jawaban.d} >
-                                <label for="country-option-4" class="">${question.jawaban.d}</label>
-                            </div>
-                        </fieldset>
+                    <fieldset>
+                    </fieldset>
                     </div>
                 </div>
                 `
             )
+
+            let filteredOption = option.filter((val,key)=>{
+                return val.question_id == question.id
+            })
+
+            filteredOption.forEach(val => {
+                $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" type="radio" name="answer${val.question_id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
+            });
         })
 
     }
@@ -302,6 +305,10 @@ export class Quiz{
         $('.modal-quiz').on('click','button.send-answer', (e) => {
             console.log(this.result);
         })
+    }
+
+    getQuiz(): void {
+
     }
 }
 

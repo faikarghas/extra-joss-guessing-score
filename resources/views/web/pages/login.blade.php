@@ -7,7 +7,7 @@
 @endsection
 @section('main')
 <main>
-    <div class="modal-login w-full fixed top-0 left-0 bg-[#FFEC00] px-14 py-20">
+    <div class="modal-login w-full left-0 bg-[#FFEC00] px-14 pt-20">
         <div class="bg-white flex flex-wrap py-14 px-20 relative justify-between">
             <div class="close-login absolute top-[35px] right-[35px] cursor-pointer                       ">
                 <a href="{{route('ex')}}" class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
@@ -39,7 +39,7 @@
                 <a href="{{ url('/login/facebook') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto font-sans font-black"><img width="26px" alt="fb logo" class="mr-16" src="{{asset('images/facebook.png')}}"/>Continue With Facebook</a>
             </div>
         </div>
-        <div class="pt-8">
+        <div class="pb-14 pt-10">
             <img alt="logo extra joss" class="m-auto mb-2" src="{{asset('/images/logo.png')}}"/>
             <p class="font-sans text-center text-[10px]">Copyright © 2022 ExtraJoss</p>
         </div>

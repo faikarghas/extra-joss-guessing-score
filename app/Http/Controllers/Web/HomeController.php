@@ -264,13 +264,17 @@ class HomeController extends Controller
             ->where([['guessings.id_user',Auth::user()->id],["fmatches.match_status","OPEN"]])
             ->get();
 
-            // dd($myguess);
         }
+
+        $klasemens = User::orderBy('total_point','DESC')
+        ->orderBy('name','ASC')
+        ->limit(20)->get();
 
         $data = [
             'matches' => $matches,
             'currentTime' => $currentTime,
-            'myguess' => $myguess
+            'myguess' => $myguess,
+            'klasemens' => $klasemens
         ];
 
         return view('web.pages.ex',$data);
@@ -284,6 +288,12 @@ class HomeController extends Controller
         return view('web.pages.login');
     }
 
+    public function belanja(){
+        return view('web.pages.belanja');
+    }
+
+
+    // DAFTAR HARUS MENYERTAKAN INI
     public function storeGuess(){
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
@@ -302,6 +312,7 @@ class HomeController extends Controller
         }
     }
 
+
      /**
      * Show the application dashboard.
      *
@@ -314,13 +325,13 @@ class HomeController extends Controller
 
     public function getQuiz()
     {
-       // $soal = Questions::all();
-        //$option =  QuestionChoices::all();
+        $soal = Questions::all();
+        $option =  QuestionChoices::all();
 
         $options =  Questions::with(['choices'])->get()->toJson(JSON_PRETTY_PRINT);
 
-        dd($options);
-        return response()->json(array('soal'=>$options));
+        // dd($options);
+        return response()->json(array('question'=>$soal,'option'=>$option,'soal'=>$options));
 
     }
 
