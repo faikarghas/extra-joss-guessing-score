@@ -66,7 +66,7 @@ export class Auth {
 }
 
 export class GuessScore {
-    kirimForm(): void {
+    tebakSkor(): void {
         $('.modal-form').on('click','button.kirim-tebakan',function (e) {
             e.preventDefault()
             $(this).html('Loading...')
@@ -92,6 +92,8 @@ export class GuessScore {
                     }
                 },
                 success:function(data){
+                    console.log(data);
+                    
                     $('.kirim-tebakan').html('Terkirim')
                     setTimeout(() => {
                         $('.kirim-tebakan').html('Kirim')
@@ -123,7 +125,8 @@ export class GuessScore {
                 let team2 = $(this).attr('data-team2');
                 let flagteam1 = $(this).attr('data-flag1');
                 let flagteam2 = $(this).attr('data-flag2');
-
+                let skor1 = $(this).attr('data-skor')?.split(',')[0];
+                let skor2 = $(this).attr('data-skor')?.split(',')[1];
 
                 $('.modal-form').css('display','block')
 
@@ -143,7 +146,7 @@ export class GuessScore {
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam1}" />
                                     <span class="text-white font-sans mr-6">${team1}</span>
                                 </div>
-                                <input class="form-tebak" type="number" name="guess_score_a"
+                                <input value="${skor1}" class="form-tebak" type="number" name="guess_score_a"
                                 value=""></input>
                             </div>
                             <div class="flex items-center mb-12">
@@ -151,7 +154,7 @@ export class GuessScore {
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam2}" />
                                     <span class="text-white font-sans mr-6">${team2}</span>
                                 </div>
-                                <input class="form-tebak" type="number" name="guess_score_b"
+                                <input value="${skor2}" class="form-tebak" type="number" name="guess_score_b"
                                 value=""></input>
                             </div>
                             <button data-im=${id} class="kirim-tebakan">Kirim</button>

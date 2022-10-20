@@ -33,7 +33,7 @@ import { getCurrentDate } from './utils/index';
 
             // Init all functionality
             guess.openGuessModal();
-            guess.kirimForm();
+            guess.tebakSkor();
             guess.closeModal();
 
             quiz.openQuizModal();

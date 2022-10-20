@@ -128,7 +128,7 @@
                 @foreach ($myguess as $key => $match)
                     @if ($key < 8)
                     <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                        <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} {{$match->id_guess}}</span>
+                        <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->round}} {{$match->id_match}}</span>
                         <div class="flex flex-wrap">
                             <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                 <li class="mb-2 flex items-center">
@@ -154,7 +154,8 @@
                                     {{-- belum expire --}}
                                     @if ($match->is_guess == 0)
                                     {{-- belum tebak skor --}}
-                                    <div data-idMatch={{$match->id_guess}} data-flag1={{$match->flag_team2}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</div>
+                                    {{$match->is_guess}}
+                                    <div data-idMatch={{$match->id_match}} data-flag1={{$match->flag_team1}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</div>
                                     @else
                                     {{-- sudah tebak skor --}}
                                     <ul class="score">
@@ -165,17 +166,17 @@
                                             <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
                                         </li>
                                     </ul>
-                                    <div class="bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
+                                    <div data-idMatch={{$match->id_match}} data-skor="{{$match->guessing_score_a}},{{$match->guessing_score_b}}" data-flag1={{$match->flag_team1}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak cursor-pointer bg-[#0085CF] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
                                     @endif
                                 @else
                                     @if ($match->is_guess == 1)
                                         {{-- sudah expire dan sudah tebak skor --}}
                                         <ul class="score">
                                             <li class="flex items-center">
-                                                <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                                <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
                                             </li>
                                             <li class="flex items-center">
-                                                <p class="text-white font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
+                                                <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
                                             </li>
                                         </ul>
                                         <div class="bg-[#6D6D6D] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
@@ -207,7 +208,7 @@
                     @foreach ($matches as $key => $match)
                         @if ($key < 8)
                         <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
+                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->round}}</span>
                             <div class="flex flex-wrap">
                                 <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                     <li class="mb-2 flex items-center">
@@ -233,7 +234,7 @@
                 @foreach ($myguess as $key => $match)
                     @if ($key >= 8)
                     <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                        <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
+                        <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->round}}</span>
                         <div class="flex flex-wrap">
                             <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                 <li class="mb-2 flex items-center">
@@ -256,7 +257,7 @@
                                     $d2 = new DateTime($datetime);
                                 ?>
                                 @if ($d1 < $d2)
-                                    <div data-idMatch={{$match->id_guess}} data-flag1={{$match->flag_team1}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</div>
+                                    <div data-idMatch={{$match->id_match}} data-flag1={{$match->flag_team1}} data-flag2={{$match->flag_team2}} data-team1={{$match->team1}} data-team2={{$match->team2}} class="btn-tebak bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</div>
                                 @endif
                             </div>
                         </div>
@@ -265,9 +266,9 @@
                 @endforeach
                 @else
                     @foreach ($matches as $key => $match)
-                        @if ($key > 8)
+                        @if ($key >= 8)
                         <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}}</span>
+                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->round}}</span>
                             <div class="flex flex-wrap">
                                 <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                     <li class="mb-2 flex items-center">
