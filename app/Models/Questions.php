@@ -12,15 +12,18 @@ class Questions extends Model
     ];
 
 
-    public function categories()
+    public function choices()
     {
-        return $this->belongsToMany(Category::class)->withTimestamps();
+        return $this->hasMany(QuestionChoices::class,'question_id','id');
     }
 
-    // public function postImages()
-    // {
-    //     return $this->belongsToMany(PostImages::class);
-    // }
+    public function correctChoicesCount() {
+        return $this->choices()->where('correct', 1 )->count();
+    }
+
+    public function correctChoicesOptions() {
+       return  $this->choices()->where('correct', 1)->get();
+    }
 
     
 }
