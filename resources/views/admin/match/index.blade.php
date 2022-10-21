@@ -34,7 +34,7 @@
                <td>{{ $row->score_a }} - {{ $row->score_b }}</td>
                <td><span class="badge rounded-pill bg-success me-1">{{ $row->round_match->title }}</span></td>
                <td><span class="badge rounded-pill bg-warning me-1">{{ $row->match_status}}</span></td>
-               <td><span class="badge rounded-pill bg-primary me-1">{{ $row->id}}</span></td>
+               <td><span class="badge rounded-pill bg-primary me-1">{{ $row->match_time}}</span></td>
                <td>
                   <form method="post" action="{{ route('matchs.updatestatus',$row->id) }}" id="form">
                      @csrf
