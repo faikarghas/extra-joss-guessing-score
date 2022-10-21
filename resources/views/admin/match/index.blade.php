@@ -40,7 +40,7 @@
                      @csrf
                      @method('PUT')
                   <div class="form-check form-switch mb-2">
-                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" value="1git " {{  ($row->status == '1' ? ' checked' : '') }} />
+                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" value="1 " {{  ($row->status == '1' ? ' checked' : '') }} />
                   </div>
                   </form>
                </td>

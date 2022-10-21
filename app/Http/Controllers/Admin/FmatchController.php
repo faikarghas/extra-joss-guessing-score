@@ -193,7 +193,7 @@ class FmatchController extends Controller
 
         return [
             'OPEN' => 'OPEN',
-            'CLOSE' => 'CLOSE',
+            'CLOSE' => 'CLOSE',git
         ];
     }
 
