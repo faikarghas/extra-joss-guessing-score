@@ -201,14 +201,8 @@ class FmatchController extends Controller
 
 
         $fmatch = Fmatch::find($id);
-
-        dd($fmatch);
-
         $fmatch->status= $request->input('status');
-        
         $fmatch->save();
-        
-        dd($fmatch->save());
 
         Alert::success('Update Status', 'Berhasil');
         return redirect()->route('matchs.index');
