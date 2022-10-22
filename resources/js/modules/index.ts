@@ -60,14 +60,10 @@ export class GuessScore {
                 },
                 success:function(data){
                     $('.kirim-tebakan').html('Terkirim')
-                    setTimeout(() => {
-                        $('.kirim-tebakan').html('Kirim')
-                    }, 2500);
-
+                    location.reload()
                 }
             });
 
-            // alert(`${guess_score_a} ${guess_score_b}`)
         })
     }
 
@@ -75,6 +71,7 @@ export class GuessScore {
         $('.modal-form').on('click','div.close',function () {
             // close modal
             $('.modal-form').css('display','none')
+            $('.overlay').css('display','none');
 
             // delete appended content from modal
             $('.form-wrapper').remove()
@@ -93,6 +90,7 @@ export class GuessScore {
                 let skor1 = $(this).attr('data-skor')?.split(',')[0];
                 let skor2 = $(this).attr('data-skor')?.split(',')[1];
 
+                $('.overlay').css('display','block');
                 $('.modal-form').css('display','block')
 
                 $('.modal-form').append(
@@ -122,7 +120,7 @@ export class GuessScore {
                                 <input value="${skor2}" class="form-tebak" type="number" name="guess_score_b"
                                 value=""></input>
                             </div>
-                            <button data-im=${id} class="kirim-tebakan">Kirim</button>
+                            <button data-im="${id}" class="kirim-tebakan">Kirim</button>
                         </form>
                     </div>
                     <div class="basis40 flex items-end justify-end">
@@ -160,13 +158,14 @@ export class Quiz{
         $('.modal-quiz .close').on('click',function () {
             // close modal
             $('.modal-quiz').css('display','none')
+            $('.overlay').css('display','none');
         })
     }
 
     openQuizModal(): void{
         $('.tebak-quiz').on('click','.qz', () => {
             $('.qz').html('loading...');
-
+            $('.overlay').css('display','block');
             $.ajax({
                 type:'GET',
                 url:`${base_url}/getquiz`,
@@ -291,8 +290,8 @@ export class Quiz{
                     }
                 },
                 success:function(data){
-                    console.log(data);
                     $(e.target).html('Terkirim')
+                    location.reload()
                     setTimeout(() => {
                         $(e.target).html('Kirim')
                     }, 2500);

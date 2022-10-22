@@ -10,7 +10,7 @@
     <div class="modal-login w-full left-0 bg-[#FFEC00] px-14 pt-20">
         <div class="bg-white flex flex-wrap py-14 px-20 relative justify-between">
             <div class="close-login absolute top-[35px] right-[35px] cursor-pointer                       ">
-                <a href="{{route('ex')}}" class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
+                <a href="{{route('home')}}" class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
                     <img src="{{asset('/images/close-w.png')}}" />
                 </a>
             </div>

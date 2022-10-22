@@ -1,6 +1,6 @@
 <nav class="absolute w-full top-0 left-0 bg-transparent px-2 xl:px-[128px] pt-[25px]">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-    <a href="https://flowbite.com/" class="flex items-center">
+    <a href="{{route('home')}}" class="flex items-center">
         <img src="{{asset('/images/logo.png')}}" class="mr-3 h-6 sm:h-[98px]" alt="Flowbite Logo">
     </a>
     <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -33,7 +33,7 @@
                     @auth
                     <li class="flex items-center list-none cursor-pointer">
                         <img alt="icon user" src="{{asset('images/user.png')}}" class="w-[14px] mr-2 pb-1"/>
-                        <p class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->name }}</p></li>
+                        <p class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->email }}</p></li>
                     <li class="flex items-center list-none font-head text-[#FFEC00] text-[20px] mx-2">|</li>
                     <li class="flex items-center list-none cursor-pointer"><a href="{{ route('logout') }}" class="font-head text-[#FFEC00] text-[20px] leading-[20px]">LOGOUT</a></li>
                     @endauth
