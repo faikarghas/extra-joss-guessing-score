@@ -193,7 +193,7 @@ class FmatchController extends Controller
 
         return [
             'OPEN' => 'OPEN',
-            'CLOSE' => 'CLOSE',
+            'CLOSE' => 'CLOSE',git
         ];
     }
 
@@ -201,14 +201,8 @@ class FmatchController extends Controller
 
 
         $fmatch = Fmatch::find($id);
-
-        dd($fmatch);
-
         $fmatch->status= $request->input('status');
-        
         $fmatch->save();
-        
-        dd($fmatch->save());
 
         Alert::success('Update Status', 'Berhasil');
         return redirect()->route('matchs.index');

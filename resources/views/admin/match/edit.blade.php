@@ -36,12 +36,11 @@
                   </select>
                </div>
                <div class="mb-3">
-                  <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
+                  <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Match Time</label>
                   <div>
                      <input
                         class="form-control"
                         type="datetime-local"
-                        value="2022-11-20T12:00:00"
                         id="html5-datetime-local-input"
                         name="match_time"
                         value="{{ old('match_time', $fmatch->match_time) }}"

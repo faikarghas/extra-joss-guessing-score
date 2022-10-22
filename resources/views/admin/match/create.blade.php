@@ -32,7 +32,7 @@
                   </select>
                </div>
                <div class="mb-3">
-                  <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Datetime</label>
+                  <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Match Time</label>
                   <div>
                      <input
                         class="form-control"
