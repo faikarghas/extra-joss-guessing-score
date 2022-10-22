@@ -7,12 +7,14 @@
       </div>
   </div>
   <div class="act-wrapper">
-      <div class="basis-act">
-          <button class="btn-quiz act-quiz">Pertanyaan Selanjutnya</button>
-      </div>
-      <div class="point-qz basis-act">
-          <img src="{{asset('images/acv.png')}}" />
-          <h5>1000 POIN</h5>
-      </div>
+        <div class="basis-act">
+        @auth
+          <button data-id="{{Auth::user()->id}}" class="btn-quiz act-quiz">Pertanyaan Selanjutnya</button>
+        @endauth
+        </div>
+        <div class="point-qz basis-act">
+            <img src="{{asset('images/acv.png')}}" />
+            <h5>1000 POIN</h5>
+        </div>
   </div>
 </div>

@@ -6,9 +6,7 @@
 @section('header')
     <header class="relative">
         <img src="{{asset('/images/banner.png')}}" class="w-full h-full"/>
-
         @include('web.components.presentational.nav') 
-
     </header>
 @endsection
 @section('main')
@@ -58,12 +56,14 @@
                     </div>
                 </div>
             </div>
-            {{-- absolute bottom-[-12%] md:bottom-[-24%] left-[50%] translate-x-[-50%] --}}
             <img src="{{asset("/images/lap2.png")}}" class="w-[1000px] hidden xl:block"/>
-
             <div class="tebak-quiz hidden xl:flex items-center flex-col mb-20">
                 <h2 class="text-black font-head text-[60px] text-center mb-6">IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</h2>
+                @auth
                 <div class="qz cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
+                @else
+                <a href="{{route('masuk')}}" class="cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</a>
+                @endauth
             </div>
         </div>
     </section>
@@ -127,7 +127,24 @@
                                     @endif
                                 @else
                                     @if ($match->is_guess == 1)
-                                        {{-- sudah expire dan sudah tebak skor --}}
+                                        @if($match->guessing_result == 1)
+                                        <ul class="score">
+                                            <li class="flex items-center">
+                                                <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                            </li>
+                                        </ul>
+                                        <div class="flex items-center ml-4">
+                                            <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                            <div>
+                                                <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                            </div>
+                                        </div>
+                                        @else
+                                        {{-- sudah expire, sudah tebak skor dan hasil pertaningan belum ada--}}
                                         <ul class="score">
                                             <li class="flex items-center">
                                                 <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
@@ -137,6 +154,7 @@
                                             </li>
                                         </ul>
                                         <div class="bg-[#6D6D6D] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
+                                        @endif
                                     @else
                                         {{-- sudah expire dan belum tebak skor --}}
                                         <ul class="score">
@@ -189,7 +207,7 @@
             <div class="basis-full lg:basis-1/2 flex flex-wrap bg-[#202124]">
                 @auth
                 @foreach ($myguess as $key => $match)
-                    @if ($key < 8)
+                    @if ($key >= 8)
                     <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                         <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
                         <div class="flex flex-wrap">
@@ -233,7 +251,24 @@
                                     @endif
                                 @else
                                     @if ($match->is_guess == 1)
-                                        {{-- sudah expire dan sudah tebak skor --}}
+                                        @if($match->guessing_result == 1)
+                                        <ul class="score">
+                                            <li class="flex items-center">
+                                                <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                                            </li>
+                                        </ul>
+                                        <div class="flex items-center ml-4">
+                                            <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                            <div>
+                                                <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                            </div>
+                                        </div>
+                                        @else
+                                        {{-- sudah expire, sudah tebak skor dan hasil pertaningan belum ada--}}
                                         <ul class="score">
                                             <li class="flex items-center">
                                                 <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
@@ -243,6 +278,7 @@
                                             </li>
                                         </ul>
                                         <div class="bg-[#6D6D6D] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
+                                        @endif
                                     @else
                                         {{-- sudah expire dan belum tebak skor --}}
                                         <ul class="score">
@@ -303,11 +339,7 @@
             <div class="flex flex-row justify-center pt-4 pb-8 gap-12 items-center">
                 <ul class="flex flex-col justify-center items-center w-[180px]">
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
-                        @auth
-                        242
-                        @else
-                        0
-                        @endauth
+                        @auth {{$myranking[0]->rank}} @else 0 @endauth
                     </li>
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Ranking</li>
                 </ul>
@@ -323,18 +355,12 @@
                         @endauth
                     </li>
                     <li class="text-black text-[16px] font-sans font-bold">
-                        @auth
-                        {{ Auth::user()->name }}
-                        @endauth
+                        @auth {{ Auth::user()->name }} @endauth
                     </li>
                 </ul>
                 <ul class="flex flex-col justify-center items-center w-[180px]">
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
-                        @auth
-                        242
-                        @else
-                        0
-                        @endauth
+                        @auth{{$myranking[0]->total_point}}@else 0 @endauth
                     </li>
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Points</li>
                 </ul>
@@ -342,8 +368,8 @@
             <div class="grid grid-cols-4 gap-4 p-8">
                 @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
-                        <span class="block font-sans font-bold text-[17px] mr-2 w-[40px]">{{$key + 1}}</span>
-                        <div class="w-[80px]">
+                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{$key + 1}}</span>
+                        <div class="basis-[25%]">
                             <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
                                 <?php
                                     $str = $klasemen->name;
@@ -353,7 +379,7 @@
                             {{$userInitials}}
                             </div>
                         </div>
-                        <div class="flex flex-col">
+                        <div class="flex flex-col basis-[55%]">
                             <span class="block font-sans font-bold text-[17px]">{{$klasemen->name}}</span>
                             <span class="block font-sans ">{{$klasemen->total_point}} points</span>
                         </div>

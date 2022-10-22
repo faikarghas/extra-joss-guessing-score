@@ -16,16 +16,18 @@ use App\Http\Controllers\Admin\DasboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/getquiz',[HomeController::class,'getquiz']);
-Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
 
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/ex',[HomeController::class,'ex'])->name('ex');
 Route::get('/daftar',[HomeController::class,'daftar'])->name('daftar');
 Route::get('/masuk',[HomeController::class,'masuk'])->name('masuk');
+Route::get('/mekanisme',[HomeController::class,'belanja'])->name('mekanisme');
+Route::get('/hadiah',[HomeController::class,'belanja'])->name('hadiah');
 Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
-Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
+Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
 
+Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
+Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
 
 
 Route::group(['middleware' => ['guest']], function() {
@@ -51,13 +53,7 @@ Route::group(['middleware' => ['guest']], function() {
 
 });
 
-
-Route::post('/guess-score/{id_match}',[HomeController::class,'storeOrUpdateScore'])->name('sous');
-Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
-
 Auth::routes();
-
-
 Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
 
 
@@ -67,18 +63,19 @@ All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-  
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/getquiz',[HomeController::class,'getquiz']);
+    Route::post('/store-quiz/{id}',[HomeController::class,'storeQuiz']);
+    Route::post('/guess-score/{id_match}',[HomeController::class,'storeOrUpdateScore'])->name('sous');
+    Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
 });
-  
+
 /*------------------------------------------
 --------------------------------------------
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-  
-    //Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 

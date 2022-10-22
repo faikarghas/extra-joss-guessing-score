@@ -10,16 +10,16 @@
     <div class="hidden w-full md:block md:w-auto pb-8" id="navbar-default">
         <ul class="flex flex-col px- md:flex-row md:space-x-4 md:mt-0 ">
             <li class="flex items-center">
-                <a href="#" class="leading-[20px] block pr-4 pl-3 font-head text-[24px] text-[#FF0000]" aria-current="page">BERANDA</a>
+                <a href="{{route('home')}}" class="{{ Request::is('/') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head text-[24px]" aria-current="page">BERANDA</a>
             </li>
             <li class="flex items-center">
-                <a href="#" class="leading-[20px] block pr-4 pl-3 font-head text-[24px] text-[#FF0000]" aria-current="page">MEKANISME</a>
+                <a href="{{route('mekanisme')}}" class="{{ Request::is('mekanisme') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head text-[24px]" aria-current="page">MEKANISME</a>
             </li>
             <li class="flex items-center">
-                <a href="#" class="leading-[20px] block pr-4 pl-3 font-head text-[24px] text-[#FF0000]" aria-current="page">HADIAH</a>
+                <a href="{{route('hadiah')}}" class="{{ Request::is('hadiah') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head text-[24px]" aria-current="page">HADIAH</a>
             </li>
             <li class="flex items-center">
-                <a href="#" class="leading-[20px] block pr-4 pl-3 font-head text-[24px] text-[#FF0000]" aria-current="page">BELANJA</a>
+                <a href="{{route('belanja')}}" class="{{ Request::is('belanja') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head text-[24px]" aria-current="page">BELANJA</a>
             </li>
             <li>
                 <ul class="m-0 px-6 py-1 flex bg-black rounded-3xl">

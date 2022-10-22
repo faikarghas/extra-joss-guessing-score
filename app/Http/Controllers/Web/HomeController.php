@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Questions;
 use App\Models\QuestionChoices;
+use App\Models\UserQuestionAnswers;
 use App\Models\User;
 use App\Models\Guessing;
 use App\Models\Fmatch;
@@ -169,8 +170,23 @@ class HomeController extends Controller
     public function update_t()
     {
 
-        $upPoint = new UpdatePointHelper();
-        $upPoint->updatePoint();
+        // $upPoint = new UpdatePointHelper();
+        // $upPoint->updatePoint();
+
+        $userNeedUpdateForQuiz = UserQuestionAnswers::select('users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+        ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+        ->leftJoin('users','user_question_answers.user_id','=','users.id')
+        ->whereRaw(
+            '(
+                CASE
+                    WHEN ( question_choices.point = 10 ) THEN true ELSE false
+                END
+            )'
+        )
+        ->where([['user_question_answers.status','=',0]])
+        ->get();
+
+        dd($userNeedUpdateForQuiz);
 
     }
 
@@ -185,9 +201,6 @@ class HomeController extends Controller
 
         $matchData = Fmatch::where('id',$id_match)->get();
         $matchDate = $matchData[0]['match_time'];
-
-        // $d1 = new DateTime($currentTime);
-        // $d2 = new DateTime($matchDate);
 
         // // expire
         if ($currentTime > $matchDate) {
@@ -242,7 +255,7 @@ class HomeController extends Controller
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
-        ->where([["fmatches.match_status","OPEN"]])
+        ->where([["fmatches.status","1"]])
         ->get();
 
         // GMT +8
@@ -252,6 +265,7 @@ class HomeController extends Controller
         $time = $timestamp + (8 * 60 * 60);
         $currentTime = date("Y-m-d H:i:s", $time);
         $myguess = [];
+        $myranking = [];
 
         if (Auth::check()) {
             // Tebakan per user
@@ -260,8 +274,14 @@ class HomeController extends Controller
             ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
             ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
             ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
-            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group')
-            ->where([['guessings.id_user',Auth::user()->id],["fmatches.match_status","OPEN"]])
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status",1]])
+            ->get();
+
+            $myranking = User::select(DB::raw('ROW_NUMBER() OVER(ORDER BY total_point) AS rank,name,total_point,id'))
+            ->where([['id',Auth::user()->id]])
+            ->orderBy('total_point','DESC')
+            ->orderBy('name','ASC')
             ->get();
 
         }
@@ -270,11 +290,14 @@ class HomeController extends Controller
         ->orderBy('name','ASC')
         ->limit(20)->get();
 
+
+
         $data = [
             'matches' => $matches,
             'currentTime' => $currentTime,
             'myguess' => $myguess,
-            'klasemens' => $klasemens
+            'klasemens' => $klasemens,
+            'myranking' => $myranking
         ];
 
         return view('web.pages.ex',$data);
@@ -288,7 +311,10 @@ class HomeController extends Controller
         return view('web.pages.login');
     }
 
-    
+    public function belanja(){
+       return view('web.pages.belanja');
+    }
+
     public function storeGuess(){
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
@@ -307,27 +333,58 @@ class HomeController extends Controller
         }
     }
 
+    public function storeQuiz(Request $request){
+        $req = $request->all();
 
-     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function adminHome()
-    {
-        return view('adminHome');
+        foreach ($req['result'] as $key => $res) {
+            UserQuestionAnswers::updateOrCreate([
+                'user_id'   => Auth::user()->id,
+                'question_id'  => $res['id_question'],
+            ],[
+                'choice_id' => $res['id_choice'],
+            ]);
+        }
+
+        $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+        ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+        ->leftJoin('users','user_question_answers.user_id','=','users.id')
+        ->whereRaw(
+            '(
+                CASE
+                    WHEN ( question_choices.point = 10 ) THEN true ELSE false
+                END
+            )'
+        )
+        ->where([['user_question_answers.status','=',0]])
+        ->get();
+
+        foreach ($userNeedUpdateForQuiz as $key => $value) {
+            if ($value->status == 0) {
+                User::where([['id','=',$value->id]])
+                ->increment('total_point', 40);
+            }
+        }
+
+        foreach ($userNeedUpdateForQuiz as $key => $value) {
+            if ($value->status == 0) {
+                UserQuestionAnswers::where([['id','=',$value->uqa_id]])
+                ->update(['status'=>1,'is_right'=>1]);
+            }
+        }
+
+        return response()->json([
+            'code' => '200',
+            'message' => 'success'
+        ],200);
     }
 
     public function getQuiz()
     {
         $soal = Questions::all();
         $option =  QuestionChoices::all();
-
         $options =  Questions::with(['choices'])->get()->toJson(JSON_PRETTY_PRINT);
 
-        // dd($options);
         return response()->json(array('question'=>$soal,'option'=>$option,'soal'=>$options));
-
     }
 
 }

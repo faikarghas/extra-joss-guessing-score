@@ -9,8 +9,7 @@ class UpdatePointHelper{
     public function updatePoint(){
 
         // User yg menebak benar
-        // Berdasarkan fmatches.match_status = 1 (pertandingan sudah selesai) dan guessings.status = 0
-        $userNeedUpdate = Guessing::select('guessings.id','guessings.id_user','guessings.id_match','guessing_score_a','guessing_score_b','status')
+        $userNeedUpdateForGuess = Guessing::select('guessings.id','guessings.id_user','guessings.id_match','guessing_score_a','guessing_score_b','guessings.status')
         ->leftJoin('users','guessings.id_user','=','users.id')
         ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
         ->whereRaw(
@@ -21,20 +20,20 @@ class UpdatePointHelper{
                 END
             )'
         )
-        ->where([['fmatches.match_status','=',1],['guessings.status','=',0]])
+        ->where([['fmatches.match_status','=',"CLOSE"],['guessings.status','=',0],['guessings.is_guess','=',1]]) // pertandingan sudah selesai,staus update point masih 0 dan sudah ditebak
         ->get();
 
-        foreach ($userNeedUpdate as $key => $value) {
+        foreach ($userNeedUpdateForGuess as $key => $value) {
             if ($value->status == 0) {
                 User::where([['id','=',$value->id_user]])
-                ->increment('total_point', 3);
+                ->increment('total_point', 1000);
             }
         }
 
-        foreach ($userNeedUpdate as $key => $value) {
+        foreach ($userNeedUpdateForGuess as $key => $value) {
             if ($value->status == 0) {
                 Guessing::where([['id','=',$value->id]])
-                ->update(['status'=>1]);
+                ->update(['status'=>1,'guessing_result'=>1]);
             }
         }
 

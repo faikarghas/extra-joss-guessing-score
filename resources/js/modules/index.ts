@@ -1,38 +1,5 @@
 let base_url = window.location.origin;
 
-let bankQuiz = [
-    {
-        id:1,
-        pertanyaan:'Siapa pencetak goal terbanyak di piala dunia 2002?',
-        jawaban:{
-            a:'faikar1',
-            b:'faikar2',
-            c:'faikar3',
-            d:'faikar4'
-        }
-    },
-    {
-        id:2,
-        pertanyaan:'Siapa pencetak goal terbanyak di piala dunia 2006?',
-        jawaban:{
-            a:'faikar1',
-            b:'faikar2',
-            c:'faikar3',
-            d:'faikar4'
-        }
-    },
-    {
-        id:3,
-        pertanyaan:'Siapa pencetak goal terbanyak di piala dunia 2010?',
-        jawaban:{
-            a:'faikar1',
-            b:'faikar2',
-            c:'faikar3',
-            d:'faikar4'
-        }
-    }
-]
-
 export class Auth {
 
     closeModalLogin(): void {
@@ -210,7 +177,7 @@ export class Quiz{
                 success:(data) => {
                     $('.qz').html('lihat quiz');
                     $('.modal-quiz').css('display','block')
-                    
+
                     this.listQuiz = data.question
                     this.listOption = data.option
 
@@ -234,7 +201,7 @@ export class Quiz{
                     })
 
                     filteredOption.forEach(val => {
-                        $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" type="radio" name="answer${val.question_id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
+                        $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" data-qi=${val.question_id} type="radio" name="answer${val.id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
                     });
                 }
             })
@@ -280,7 +247,7 @@ export class Quiz{
             })
 
             filteredOption.forEach(val => {
-                $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" type="radio" name="answer${val.question_id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
+                $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" data-qi=${val.question_id} type="radio" name="answer${val.id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
             });
         })
 
@@ -290,12 +257,13 @@ export class Quiz{
         $('.modal-quiz').on('click','input[type="radio"]', (e) => {
             this.result.push(
                 {
-                    id : $(e.currentTarget).attr('name')?.split('answer')[1],
+                    id_question : $(e.currentTarget).attr('data-qi'),
+                    id_choice : $(e.currentTarget).attr('name')?.split('answer')[1],
                     answer: $(e.currentTarget).val()
                 }
             )
 
-            const filterById = [...new Map(this.result.map(item => [item['id'], item])).values()];
+            const filterById = [...new Map(this.result.map(item => [item['id_choice'], item])).values()];
 
             this.result = filterById
         });
@@ -303,7 +271,33 @@ export class Quiz{
 
     kirimJawabanQuiz(): void{
         $('.modal-quiz').on('click','button.send-answer', (e) => {
-            console.log(this.result);
+            let id = $(e.target).attr('data-id');
+            $(e.target).html('Loading...')
+
+            $.ajax({
+                type:'POST',
+                url:`${base_url}/store-quiz/${id}`,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data  :{
+                    'result':this.result,
+                },
+                error: function(xhr, error){
+                    if (xhr.status === 500) {
+                        $(e.target).html('Gagal Terkirim')
+
+                        setTimeout(() => {
+                            $(e.target).html('Kirim')
+                        }, 2500);
+                    }
+                },
+                success:function(data){
+                    console.log(data);
+                    $(e.target).html('Terkirim')
+                    setTimeout(() => {
+                        $(e.target).html('Kirim')
+                    }, 2500);
+                }
+            });
         })
     }
 
@@ -315,4 +309,6 @@ export class Quiz{
 export function sum(a: number, b:number): number {
     return a + b;
 }
+
+
 
