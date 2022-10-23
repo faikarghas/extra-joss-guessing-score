@@ -38,10 +38,12 @@ import { getCurrentDate } from './utils/index';
 
             quiz.getQuiz()
             quiz.openQuizModal();
+            quiz.openQuizModalDisabled();
+            quiz.closeQuizModal();
+            quiz.closeQuizDisabledModal();
             quiz.kirimJawabanQuiz();
             quiz.nextQuiz();
             quiz.storeCheckedInput();
-            quiz.closeQuizModal();
 
             console.log(
                 Window.list

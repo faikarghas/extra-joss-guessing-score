@@ -154,14 +154,6 @@ export class Quiz{
         this.listOption = [];
     }
 
-    closeQuizModal(): void{
-        $('.modal-quiz .close').on('click',function () {
-            // close modal
-            $('.modal-quiz').css('display','none')
-            $('.overlay').css('display','none');
-        })
-    }
-
     openQuizModal(): void{
         $('.tebak-quiz').on('click','.qz', () => {
             $('.qz').html('loading...');
@@ -200,11 +192,39 @@ export class Quiz{
                     })
 
                     filteredOption.forEach(val => {
-                        $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" data-qi=${val.question_id} type="radio" name="answer${val.id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
+                        $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" data-qi=${val.question_id} type="radio" data-ch="${val.id}" name="answer${val.question_id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
                     });
                 }
             })
 
+        })
+    }
+
+    openQuizModalDisabled(): void{
+        $('.qz-disabled').on('click',function (params) {
+            $('.overlay').css('display','block');
+            $('.modal-quizDis').css('display','block')
+        })
+    }
+
+    closeQuizModal(): void{
+        $('.modal-quiz .close').on('click', () => {
+            // close modal
+            $('.modal-quiz').css('display','none')
+            $('.overlay').css('display','none');
+
+            $('.quiz-wrapper').remove()
+            $('.quiz-reward').remove()
+            $('.total-trueQuiz').remove()
+            this.currentPage = 0
+        })
+    }
+
+    closeQuizDisabledModal(): void{
+        $('.modal-quizDis .close').on('click', () => {
+            // close modal
+            $('.modal-quizDis').css('display','none')
+            $('.overlay').css('display','none');
         })
     }
 
@@ -246,7 +266,7 @@ export class Quiz{
             })
 
             filteredOption.forEach(val => {
-                $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" data-qi=${val.question_id} type="radio" name="answer${val.id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
+                $('.modal-quiz fieldset').append(`<div class="choosebox"><input id="country-option-1" data-qi=${val.question_id} type="radio" data-ch="${val.id}" name="answer${val.question_id}" value=${val.choice}><label for="country-option-1" class="">${val.choice}</label></div>`)
             });
         })
 
@@ -257,7 +277,7 @@ export class Quiz{
             this.result.push(
                 {
                     id_question : $(e.currentTarget).attr('data-qi'),
-                    id_choice : $(e.currentTarget).attr('name')?.split('answer')[1],
+                    id_choice : $(e.currentTarget).attr('data-ch'),
                     answer: $(e.currentTarget).val()
                 }
             )
@@ -290,10 +310,19 @@ export class Quiz{
                     }
                 },
                 success:function(data){
+                    console.log(data);
                     $(e.target).html('Terkirim')
-                    location.reload()
+                    $('.quiz-wrapper').remove();
+                    $('.act-wrapper').remove();
+                    $('.modal-quiz').append(
+                        `
+                            <h3 class="quiz-reward">Anda mendapatkan ${40*data.totalTrue} poin</h3>
+                            <h3 class="total-trueQuiz">${data.totalTrue}/10 pertanyaan dijawab benar!</h3>
+                        `
+                    );
+
                     setTimeout(() => {
-                        $(e.target).html('Kirim')
+                        location.reload()
                     }, 2500);
                 }
             });
@@ -303,6 +332,8 @@ export class Quiz{
     getQuiz(): void {
 
     }
+
+
 }
 
 export function sum(a: number, b:number): number {

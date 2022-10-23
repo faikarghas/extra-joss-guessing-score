@@ -9,12 +9,12 @@
   <div class="act-wrapper">
         <div class="basis-act">
         @auth
-          <button data-id="{{Auth::user()->id}}" class="btn-quiz act-quiz">Pertanyaan Selanjutnya</button>
+            <button data-id="{{Auth::user()->id}}" class="btn-quiz act-quiz bg-[#FF0000]">Pertanyaan Selanjutnya</button>
         @endauth
         </div>
         <div class="point-qz basis-act">
             <img src="{{asset('images/acv.png')}}" />
-            <h5>1000 POIN</h5>
+            <h5>400 POIN</h5>
         </div>
   </div>
 </div>

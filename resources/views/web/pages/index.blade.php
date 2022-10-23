@@ -67,9 +67,13 @@
             <div class="tebak-quiz hidden xl:flex items-center flex-col mb-20">
                 <h2 class="text-black font-head text-[60px] text-center mb-6">IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</h2>
                 @auth
-                <div class="qz cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
+                    @if(count($checkQuiz) == 0)
+                        <div class="qz cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
+                    @else
+                        <div class="qz-disabled cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
+                    @endif
                 @else
-                <a href="{{route('masuk')}}" class="cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</a>
+                    <a href="{{route('masuk')}}" class="cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</a>
                 @endauth
             </div>
         </div>
@@ -356,6 +360,13 @@
 
     {{-- MODAL QUIZ --}}
     @include('web.components.modal.quiz')
-
+    <div class="modal-quizDis z-50 hidden flex-wrap bg-black w-[400px] md:w-[600px] p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <div class="close">
+            <div class="">
+                <img src="{{asset('/images/close.png')}}" />
+            </div>
+        </div>
+        <h3 class="text-[#FCEF0A] font-head text-[35px] leading-[25px]">Anda Sudah Mengikuti Quiz</h3>
+    </div>
 </main>
 @endsection

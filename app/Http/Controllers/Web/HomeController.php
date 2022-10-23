@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Guessing;
 use App\Models\Fmatch;
 use App\Models\Post;
+use App\Models\QuizIndicator;
 use App\Lib\UpdatePointHelper;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
@@ -168,6 +169,7 @@ class HomeController extends Controller
             ->orderBy('total_point','DESC')
             ->get();
 
+            $checkQuiz = QuizIndicator::where([['id_user',Auth::user()->id],['quiz_1',1]])->get();
 
             foreach ($listranking as $key => $data) {
                 if ($data->id == Auth::user()->id) {
@@ -198,7 +200,8 @@ class HomeController extends Controller
             'myguessSemiFinal' => $myguessSemiFinal,
             'myguessFinal' => $myguessFinal,
             'klasemens' => $klasemens,
-            'myranking' => $myranking
+            'myranking' => $myranking,
+            'checkQuiz' => $checkQuiz
         ];
 
         return view('web.pages.index',$data);
@@ -239,6 +242,24 @@ class HomeController extends Controller
             'profil' => $profil
         ];
         return view('web.pages.profil',$data);
+    }
+    // bulk create guessing
+    public function storeGuess(){
+        $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status")
+        ->get();
+
+        foreach ($matches as $key => $match) {
+            Guessing::updateOrCreate([
+                'id_user'   => Auth::user()->id,
+                'id_match'  => $match->id,
+            ],[
+                'guessing_score_a' => 0,
+                'guessing_score_b' => 0,
+            ]);
+        }
     }
 
     public function update_t()
@@ -322,25 +343,6 @@ class HomeController extends Controller
         return view('web.pages.match',$data);
     }
 
-
-    public function storeGuess(){
-        $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
-        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status")
-        ->get();
-
-        foreach ($matches as $key => $match) {
-            Guessing::updateOrCreate([
-                'id_user'   => Auth::user()->id,
-                'id_match'  => $match->id,
-            ],[
-                'guessing_score_a' => 0,
-                'guessing_score_b' => 0,
-            ]);
-        }
-    }
-
     public function storeQuiz(Request $request){
         $req = $request->all();
 
@@ -380,10 +382,21 @@ class HomeController extends Controller
             }
         }
 
+        QuizIndicator::updateOrCreate([
+            'id_user'   => Auth::user()->id,
+        ],[
+            'quiz_1' => 1,
+        ]);
+
         return response()->json([
             'code' => '200',
-            'message' => 'success'
+            'message' => 'success',
+            'totalTrue' => count($userNeedUpdateForQuiz),
+            'quiz' => true
         ],200);
+
+
+
     }
 
     public function getQuiz()
