@@ -4,7 +4,7 @@
 <meta name="description" content="meta description">
 @endsection
 @section('header')
-    <header class="relative">
+    <header class="relative pt-[85px] sm:pt-[130px] md:pt-0">
         <img src="{{asset('/images/banner.png')}}" class="w-full h-full"/>
         @include('web.components.presentational.nav')
     </header>
@@ -14,20 +14,20 @@
     <section class="bg-black pt-4 xl:pt-20 pb-8 xl:pb-32 relative px-8 xl:h-[424px]">
         <div class="relative flex flex-col items-center xl:border-[4px] xl:border-[#383838] w-[90%] m-auto xl:pt-16">
             <div class="text-center xl:absolute bg-black xl:px-20 xl:top-[-40px] xl:h-[40px] xl:left-[50%] xl:translate-x-[-50%]">
-                <h3 class="text-[40px] xl:text-[60px] text-white font-head">Hasil Terakhir</h3>
+                <h3 class="text-[40px] xl:text-[60px] text-white font-head mb-4">Hasil Terakhir</h3>
             </div>
             <div class="flex flex-wrap flex-row justify-center items-center gap-10 mb-4">
-                <div class="flex lg:gap-20">
+                <div class="flex flex-col lg:flex-row lg:gap-20">
                     {{-- onGoingMatches --}}
                     @foreach ($latestMatch as $match)
-                    <div>
-                        <div class="text-center mb-8">
+                    <div class="mb-8">
+                        <div class="text-center mb-0 lg:mb-8">
                             <span class="text-[#FFFFFF]">Final Score</span>
                         </div>
-                        <div class="flex">
+                        <div class="flex justify-center">
                             <div class="flex flex-wrap flex-row">
                                 <div class="text-white flex flex-row">
-                                    <div class="text-center mr-6">
+                                    <div class="text-center mr-6 flex flex-col items-center">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[50px] md:h-[77px]"/>
                                         </div>
@@ -50,7 +50,7 @@
                                             <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->guessing_score_b ? $match->guessing_score_b : 0}}</h6>
                                         </div>
                                     </div>
-                                    <div class="text-center ml-6">
+                                    <div class="text-center ml-6 flex flex-col items-center">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[50px] md:h-[77px]"/>
                                         </div>
@@ -289,17 +289,17 @@
     <section class="relative bg-[#FFEC00] px-8 pt-6">
         <div class="bg-[#F8F8F8] p-10">
             <div class="flex flex-col">
-                <h2 class="text-black font-head text-[60px] leading-[50px] mb-4 m-auto inline-block m-auto">LEADERBOARD</h2>
-                <h5 class="text-black font-head text-[20px] m-auto inline-block m-auto">STATISTIK ANDA<h5>
+                <h2 class="text-black font-head text-[60px] leading-[50px] mb-4 m-auto inline-block">LEADERBOARD</h2>
+                <h5 class="text-black font-head text-[20px] m-auto inline-block">STATISTIK ANDA<h5>
             </div>
-            <div class="flex flex-row justify-center pt-4 pb-8 gap-12 items-center">
-                <ul class="flex flex-col justify-center items-center w-[180px]">
+            <div class="flex flex-col lg:flex-row justify-center pt-4 pb-8 gap-12 items-center">
+                <ul class="flex order-2 lg:order-1 flex-col justify-center items-center w-[180px]">
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
                         @auth {{$myranking[0]->rank}} @else 0 @endauth
                     </li>
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Ranking</li>
                 </ul>
-                <ul class="flex flex-col justify-center items-center">
+                <ul class="flex order-1 lg:order-2 flex-col justify-center items-center">
                     <li class="uppercase text-black text-[16px] bg-[#FFEC00] p-2 leading-[26px] font-sans font-bold w-[63px] h-[63px] rounded-full flex justify-center items-center mb-2">
                         @auth
                         <?php
@@ -314,14 +314,15 @@
                         @auth {{ Auth::user()->name }} @endauth
                     </li>
                 </ul>
-                <ul class="flex flex-col justify-center items-center w-[180px]">
+                <ul class="flex order-3 lg:order-3 flex-col justify-center items-center w-[180px]">
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
                         @auth{{$myranking[0]->total_point}}@else 0 @endauth
                     </li>
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Points</li>
                 </ul>
             </div>
-            <div class="grid grid-cols-4 gap-4 p-8">
+            {{-- grid-flow-col --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
                 @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
                         <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{$key + 1}}</span>

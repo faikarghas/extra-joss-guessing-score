@@ -37,7 +37,7 @@ class UpdatePointHelper{
             }
         }
 
-        // dd($userNeedUpdate);
+        dd($userNeedUpdateForGuess);
     }
 
 }

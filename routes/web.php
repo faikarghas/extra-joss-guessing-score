@@ -20,9 +20,10 @@ use App\Http\Controllers\Admin\DasboardController;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/daftar',[HomeController::class,'daftar'])->name('daftar');
 Route::get('/masuk',[HomeController::class,'masuk'])->name('masuk');
-Route::get('/mekanisme',[HomeController::class,'belanja'])->name('mekanisme');
-Route::get('/hadiah',[HomeController::class,'belanja'])->name('hadiah');
+Route::get('/mekanisme',[HomeController::class,'mekanisme'])->name('mekanisme');
+Route::get('/hadiah',[HomeController::class,'hadiah'])->name('hadiah');
 Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
+Route::get('/profil',[HomeController::class,'profil'])->name('profil');
 
 Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
 Route::get('/upd',[HomeController::class,'update_t'])->name('upd');

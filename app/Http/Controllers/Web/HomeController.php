@@ -12,6 +12,7 @@ use App\Models\UserQuestionAnswers;
 use App\Models\User;
 use App\Models\Guessing;
 use App\Models\Fmatch;
+use App\Models\Post;
 use App\Lib\UpdatePointHelper;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
@@ -203,26 +204,63 @@ class HomeController extends Controller
         return view('web.pages.index',$data);
     }
 
+
+    public function daftar(){
+        return view('web.pages.register');
+    }
+
+    public function masuk(){
+        return view('web.pages.login');
+    }
+
+    public function belanja(){
+       return view('web.pages.belanja');
+    }
+
+    public function mekanisme(){
+        $mekanisme = Post::where('slug','mekanisme')->get();
+        $data = [
+            'mekanisme' => $mekanisme
+        ];
+        return view('web.pages.mekanisme',$data);
+     }
+
+    public function hadiah(){
+        $hadiah = Post::where('slug','hadiah')->get();
+        $data = [
+            'hadiah' => $hadiah
+        ];
+        return view('web.pages.hadiah',$data);
+    }
+
+    public function profil(){
+        $profil = User::where('id',Auth::user()->id)->get();
+        $data = [
+            'profil' => $profil
+        ];
+        return view('web.pages.profil',$data);
+    }
+
     public function update_t()
     {
 
-        // $upPoint = new UpdatePointHelper();
-        // $upPoint->updatePoint();
+        $upPoint = new UpdatePointHelper();
+        $upPoint->updatePoint();
 
-        $userNeedUpdateForQuiz = UserQuestionAnswers::select('users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
-        ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
-        ->leftJoin('users','user_question_answers.user_id','=','users.id')
-        ->whereRaw(
-            '(
-                CASE
-                    WHEN ( question_choices.point = 10 ) THEN true ELSE false
-                END
-            )'
-        )
-        ->where([['user_question_answers.status','=',0]])
-        ->get();
+        // $userNeedUpdateForQuiz = UserQuestionAnswers::select('users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+        // ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+        // ->leftJoin('users','user_question_answers.user_id','=','users.id')
+        // ->whereRaw(
+        //     '(
+        //         CASE
+        //             WHEN ( question_choices.point = 10 ) THEN true ELSE false
+        //         END
+        //     )'
+        // )
+        // ->where([['user_question_answers.status','=',0]])
+        // ->get();
 
-        dd($userNeedUpdateForQuiz);
+        // dd($userNeedUpdateForQuiz);
 
     }
 
@@ -284,17 +322,6 @@ class HomeController extends Controller
         return view('web.pages.match',$data);
     }
 
-    public function daftar(){
-        return view('web.pages.register');
-    }
-
-    public function masuk(){
-        return view('web.pages.login');
-    }
-
-    public function belanja(){
-       return view('web.pages.belanja');
-    }
 
     public function storeGuess(){
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')

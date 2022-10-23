@@ -4,12 +4,10 @@
 <meta name="description" content="meta description">
 @endsection
 @section('header')
-    <header class="relative">
-        <img src="{{asset('/images/bg-lap.png')}}" class="w-full h-full"/>
-
+    <header class="relative info bg-no-repeat bg-cover" style="background-image: url({{asset('/images/bg-lap.png')}})">
         @include('web.components.presentational.nav') 
-
-        <section class="lg:absolute lg:w-[95%] lg:left-[50%] lg:translate-x-[-50%] lg:top-[58%] lg:translate-y-[-50%]">
+        {{-- <section class="lg:absolute lg:w-[95%] lg:left-[50%] lg:translate-x-[-50%] lg:top-[58%] lg:translate-y-[-50%]"> --}}
+        <section class="lg:relative lg:w-[95%] lg:left-[50%] lg:translate-x-[-50%] pt-[85px] sm:pt-[130px] lg:pt-[160px]">
             <div class="bg-[#FCF006] lg:bg-[#F8F8F8] px-12 pt-28 pb-28 flex flex-col items-center justify-center">
                 <h1 class="text-black text-[60px] font-head mb-8 leading-tight">TEMUKAN KAMI DI MARKET PLACE</h1>
                 <div class="flex flex-col lg:flex-row justify-center gap-12 w-full">

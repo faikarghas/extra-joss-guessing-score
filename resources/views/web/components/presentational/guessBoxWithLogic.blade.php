@@ -45,7 +45,7 @@
                         <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
                     </li>
                     <li class="flex items-center">
-                        <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                        <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
                     </li>
                 </ul>
                 <div class="flex items-center ml-4">
