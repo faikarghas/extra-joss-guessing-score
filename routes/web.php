@@ -69,3 +69,8 @@ Route::get('logout', function ()
     Session()->flush();
     return Redirect::to('/');
 })->name('logout');
+
+Route::get('/storage', function(){
+    \Artisan::call('storage:link');
+    return "storage link sukses";
+});
