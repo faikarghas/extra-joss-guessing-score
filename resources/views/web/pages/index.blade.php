@@ -138,7 +138,7 @@
                 @endforeach
                 @else
                     @foreach ($matches as $key => $match)
-                        @if ($key < 8)
+                        @if ($key >= 8)
                         <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                             <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
                             <div class="flex flex-wrap">
