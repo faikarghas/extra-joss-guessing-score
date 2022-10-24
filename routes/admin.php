@@ -39,11 +39,14 @@ Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
   Route::resource('/quizs', \App\Http\Controllers\Admin\QuizController::class);
   Route::resource('/quizchoices', \App\Http\Controllers\Admin\QuestionChoiceController::class);
   Route::resource('/users', \App\Http\Controllers\Admin\UserController::class);
+  Route::resource('/rounds', \App\Http\Controllers\Admin\RoundController::class);
 
   Route::get('/startquiz', [\App\Http\Controllers\Admin\StartQuizController::class, 'index']);
   Route::get('/startquiz/getquiz', [\App\Http\Controllers\Admin\StartQuizController::class, 'getquiz']);
 
-  Route::put('/matchs/updatestatus/{id}', [\App\Http\Controllers\Admin\FmatchController::class, 'update_status'])->name('matchs.updatestatus');;
+
+  Route::any('/matchs/updatestatus', [\App\Http\Controllers\Admin\FmatchController::class, 'update_status'])->name('matchs.updatestatus');;
+  Route::any('/rounds/updatestatus', [\App\Http\Controllers\Admin\RoundController::class, 'update_status'])->name('rounds.updatestatus');;
   
 
   //User

@@ -21,8 +21,8 @@
    <link rel="stylesheet" href="{{ asset('vendor/my-auth/css/auth.css') }}">
    <link rel="stylesheet" href="{{ asset('vendor/my-dashboard/css/demo.css') }}">
    <link rel="stylesheet" href="{{ asset('vendor/my-dashboard/js/perfect-scrollbar/perfect-scrollbar.css') }}">
-   <script src="{{ asset('vendor/my-dashboard/js/helpers.js') }}">
-   <script src="{{ asset('vendor/my-dashboard/js/config.js') }}">
+   <script src="{{ asset('vendor/my-dashboard/js/helpers.js') }}"></script>
+   <script src="{{ asset('vendor/my-dashboard/js/config.js') }}"></script>
    
     {{-- css:external --}}
     @stack('css-external')

@@ -193,19 +193,25 @@ class FmatchController extends Controller
 
         return [
             'OPEN' => 'OPEN',
-            'CLOSE' => 'CLOSE',git
+            'CLOSE' => 'CLOSE',
         ];
     }
 
-    public function update_status(Request $request, $id){
+    public function update_status(Request $request){
 
 
+        $id = $request->input('data_id');
         $fmatch = Fmatch::find($id);
-        $fmatch->status= $request->input('status');
+        //dd($fmatch);
+        $fmatch->status= $request->input('checkboxStatus');
         $fmatch->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Status Berhasil Di Updated',
+        ]);
 
-        Alert::success('Update Status', 'Berhasil');
-        return redirect()->route('matchs.index');
+        //Alert::success('Update Status', 'Berhasil');
+        // return redirect()->route('matchs.index');
 
 
     }

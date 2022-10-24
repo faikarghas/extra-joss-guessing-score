@@ -6,16 +6,15 @@
   {{ Breadcrumbs::render('add_category') }}
 @endsection
 @section('content')
-
+<form  action="{{  route('quizs.update',$question->id) }}" method="POST">
+   @csrf
+   @method('PUT')
    <div class="row">
-   
-      <div class="col-md-12">
+      
+      <div class="col-md-8">
          <div class="card mb-4">
             <h5 class="card-header">Quiz Edit</h5>
             <div class="card-body">
-               <form  action="{{  route('quizs.update',$question->id) }}" method="POST">
-               @csrf
-               @method('PUT')
                <div class="mb-3">
                   <label for="defaultFormControlInput" class="col-md-2 col-form-label">Questions</label>
                   <div>
@@ -31,43 +30,55 @@
                   </div>
                </div>
                <button type="submit" class="btn btn-primary">Save</button>
-               </form>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-md-4">
+         <div class="card mb-4">
+            <h5 class="card-header">Quiz Setting</h5>
+            <div class="card-body">
+            
+               <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Round</label>
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="round">
+                    <option value="">Select Round</option>
+                    @foreach ($rounds as $row)
+                    <option @selected($row->id == $question->rounds_id)
+                     value="{{$row->id}}">{{$row->title}}</option>
+                    @endforeach
+                  </select>
+               </div>
+               <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Category Quiz</label>
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="catquiz">
+                    <option value="">Select Category</option>
+                    @foreach ($category as $row)
+                    <option @selected($row->id == $question->catquiz_id)
+                     value="{{$row->id}}">{{$row->title}}</option>
+                    @endforeach
+                  </select>
+               </div>
+               <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Status</label>
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="status">
+                    <option value="">Select Status</option>
+                    @foreach ($status as $key =>$value)
+                     <option value="{{ $key }}" {{ old('status',  $question->status) == $key ? "selected" : null }}> {{ $value }}</option>
+                     @endforeach 
+                  </select>
+               </div>
+               
 
 
             </div>
          </div>
       </div>
-   
+      </form>
       <div class="col-md-12">
          <div class="card mb-4">
             <h5 class="card-header">List Answer</h5>
             <div class="card-body">
-               {{-- <div class="mb-3">
-                  <label for="defaultFormControlInput" class="col-md-2 col-form-label">Answer</label>
-                     @foreach ($options as $row)
-                        @foreach($row->choices as $option)
-                        <form  action="{{  route('quizchoices.update',$option->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-3">
-                           <input
-                              type="text"
-                              class="form-control"
-                              id="defaultFormControlInput"
-                              placeholder="John Doe"
-                              aria-describedby="defaultFormControlHelp"
-                              name="choice"
-                              value="{{ old('choice', $option->choice) }}"
-                           />
-                        </div>
-                        <div class="mb-3">
-                           <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                        </form>
-                        @endforeach   
-                     @endforeach 
-               </div> --}}
-               
                <div class="table-responsive text-nowrap">
                   <table class="table">
                     <thead>

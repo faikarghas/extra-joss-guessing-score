@@ -14,9 +14,9 @@
             <div class="card-body">
               <h5 class="card-title text-primary">Selamat Datang {{ Auth::user()->name }}</h5>
               <p class="mb-4">
-                You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                your profile.
+                Hari ini ada  <span class="fw-bold">72 Score</span> yang belum di Update. Klik Update Score Di bawah ini 
               </p>
+              <p><a href="#" class="btn btn-sm btn-outline-primary">Update Score</a></p>
             </div>
           </div>
           <div class="col-sm-5 text-center text-sm-left">

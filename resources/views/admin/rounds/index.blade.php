@@ -16,12 +16,9 @@
      <table class="table">
        <thead>
          <tr>
-           <th>Team A</th>
-           <th>Team B</th>
-           <th>Result</th>
-           <th>Round</th>
-           <th>Match Status</th>
-           <th>Match Time</th>
+           <th>Title</th>
+           <th>Start At</th>
+           <th>End At</th>
            <th>Status</th>
            <th>Actions</th>
          </tr>
@@ -29,25 +26,17 @@
        <tbody class="table-border-bottom-0">
          @foreach ($datas as $row)
             <tr>
-               <td><strong>{{ $row->countries_one->name }}</strong></td>
-               <td><strong>{{ $row->countries_two->name}}</strong></td>
-               <td>{{ $row->score_a }} - {{ $row->score_b }}</td>
-               <td><span class="badge rounded-pill bg-success me-1">{{ $row->round_match->title }}</span></td>
-               <td><span class="badge rounded-pill bg-warning me-1">{{ $row->match_status}}</span></td>
-               <td><span class="badge rounded-pill bg-primary me-1">{{ $row->match_time}}</span></td>
+               <td><strong>{{ $row->title }}</strong></td>
+               <td><strong>{{ $row->start_at}}</strong></td>
+               <td><strong>{{ $row->end_at }}</strong></td>
                <td>
-                  {{-- <form  action="{{ route('matchs.updatestatus',$row->id) }}" id="form">
-                     @csrf
-                     @method('PUT') --}}
-                     <div class="form-check form-switch mb-2">
+                  <div class="form-check form-switch mb-2">
                      @if ($row->status == '1')
-                     <input class="form-check-input" type="checkbox" data-id="{{ $row->id }}" id="flexSwitchCheckDefault" name="status" value="0" checked/>
+                        <input class="form-check-input" type="checkbox" data-id="{{ $row->id }}" id="flexSwitchCheckDefault" name="status" value="0" checked/>
                      @else
-                     <input class="form-check-input" type="checkbox" data-id="{{ $row->id }}" id="flexSwitchCheckDefault" name="status" value="1"/>
-                     @endif
-                    
+                        <input class="form-check-input" type="checkbox" data-id="{{ $row->id }}" id="flexSwitchCheckDefault" name="status" value="1"/>
+                     @endif  
                   </div>
-                  {{-- </form> --}}
                </td>
                <td>
                   <div class="dropdown">
@@ -79,7 +68,7 @@
             
             
             $.ajax({
-               url: '{{ route('matchs.updatestatus') }}',
+               url: '{{ route('rounds.updatestatus') }}',
                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
                data: {
                    

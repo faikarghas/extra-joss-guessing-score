@@ -6,66 +6,102 @@
   {{ Breadcrumbs::render('add_category') }}
 @endsection
 @section('content')
-<form  action="{{  route('quizs.store') }}" method="POST">
+<form  action="{{  route('matchs.update',$fmatch->id) }}" method="POST">
    @csrf
+   @method('PUT')
    <div class="row">
       <div class="col-md-8">
          <div class="card mb-4">
-            <h5 class="card-header">Quiz Add</h5>
+            <h5 class="card-header">Match Add</h5>
             <div class="card-body">
                <div class="mb-3">
-                  <label for="defaultFormControlInput" class="col-md-2 col-form-label">Questions</label>
-                  <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Team A</label>
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="id_team_a">
+                    <option value="">Select Country A</option>
+                    {{-- @foreach ($country as $row)
+                     <option value="{{$row->id}}">{{$row->name}}</option>
+                    @endforeach --}}
+                    @foreach ($country as $row)
+                        <option @selected($row->id == $fmatch->id_team_a) value="{{$row->id}}">{{$row->name}}</option>
+                    @endforeach
+                  </select>
+               </div>
+               <div class="mb-3">
+                  <label for="exampleFormControlSelect1" class="form-label">Team B</label>
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="id_team_b">
+                    <option value="">Select Country B</option>
+                    @foreach ($country as $row)
+                        <option @selected($row->id == $fmatch->id_team_b) value="{{$row->id}}">{{$row->name}}</option>
+                    @endforeach
+                  </select>
+               </div>
+               <div class="mb-3">
+                  <label for="html5-datetime-local-input" class="col-md-2 col-form-label">Match Time</label>
+                  <div>
                      <input
-                        type="text"
                         class="form-control"
-                        id="defaultFormControlInput"
-                        placeholder="John Doe"
-                        aria-describedby="defaultFormControlHelp"
-                        name="question"
+                        type="datetime-local"
+                        id="html5-datetime-local-input"
+                        name="match_time"
+                        value="{{ old('match_time', $fmatch->match_time) }}"
                      />
                   </div>
-                  
                </div>
-               <button type="submit" class="btn btn-primary">Save</button>
+               <div class="mb-3">
+                  <label for="defaultFormControlInput" class="form-label">Result Team 1</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="defaultFormControlInput"
+                     placeholder="John Doe"
+                     aria-describedby="defaultFormControlHelp"
+                     name="score_a"
+                     value="{{ old('score_a', $fmatch->score_a) }}"
+                  />
+               </div>
+               <div class="mb-3">
+                  <label for="defaultFormControlInput" class="form-label">Result Team 2</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="defaultFormControlInput"
+                     placeholder="John Doe"
+                     aria-describedby="defaultFormControlHelp"
+                     name="score_b"
+                     value="{{ old('score_b', $fmatch->score_b) }}"
+                  />
+               </div>
+               <button type="submit" class="btn btn-primary">SAVE</button>
             </div>
          </div>
-      </div>   
+      </div>
       <div class="col-md-4">
          <div class="card mb-4">
-            <h5 class="card-header">Quiz Setting</h5>
+            <h5 class="card-header">Match Setings</h5>
             <div class="card-body">
                <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Round</label>
+                  <label for="exampleFormControlSelect1" class="form-label">ROUND</label>
                   <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="round">
                     <option value="">Select Round</option>
-                    @foreach ($rounds as $row)
-                     <option value="{{$row->id}}">{{$row->title}}</option>
-                    @endforeach
+                    @foreach ($round as $row)
+                     <option @selected($row->id == $fmatch->round)
+                           value="{{$row->id}}">{{$row->title}}</option>
+                     @endforeach
                   </select>
+
                </div>
                <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Category Quiz</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="catquiz">
-                    <option value="">Select Category</option>
-                    @foreach ($category as $row)
-                     <option value="{{$row->id}}">{{$row->title}}</option>
-                    @endforeach
-                  </select>
-               </div>
-               <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Status</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="status">
+                  <label for="exampleFormControlSelect1" class="form-label">STATUS</label>
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="match_status">
                     <option value="">Select Status</option>
-                        @foreach ($statuses as $key =>$value)
-                           <option value="{{ $key }}" {{ old('status') == $key ? "selected" : null }}> {{ $value }}
-                     </option>
-                 @endforeach 
+                    @foreach ($match_status as $key =>$value)
+                        <option value="{{ $key }}" {{ old('match_status',  $fmatch->match_status) == $key ? "selected" : null }}> {{ $value }}</option>
+                     @endforeach  
                   </select>
                </div>
             </div>
          </div>
-      </div>  
+      </div>
    </div>
 </form>
 @endsection

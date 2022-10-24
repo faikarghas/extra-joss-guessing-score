@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller; 
 
 use App\Models\Questions;
+use App\Models\Round;
 use App\Models\QuestionChoices;
+use App\Models\QuizCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +22,8 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
-        $datas = Questions::all();
+        
+        $datas = Questions::with('round_match')->get();
         return view('admin.quizs.index',compact('datas'));
     }
     /**
@@ -33,8 +35,9 @@ class QuizController extends Controller
     {
         //
         return view('admin.quizs.create',[
-            // 'categories' => Category::with('descendants')->onlyParent()->get(),
-            // 'statuses' => $this->statuses(),
+            'rounds' => Round::all(),
+            'category' => QuizCategory::all(),
+            'statuses' => $this->statuses(),
         ]);
         //return view('posts.create');
     }
@@ -68,6 +71,9 @@ class QuizController extends Controller
                 'question_id' => QuestionChoices::create([
                     "question" => $request->question
                   ])->id,
+                  'catquiz_id' => $request->catquiz,
+                  'rounds_id' => $request->round,
+                  'status' => $request->status,  
                 'user_id' => Auth::user()->id,
             ]);
 
@@ -123,6 +129,9 @@ class QuizController extends Controller
         
         $datas = array(
             'question' => Questions::find($id),
+            'status' => $this->statuses(),
+            'rounds' => Round::all(),
+            'category' => QuizCategory::all(),
             'options' =>  Questions::with(['choices'])->where('id',$id)->get(),
         );
 
@@ -149,6 +158,10 @@ class QuizController extends Controller
       
         $question = Questions::find($id);
         $question->question= $request->input('question');
+        $question->catquiz_id= $request->input('catquiz');
+        $question->rounds_id= $request->input('round');
+        $question->status= $request->input('status');
+
         $question->save();
         Alert::success('Update Question', 'Berhasil');
         return redirect()->route('quizs.index');
@@ -175,8 +188,8 @@ class QuizController extends Controller
     private function statuses(){
 
         return [
-            'draft' => 'draft',
-            'publish' => 'publish',
+            '1' => 'active',
+            '0' => 'non-active',
         ];
     }
 }

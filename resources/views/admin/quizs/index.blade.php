@@ -11,20 +11,36 @@
 <!-- Basic Bootstrap Table -->
 <div class="card">
    <h5 class="card-header">List Quiz</h5>
-   <div class="table-responsive text-nowrap">
+   <div class="table-responsive">
      <table class="table">
        <thead>
          <tr>
-           <th>Questions</th>
+            <th>No</th>
+            <th>Questions</th>
+           <th>Round</th>
            <th>Status</th>
            <th>Actions</th>
          </tr>
        </thead>
        <tbody class="table-border-bottom-0">
+         @php
+            $i = 1
+         @endphp
          @foreach ($datas as $row)
             <tr>
+               <td><strong>{{  $i++ }}</strong></td>
                <td><strong>{{ $row->question }}</strong></td>
-               <td><span class="badge bg-label-success me-1"></span></td>
+               <td><span class="badge bg-label-success me-1">{{  $row->round_match->title }}</span></td>
+               <td>
+                  @if ($row->status == 1)
+                  <span class="badge bg-label-success me-1">Active
+                  </span>
+                  @else
+                  <span class="badge bg-label-warning me-1">Non Active
+                  </span>
+                  @endif
+                  
+                  </td>
                <td>
                   <div class="dropdown">
                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
