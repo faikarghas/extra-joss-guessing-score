@@ -23,6 +23,7 @@
                         placeholder="John Doe"
                         aria-describedby="defaultFormControlHelp"
                         name="question"
+                        required
                      />
                   </div>
                   
@@ -37,7 +38,7 @@
             <div class="card-body">
                <div class="mb-3">
                   <label for="exampleFormControlSelect1" class="form-label">Round</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="round">
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="round" required>
                     <option value="">Select Round</option>
                     @foreach ($rounds as $row)
                      <option value="{{$row->id}}">{{$row->title}}</option>
@@ -46,7 +47,7 @@
                </div>
                <div class="mb-3">
                   <label for="exampleFormControlSelect1" class="form-label">Category Quiz</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="catquiz">
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="catquiz" required>
                     <option value="">Select Category</option>
                     @foreach ($category as $row)
                      <option value="{{$row->id}}">{{$row->title}}</option>
@@ -55,7 +56,7 @@
                </div>
                <div class="mb-3">
                   <label for="exampleFormControlSelect1" class="form-label">Status</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="status">
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="status" required>
                     <option value="">Select Status</option>
                         @foreach ($statuses as $key =>$value)
                            <option value="{{ $key }}" {{ old('status') == $key ? "selected" : null }}> {{ $value }}

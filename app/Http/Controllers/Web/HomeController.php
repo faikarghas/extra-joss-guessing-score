@@ -14,6 +14,8 @@ use App\Models\Guessing;
 use App\Models\Fmatch;
 use App\Models\Post;
 use App\Models\QuizIndicator;
+use App\Models\Province;
+use App\Models\Regencie;
 use App\Lib\UpdatePointHelper;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
@@ -211,7 +213,13 @@ class HomeController extends Controller
 
 
     public function daftar(){
-        return view('web.pages.register');
+
+        $data = [
+            'province' => Province::all(),
+            'regencie' => Regencie::all() 
+        ];
+        
+        return view('web.pages.register',$data);
     }
 
     public function masuk(){
@@ -410,5 +418,46 @@ class HomeController extends Controller
 
         return response()->json(array('question'=>$soal,'option'=>$option));
     }
+
+    public function selectCity(Request $request)
+    {
+        $regencies = Regencie::where('province_id', $request->get('id'))
+            ->pluck('name', 'id');
+        return response()->json($regencies);
+    }
+
+    public function storeRegister(Request $request)
+    {
+        
+        // $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:users',
+        //     // 'password' => 'required|min:6',
+        // ]);
+        
+        $data = $request->all();
+        //dd($data);
+        $check = $this->createUser($data);
+        dd($check);
+    }
+
+    public function createUser(array $data)
+    {
+      return User::create([
+        'name' => $data['name'],
+        'username' => $data['username'],
+        'account_instagram' => $data['account_instagram'],
+        'email' => $data['email'],
+        'phone' => $data['phone'],
+        'nik' => $data['nik'],
+        'kota' => $data['provinsi'],
+        'kecamatan' => $data['city'],
+        'address' => $data['address'],
+        'size_jersey' => $data['size_jersey'],
+        'size_sepatu' => $data['size_sepatu'],
+        'role' => 0,
+        'point' => 60
+      ]);
+    }    
 
 }
