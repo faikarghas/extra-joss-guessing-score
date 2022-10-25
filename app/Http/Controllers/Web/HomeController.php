@@ -405,7 +405,8 @@ class HomeController extends Controller
     {
         $soal = Questions::all();
         $option =  QuestionChoices::all();
-        $options =  Questions::with(['choices'])->get()->toJson(JSON_PRETTY_PRINT);
+
+        // $options =  Questions::with(['choices'])->get();
 
         return response()->json(array('question'=>$soal,'option'=>$option));
     }
