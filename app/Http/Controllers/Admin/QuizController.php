@@ -130,7 +130,7 @@ class QuizController extends Controller
         $datas = array(
             'question' => Questions::find($id),
             'status' => $this->statuses(),
-            'rounds' => Round::all(),
+            'rounds' => Round::orderBy('id','asc')->get(),
             'category' => QuizCategory::all(),
             'options' =>  Questions::with(['choices'])->where('id',$id)->get(),
         );

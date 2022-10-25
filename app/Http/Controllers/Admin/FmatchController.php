@@ -210,9 +210,5 @@ class FmatchController extends Controller
             'message' => 'Status Berhasil Di Updated',
         ]);
 
-        //Alert::success('Update Status', 'Berhasil');
-        // return redirect()->route('matchs.index');
-
-
     }
 }
