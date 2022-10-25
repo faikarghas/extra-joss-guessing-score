@@ -4,7 +4,7 @@ import './bootstrap';
 import 'flowbite';
 
 // Modules
-import { Auth, Quiz, GuessScore } from './modules';
+import { Auth, Quiz, GuessScore, Register } from './modules';
 
 // Utils
 import { getCurrentDate } from './utils/index';
@@ -29,7 +29,8 @@ import { getCurrentDate } from './utils/index';
 
             const auth = new Auth();
             const guess = new GuessScore();
-            const quiz = new Quiz(0,2);
+            const quiz = new Quiz(0,10);
+            const register = new Register();
 
             // Init all functionality
             guess.openGuessModal();
@@ -44,6 +45,8 @@ import { getCurrentDate } from './utils/index';
             quiz.kirimJawabanQuiz();
             quiz.nextQuiz();
             quiz.storeCheckedInput();
+
+            register.seletCity();
 
             console.log(
                 Window.list

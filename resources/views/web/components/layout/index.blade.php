@@ -36,19 +36,6 @@
         @yield('main')
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            $(function () {
-                $('provinsi').on('change', function () {
-                    axios.post('{{ route('selectcity') }}', {id: $(this).val()})
-                        .then(function (response) {
-                            $('#city').empty();
-                            $.each(response.data, function (id, name) {
-                                $('#city').append(new Option(name, id))
-                            })
-                        });
-                });
-            });
-        </script>
         @vite(['resources/js/app.ts'])
 
 

@@ -166,6 +166,8 @@ export class Quiz{
                     }
                 },
                 success:(data) => {
+                    console.log(data);
+                    
                     $('.qz').html('lihat quiz');
                     $('.modal-quiz').css('display','block')
 
@@ -334,6 +336,33 @@ export class Quiz{
     }
 
 
+}
+
+export class Register{
+    seletCity(): void{
+        $('#provinsi').on('change', function () {
+            console.log($(this).val());
+
+            $.ajax({
+                type:'POST',
+                url:`${base_url}/selectCity/${$(this).val()}`,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                error: function(xhr, error){
+                    if (xhr.status === 500) {
+                    }
+                },
+                success:(response) => {
+                    console.log(response);
+                    $('#city').empty();
+                    $.each(response, function (index, item) {
+                        console.log(name);
+                        $('#city').append(new Option(item.name, item.id))
+                    })
+                }
+            })
+
+        })
+    }
 }
 
 export function sum(a: number, b:number): number {

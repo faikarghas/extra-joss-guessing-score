@@ -30,7 +30,7 @@ Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
 
 
 Route::post('/storeRegister',[HomeController::class,'storeRegister'])->name('storeRegister');
-Route::post('/selectCity', [HomeController::class,'selectCity'])->name('selectcity');
+Route::post('/selectCity/{id}', [HomeController::class,'selectCity'])->name('selectcity');
 
 
 Route::group(['middleware' => ['guest']], function() {

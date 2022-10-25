@@ -27,31 +27,31 @@
                             <input id="nama" type="text" name="name" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                            <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT EMAIL*</label>
+                            <input id="email" type="text" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
+                        </div>
+                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="username" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME*</label>
                             <input id="username" type="text" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                            <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">PASSWORD</label>
+                            <input id="password" type="password" name="password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
+                        </div>
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="instagram" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">AKUN INSTAGRAM*</label>
                             <input id="instagram" type="text" name="account_instagram" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="@" required="">
-                        </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
-                            <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT EMAIL*</label>
-                            <input id="email" type="text" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="phone" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NO HANDPHONE*</label>
                             <input id="phone" type="tel" name="phone" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-full">
-                            <label for="nik" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NO IDENTITAS KEPENDUDUKAN*</label>
-                            <input id="nik" type="text" name="nik" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
-                        </div>
                     </div>
                     <div class="basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KOTA*</label>
-                            <select  class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" name="provinsi" id="provinsi">
-                                <option value="">== Pilih Provinsi ==</option>
+                            <select class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" name="provinsi" id="provinsi">
+                                <option value="">Pilih Provinsi</option>
                                 @foreach ($province as $row )
                                 <option value="{{ $row->id }}">{{ $row->name }}</option>    
                                 @endforeach
@@ -60,7 +60,7 @@
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KECAMATAN*</label>
                               <select name="city" id="city" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer">
-                                <option value="">== Select City ==</option>
+                                <option value="">Pilih Kota</option>
                             </select>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
@@ -74,6 +74,12 @@
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN SEPATU*</label>
                             <input type="text" name="size_sepatu" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
+                        </div>
+                    </div>
+                    <div class="basis-full">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full">
+                            <label for="nik" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NO IDENTITAS KEPENDUDUKAN*</label>
+                            <input id="nik" type="text" name="nik" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                     </div>
                   <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">KIRIM</button>
