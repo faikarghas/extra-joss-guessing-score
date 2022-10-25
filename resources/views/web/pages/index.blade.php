@@ -90,7 +90,7 @@
             <h5 class="text-black font-head text-[20px] text-center uppercase">MINGGU KE 1</h5>
         </div>
 
-        @if (true)
+        @if ($round[0]->id !== 4)
         {{-- TEBAK SCORE  --}}
         <div class="flex flex-row flex-wrap lg:flex-nowrap gap-2">
             <div class="basis-full lg:basis-1/2 flex flex-wrap bg-[#202124]">

@@ -16,6 +16,7 @@ use App\Models\Post;
 use App\Models\QuizIndicator;
 use App\Models\Province;
 use App\Models\Regencie;
+use App\Models\Round;
 use App\Lib\UpdatePointHelper;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
@@ -48,12 +49,14 @@ class HomeController extends Controller
         $myranking=[];
         $checkQuiz=[];
 
-         // Daftar pertandingan group
+        // current round
+        $round = Round::where('status',1)->get();
+        // Daftar pertandingan group
         $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
-        ->where([["fmatches.status","1"]])
+        ->where([["fmatches.status","1"],["fmatches.round","=",$round[0]->id]])
         ->get();
 
         // Daftar 16 besar
@@ -131,7 +134,7 @@ class HomeController extends Controller
             ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
             ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
             ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
-            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"]])
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","=",$round[0]->id]])
             ->get();
 
             $myguessRound16 = Guessing::leftJoin('users','guessings.id_user','=','users.id')
@@ -205,7 +208,8 @@ class HomeController extends Controller
             'myguessFinal' => $myguessFinal,
             'klasemens' => $klasemens,
             'myranking' => $myranking,
-            'checkQuiz' => $checkQuiz
+            'checkQuiz' => $checkQuiz,
+            'round' => $round
         ];
 
         return view('web.pages.index',$data);
@@ -411,10 +415,11 @@ class HomeController extends Controller
 
     public function getQuiz()
     {
-        $soal = Questions::all();
-        $option =  QuestionChoices::all();
+        $round = Round::where('status',1)->get();
 
-        // $options =  Questions::with(['choices'])->get();
+        $soal = Questions::where('rounds_id',$round[0]->id)->get();
+        $option =  QuestionChoices::select('choice', 'id', 'question_id')->get();
+
 
         return response()->json(array('question'=>$soal,'option'=>$option));
     }
