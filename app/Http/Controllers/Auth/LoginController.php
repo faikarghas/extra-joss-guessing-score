@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -41,6 +42,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         $input = $request->all();
 
         $this->validate($request, [
@@ -48,16 +50,22 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->role == 'admin') {
-                return redirect()->route('dashboard.index');
+        $checkEmail = User::where('email',$input['email'])->get();
+
+        if (count($checkEmail) > 0) {
+            if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))){
+                if (auth()->user()->role == 'admin') {
+                    return redirect()->route('dashboard.index');
+                }else{
+                    return redirect()->route('home');
+                }
             }else{
-                return redirect()->route('home');
+                return redirect()->route('masuk')
+                    ->with('error','Password Salah.');
             }
-        }else{
+        } else {
             return redirect()->route('masuk')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('error','Email belum terdaftar.');
         }
 
     }

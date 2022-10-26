@@ -3,6 +3,7 @@ namespace App\Lib;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Guessing;
+use App\Models\Round;
 
 class UpdatePointHelper{
 
@@ -22,6 +23,12 @@ class UpdatePointHelper{
         )
         ->where([['fmatches.match_status','=',"CLOSE"],['guessings.status','=',0],['guessings.is_guess','=',1]]) // pertandingan sudah selesai,staus update point masih 0 dan sudah ditebak
         ->get();
+
+        $point = 1000;
+        $round = Round::where('status',1)->get();
+        if ($round[0]->id == 4) {
+            $point = 2000;
+        }
 
         foreach ($userNeedUpdateForGuess as $key => $value) {
             if ($value->status == 0) {

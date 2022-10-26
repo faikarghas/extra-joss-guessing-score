@@ -83,6 +83,11 @@
                         </div>
                     </div>
                   <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">KIRIM</button>
+                    @if($message = Session::get('email_duplicate'))
+                        <div class="p-4 mt-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                            <span class="font-medium">{{$message}}</span>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>

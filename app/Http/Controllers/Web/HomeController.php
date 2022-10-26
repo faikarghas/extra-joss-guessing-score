@@ -22,6 +22,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -438,53 +439,57 @@ class HomeController extends Controller
     public function storeRegister(Request $request)
     {
 
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     // 'password' => 'required|min:6',
-        // ]);
-
         $data = $request->all();
         $check = $this->createUser($data);
-        return redirect()->intended('/');
+
     }
 
-    public function createUser(array $data)
+    public function createUser(Request $request)
     {
-     $createUser = User::create([
-        'name' => $data['name'],
-        'username' => $data['username'],
-        'account_instagram' => $data['account_instagram'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-        'nik' => $data['nik'],
-        'kota' => $data['provinsi'],
-        'kecamatan' => $data['city'],
-        'address' => $data['address'],
-        'size_jersey' => $data['size_jersey'],
-        'size_sepatu' => $data['size_sepatu'],
-        'role' => 0,
-        'total_point' => 60,
-        'password' => Hash::make($data['password']),
-      ]);
+        try {
+            $data = $request->all();
 
-      $userLastId = $createUser->id;
+            $createUser = User::create([
+                'name' => $data['name'],
+                'username' => $data['username'],
+                'account_instagram' => $data['account_instagram'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'nik' => $data['nik'],
+                'kota' => $data['provinsi'],
+                'kecamatan' => $data['city'],
+                'address' => $data['address'],
+                'size_jersey' => $data['size_jersey'],
+                'size_sepatu' => $data['size_sepatu'],
+                'role' => 0,
+                'total_point' => 60,
+                'password' => Hash::make($data['password']),
+              ]);
+        
+              $userLastId = $createUser->id;
 
-      $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
-      ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
-      ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
-      ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status")
-      ->get();
+              $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+                ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+                ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+                ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status")
+                ->get();
 
-      foreach ($matches as $key => $match) {
-          Guessing::updateOrCreate([
-              'id_user'   => $userLastId,
-              'id_match'  => $match->id,
-          ],[
-              'guessing_score_a' => 0,
-              'guessing_score_b' => 0,
-          ]);
-      }
+                foreach ($matches as $key => $match) {
+                    Guessing::updateOrCreate([
+                        'id_user'   => $userLastId,
+                        'id_match'  => $match->id,
+                    ],[
+                        'guessing_score_a' => 0,
+                        'guessing_score_b' => 0,
+                    ]);
+                }
+
+                return redirect()->intended('/masuk');
+
+        } catch (\Throwable $e) {
+            Session::flash('email_duplicate', 'Email sudah terpakai');
+            return redirect()->intended('/daftar');
+        }
     }
 
 }
