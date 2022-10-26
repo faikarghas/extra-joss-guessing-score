@@ -33,7 +33,7 @@ class UpdatePointHelper{
         foreach ($userNeedUpdateForGuess as $key => $value) {
             if ($value->status == 0) {
                 User::where([['id','=',$value->id_user]])
-                ->increment('total_point', 1000);
+                ->increment('total_point', $point);
             }
         }
 
