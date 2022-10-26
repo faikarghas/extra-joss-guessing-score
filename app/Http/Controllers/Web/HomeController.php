@@ -187,7 +187,8 @@ class HomeController extends Controller
 
         }
 
-        $klasemens = User::orderBy('total_point','DESC')
+        $klasemens = User::where('role',0)
+        ->orderBy('total_point','DESC')
         ->orderBy('name','ASC')
         ->limit(30)->get();
 
