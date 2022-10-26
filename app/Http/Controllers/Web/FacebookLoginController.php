@@ -116,7 +116,6 @@ class FacebookLoginController extends Controller
             // return $finduser;
 
             if ( $finduser ) {
-                dd('ff');
                 Auth::login($finduser);
 
                 return redirect()->intended('/');
