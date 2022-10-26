@@ -46,38 +46,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       
-
-        //$images = $request->images;
-        //$image = explode(",", $images);
-
-
-        // if (!empty($image)){
-        //     dd('data tidak kosong');
-        // }
-
-
-        // 
-        //dd($image);
-
-        //dd($image[0],parse_url($image[0])['path']);
-        // get filename
-        //dd(basename($image[0]));
-        // get path 
-        //dd(pathinfo($image[0])['dirname']);
-
-        //dd(pathinfo($image[0]));
-        // get path without host
-        //$dirname = pathinfo($image[0])['dirname'];
-        //dd($dirname);
-        //get path without host
-        //dd(parse_url($dirname)['path']);
-
-        
-        //$host = request()->getHttpHost(); 
-        //dd(parse_url($image[0])['host']);
-
-
+    
         $validator = Validator::make(
             $request->all(),
             [
@@ -168,23 +137,21 @@ class UserController extends Controller
         return view('admin.posts.index',compact('posts'));
     }
 
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
+    public function edit($id)
     {
         
-        
-        return view('admin.posts.edit',[
-            'post' => $post,
-            'categories' => Category::with('descendants')->onlyParent()->get(),
-            'statuses' => $this->statuses(),
-        ]);
+       
+
+        $datas = array(
+            'user' => User::find($id)
+        );
+        return view('admin.users.edit')->with($datas); 
+
+        // return view('admin.users.edit',[
+        //        'user' => User::find($id),
+        //     // 'categories' => Category::with('descendants')->onlyParent()->get(),
+        //     // 'statuses' => $this->statuses(),
+        // ]);
     }
 
     /**

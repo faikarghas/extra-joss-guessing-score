@@ -36,10 +36,10 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                      </button>
                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:void(0);"
+                        <a class="dropdown-item" href="{{ route('users.edit', $row->id) }}"
                            ><i class="bx bx-edit-alt me-1"></i> Edit</a
                         >
-                        <a class="dropdown-item" href="javascript:void(0);"
+                        <a class="dropdown-item" href="{{ route('users.show', $row->id) }}"
                            ><i class="bx bx-video-recording me-1"></i> View Details</a
                         >
                      </div>
