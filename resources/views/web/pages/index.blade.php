@@ -18,10 +18,7 @@
             </div>
             <div class="flex flex-wrap flex-row justify-center items-center gap-10 mb-4">
                 <div class="flex flex-col lg:flex-row lg:gap-20">
-                    {{-- onGoingMatches --}}
-                    {{-- @if (count($latestMatch) == 0)
-                        
-                    @endif --}}
+                    {{-- Final Match --}}
                     @foreach ($latestMatch as $match)
                     <div class="mb-8">
                         <div class="text-center mb-0 lg:mb-8">
@@ -88,7 +85,7 @@
             <h2 class="text-black font-head leading-[35px] xl:leading-tight text-[40px] xl:text-[60px] text-center mb-6">IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</h2>
             <div class="qz bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
         </div>
-        <div class="mb-8">
+        <div class="mb-8 mt-12">
             <h2 class="text-black font-head text-[60px] text-center mb-2 uppercase leading-[50px]">Tebak Skor</h2>
             <h5 class="text-black font-head text-[20px] text-center uppercase">PUTARAN KE {{$round[0]->id}}</h5>
         </div>
@@ -186,23 +183,29 @@
                                 </li>
                             @endforeach
                         @else
-                            @for ($i = 0; $i < 8; $i++)
+                            @foreach($match_round_16 as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
+                                    @if ($match->team1 !== 'NA')
+                                    @else
                                     <div class="basis-1/2 flex items-center justify-center">
+                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
+                                    @endif
                                 </div>
                             </li>
-                            @endfor
+                            @endforeach
                         @endauth
 
                       </ul>
@@ -214,23 +217,26 @@
                                 </li>
                             @endforeach
                         @else
-                            @for ($i = 0; $i < 4; $i++)
+                            @foreach($match_quarter as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
                                     <div class="basis-1/2 flex items-center justify-center">
+                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
                                 </div>
                             </li>
-                            @endfor
+                            @endforeach
                         @endauth
                       </ul>
                       <ul class="bracket bracket-3">
@@ -241,23 +247,26 @@
                                 </li>
                             @endforeach
                         @else
-                            @for ($i = 0; $i < 2; $i++)
+                            @foreach($match_semi_finals as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
                                     <div class="basis-1/2 flex items-center justify-center">
+                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
                                 </div>
                             </li>
-                            @endfor
+                            @endforeach
                         @endauth
                       </ul>
                       <ul class="bracket bracket-4">
@@ -268,23 +277,26 @@
                             </li>
                             @endforeach
                         @else
-                            @for ($i = 0; $i < 1; $i++)
+                            @foreach($match_final as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">NA</p>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
                                     <div class="basis-1/2 flex items-center justify-center">
+                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
                                 </div>
                             </li>
-                            @endfor
+                            @endforeach
                         @endauth
                       </ul>
                     </div>

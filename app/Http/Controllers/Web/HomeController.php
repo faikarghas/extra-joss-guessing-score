@@ -64,16 +64,15 @@ class HomeController extends Controller
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
-        ->where([["fmatches.status","0"],["fmatches.round","4"]])
+        ->where([["fmatches.status","0"],["fmatches.round","5"]])
         ->get();
-
 
         // Daftar quarter final
         $match_quarter = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
-        ->where([["fmatches.status","0"],["fmatches.round","5"]])
+        ->where([["fmatches.status","0"],["fmatches.round","6"]])
         ->get();
 
         // Daftar semi final
@@ -81,7 +80,7 @@ class HomeController extends Controller
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
-        ->where([["fmatches.status","0"],["fmatches.round","6"]])
+        ->where([["fmatches.status","0"],["fmatches.round","7"]])
         ->get();
 
         // Daftar  final
@@ -89,7 +88,7 @@ class HomeController extends Controller
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
         ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
         ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
-        ->where([["fmatches.status","0"],["fmatches.round","8"]])
+        ->where([["fmatches.status","0"],["fmatches.round","9"]])
         ->get();
 
         // Pertandingan berlangsung
