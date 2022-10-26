@@ -8,7 +8,7 @@
     "src": "public/fonts/BebasNeue-Regular.woff"
   },
   "resources/js/app.ts": {
-    "file": "assets/app.351b5509.js",
+    "file": "assets/app.b9dc3da3.js",
     "src": "resources/js/app.ts",
     "isEntry": true
   },
@@ -18,7 +18,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.621beb1e.css",
+    "file": "assets/app.bdffcea7.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

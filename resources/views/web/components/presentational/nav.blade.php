@@ -1,4 +1,4 @@
-<nav class="fixed z-10 w-full top-0 left-0 bg-black md:bg-transparent px-5 sm:px-6 py-4 xl:px-[128px] lg:pt-[25px]">
+<nav class="fixed sm:absolute z-10 w-full top-0 left-0 bg-black md:bg-transparent px-5 sm:px-6 py-4 xl:px-[128px] lg:pt-[25px]">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
     <a href="{{route('home')}}" class="flex items-center">
         <img src="{{asset('/images/logo.png')}}" class="mr-3 h-[53px] sm:h-[98px]" alt="Extrajoss Logo">
