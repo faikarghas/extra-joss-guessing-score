@@ -126,6 +126,7 @@ class FacebookLoginController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'facebook_id'=> $user->id,
+                    'total_point' => 60,
                     'password' => 'dummypass'// you can change auto generate password here and send it via email but you need to add checking that the user need to change the password for security reasons
                 ]);
 
