@@ -19,6 +19,7 @@
             <div class="flex flex-wrap flex-row justify-center items-center gap-10 mb-4">
                 <div class="flex flex-col lg:flex-row lg:gap-20">
                     {{-- onGoingMatches --}}
+                    {{-- @if ($latestMatch)
                     @foreach ($latestMatch as $match)
                     <div class="mb-8">
                         <div class="text-center mb-0 lg:mb-8">
@@ -61,6 +62,7 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif --}}
                 </div>
             </div>
             <img src="{{asset("/images/lap2.png")}}" class="w-[1000px] hidden xl:block"/>
