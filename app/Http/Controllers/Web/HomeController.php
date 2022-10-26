@@ -189,8 +189,7 @@ class HomeController extends Controller
 
         $klasemens = User::orderBy('total_point','DESC')
         ->orderBy('name','ASC')
-        ->limit(20)->get();
-
+        ->limit(30)->get();
 
         $data = [
             'latestMatch' => $latestMatch,
@@ -441,7 +440,7 @@ class HomeController extends Controller
 
         $data = $request->all();
         $check = $this->createUser($data);
-        dd($check);
+        return redirect()->intended('/');
     }
 
     public function createUser(array $data)
@@ -459,7 +458,7 @@ class HomeController extends Controller
         'size_jersey' => $data['size_jersey'],
         'size_sepatu' => $data['size_sepatu'],
         'role' => 0,
-        'point' => 60,
+        'total_point' => 60,
         'password' => Hash::make($data['password']),
       ]);
 

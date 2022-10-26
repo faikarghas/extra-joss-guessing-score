@@ -309,9 +309,10 @@
                         <?php
                             $str = Auth::user()->name;
                             $words = explode(' ', $str);
-                            $userInitial = $words[0][0]. $words[1][0]
+                            $si = count($words) > 1 ? $words[1][0] : '';
+                            $userInitials = $words[0][0]. $si;
                         ?>
-                        {{$userInitial}}
+                        {{$userInitials}}
                         @endauth
                     </li>
                     <li class="text-black text-[16px] font-sans font-bold">
@@ -335,7 +336,8 @@
                                 <?php
                                     $str = $klasemen->name;
                                     $words = explode(' ', $str);
-                                    $userInitials = $words[0][0]. $words[1][0]
+                                    $si = count($words) > 1 ? $words[1][0] : '';
+                                    $userInitials = $words[0][0]. $si;
                                 ?>
                             {{$userInitials}}
                             </div>
