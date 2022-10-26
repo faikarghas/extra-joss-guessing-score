@@ -7,34 +7,34 @@
 @endsection
 @section('main')
 <main>
-    <div class="modal-register w-full  bg-[#FFEC00] px-14 pt-20 pb-6">
-        <div class="bg-white flex flex-wrap py-14 px-20 relative justify-between">
-            <div class="close-register absolute top-[15px] right-[15px] cursor-pointer">
-                <a href="{{route('home')}}" class="block w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
+    <div class="modal-register w-full  bg-[#FFEC00] px-9 lg:px-14 pt-9 lg:pt-20 pb-6">
+        <div class="bg-white flex flex-wrap py-14 px-4 lg:px-20 relative justify-between">
+            <div class="close-register absolute top-[-22px] right-[-22px] lg:top-[15px] lg:right-[15px] cursor-pointer">
+                <a href="{{route('home')}}" class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
                     <img src="{{asset('/images/close-w.png')}}" />
                 </a>
             </div>
-            <div class="basis-full flex justify-between mb-8">
+            <div class="basis-full flex flex-col lg:flex-row justify-between mb-8">
                 <h2 class="font-head text-[60px] leading-[54px]">DAFTAR</h2>
-                <h2 class="font-head text-[60px] text-[#FFA800] flex leading-[54px] items-center">DAPATKAN <img class="mx-2 object-contain h-[36px]" src="{{asset('/images/acv2.png')}}" />  60 Poin AWAL!</h2>
+                <h2 class="font-head text-[25px] lg:text-[60px] text-[#FFA800] flex leading-[54px] items-center">DAPATKAN <img class="mx-2 object-contain h-[36px]" src="{{asset('/images/acv2.png')}}" />  60 Poin AWAL!</h2>
             </div>
             <div class="basis-full relative">
                 <form class="flex flex-wrap justify-between" method="POST" action="{{ route('storeRegister') }}">
                 @csrf
-                    <div class="basis-[48%] flex flex-wrap justify-between">
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                    <div class="basis-full lg:basis-[48%] flex flex-wrap justify-between">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="nama" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NAMA*</label>
                             <input id="nama" type="text" name="name" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT EMAIL*</label>
                             <input id="email" type="text" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="username" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME*</label>
                             <input id="username" type="text" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">PASSWORD</label>
                             <input id="password" type="password" name="password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
@@ -47,7 +47,7 @@
                             <input id="phone" type="tel" name="phone" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                     </div>
-                    <div class="basis-[48%] flex flex-wrap justify-between">
+                    <div class="basis-full lg:basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KOTA*</label>
                             <select class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" name="provinsi" id="provinsi">
@@ -67,11 +67,11 @@
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT RUMAH*</label>
                             <input type="text" name="address" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN JERSEY*</label>
                             <input type="text" name="size_jersey" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN SEPATU*</label>
                             <input type="text" name="size_sepatu" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>

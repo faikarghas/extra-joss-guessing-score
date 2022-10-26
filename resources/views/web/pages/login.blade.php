@@ -7,9 +7,9 @@
 @endsection
 @section('main')
 <main>
-    <div class="modal-login w-full left-0 bg-[#FFEC00] px-14 pt-20">
-        <div class="bg-white flex flex-wrap py-14 px-20 relative justify-between">
-            <div class="close-login absolute top-[35px] right-[35px] cursor-pointer                       ">
+    <div class="modal-login w-full left-0 bg-[#FFEC00] px-9 lg:px-14 pt-9 lg:pt-20">
+        <div class="bg-white flex flex-wrap py-14 px-4 lg:px-20 relative justify-between">
+            <div class="close-login absolute top-[-22px] right-[-22px] rigth lg:top-[35px] lg:right-[35px] cursor-pointer                       ">
                 <a href="{{route('home')}}" class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
                     <img src="{{asset('/images/close-w.png')}}" />
                 </a>
@@ -30,13 +30,13 @@
                   </div>
                   <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">LOG IN</button>
                 </form>
-                <div class="absolute right-[-15%] top-[50%] translate-y-[-50%] ">OR</div>
+                <div class="absolute right-[-15%] top-[50%] translate-y-[-50%] hidden lg:block">OR</div>
             </div>
             <div class="basis-full lg:basis-[48%]">
                 <span class="block font-sans text-center mb-5 text-[#A0A0A0]"> atau login dengan </span>
-                <a href="{{ url('login/google') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto mb-4 font-sans font-black"><img width="26px" alt="google logo" class="mr-16" src="{{asset('images/google.png')}}"/>Continue With Google</a>
+                <a href="{{ url('login/google') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto mb-4 font-sans font-black text-[14px] lg:text-[16px]"><img width="26px" alt="google logo" class="mr-4 lg:mr-16" src="{{asset('images/google.png')}}"/>Continue With Google</a>
     
-                <a href="{{ url('/login/facebook') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto font-sans font-black"><img width="26px" alt="fb logo" class="mr-16" src="{{asset('images/facebook.png')}}"/>Continue With Facebook</a>
+                <a href="{{ url('/login/facebook') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto font-sans font-black text-[14px] lg:text-[16px]"><img width="26px" alt="fb logo" class="mr-4 lg:mr-16" src="{{asset('images/facebook.png')}}"/>Continue With Facebook</a>
             </div>
         </div>
         <div class="pb-14 pt-10">
