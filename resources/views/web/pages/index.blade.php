@@ -106,16 +106,16 @@
                     @foreach ($matches as $key => $match)
                         @if ($key < 8)
                         <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                             <div class="flex flex-wrap">
                                 <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                     <li class="mb-2 flex items-center">
                                         <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                        <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                     </li>
                                     <li class="flex items-center">
                                         <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                        <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                     </li>
                                 </ul>
                                 <div class="basis-1/2 flex items-center justify-center">
@@ -140,16 +140,16 @@
                     @foreach ($matches as $key => $match)
                         @if ($key >= 8)
                         <div class="basis-full lg:basis-1/2 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
-                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+                            <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                             <div class="flex flex-wrap">
                                 <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                     <li class="mb-2 flex items-center">
                                         <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                        <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                     </li>
                                     <li class="flex items-center">
                                         <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                        <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                        <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                     </li>
                                 </ul>
                                 <div class="basis-1/2 flex items-center justify-center">
@@ -185,20 +185,27 @@
                         @else
                             @foreach($match_round_16 as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
+                                            @if($match->team1 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
+                                            @if($match->team2 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
                                     @if ($match->team1 !== 'NA')
-                                    @else
                                     <div class="basis-1/2 flex items-center justify-center">
                                         <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
@@ -219,21 +226,31 @@
                         @else
                             @foreach($match_quarter as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
+                                            @if($match->team1 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
+                                            @if($match->team2 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
+                                    @if ($match->team1 !== 'NA')
                                     <div class="basis-1/2 flex items-center justify-center">
                                         <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
+                                    @endif
                                 </div>
                             </li>
                             @endforeach
@@ -249,21 +266,31 @@
                         @else
                             @foreach($match_semi_finals as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
+                                            @if($match->team1 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
+                                            @if($match->team2 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
+                                    @if ($match->team1 !== 'NA')
                                     <div class="basis-1/2 flex items-center justify-center">
                                         <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
+                                    @endif
                                 </div>
                             </li>
                             @endforeach
@@ -279,21 +306,31 @@
                         @else
                             @foreach($match_final as $match)
                             <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
+                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                 <div class="flex flex-wrap">
                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                         <li class="mb-2 flex items-center">
+                                            @if($match->team1 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
                                         </li>
                                         <li class="flex items-center">
+                                            @if($match->team2 == 'NA')
+                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                            @else
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            <p class="text-white font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            @endif
+                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
                                         </li>
                                     </ul>
+                                    @if ($match->team1 !== 'NA')
                                     <div class="basis-1/2 flex items-center justify-center">
                                         <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
                                     </div>
+                                    @endif
                                 </div>
                             </li>
                             @endforeach
