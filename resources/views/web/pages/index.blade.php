@@ -164,180 +164,182 @@
         </div>
         @else
         {{-- TEBAK BRACKET SCORE  --}}
-        <div class="flex flex-row">
-            <div class="basis-full flex flex-wrap bg-[#202124] py-4 px-4">
-                <div class="w-full">
-                    <div class="tournament-headers">
-                      <h3 class="font-sans uppercase">Round of 16</h3>
-                      <h3 class="font-sans uppercase">Quarter Finals</h3>
-                      <h3 class="font-sans uppercase">Semi Finals</h3>
-                      <h3 class="font-sans uppercase">Final</h3>
-                    </div>
+        <div class="overflow-auto ">
+            <div class="flex flex-row w-[1200px] lg:w-full ">
+                <div class="basis-full flex flex-wrap bg-[#202124] py-4 px-4">
+                    <div class="w-full">
+                        <div class="tournament-headers">
+                        <h3 class="font-sans uppercase">Round of 16</h3>
+                        <h3 class="font-sans uppercase">Quarter Finals</h3>
+                        <h3 class="font-sans uppercase">Semi Finals</h3>
+                        <h3 class="font-sans uppercase">Final</h3>
+                        </div>
 
-                    <div class="tournament-brackets">
-                      <ul class="bracket bracket-1">
-                        @auth
-                            @foreach ($myguessRound16 as $match)
+                        <div class="tournament-brackets">
+                        <ul class="bracket bracket-1">
+                            @auth
+                                @foreach ($myguessRound16 as $match)
+                                    <li class="team-item">
+                                        @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
+                                    </li>
+                                @endforeach
+                            @else
+                                @foreach($match_round_16 as $match)
                                 <li class="team-item">
-                                    @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
-                                </li>
-                            @endforeach
-                        @else
-                            @foreach($match_round_16 as $match)
-                            <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
-                                <div class="flex flex-wrap">
-                                    <ul class="basis-1/2 border-r-[1px] border-[#383838]">
-                                        <li class="mb-2 flex items-center">
-                                            @if($match->team1 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
-                                        </li>
-                                        <li class="flex items-center">
-                                            @if($match->team2 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
-                                        </li>
-                                    </ul>
-                                    @if ($match->team1 !== 'NA')
-                                    <div class="basis-1/2 flex items-center justify-center">
-                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
+                                    <div class="flex flex-wrap">
+                                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                                            <li class="mb-2 flex items-center">
+                                                @if($match->team1 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                @if($match->team2 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            </li>
+                                        </ul>
+                                        @if ($match->team1 !== 'NA')
+                                        <div class="basis-1/2 flex items-center justify-center">
+                                            <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                        </div>
+                                        @endif
                                     </div>
-                                    @endif
-                                </div>
-                            </li>
-                            @endforeach
-                        @endauth
+                                </li>
+                                @endforeach
+                            @endauth
 
-                      </ul>
-                      <ul class="bracket bracket-2">
-                        @auth
-                            @foreach ($myguessQuarter as $match)
+                        </ul>
+                        <ul class="bracket bracket-2">
+                            @auth
+                                @foreach ($myguessQuarter as $match)
+                                    <li class="team-item ">
+                                        @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
+                                    </li>
+                                @endforeach
+                            @else
+                                @foreach($match_quarter as $match)
+                                <li class="team-item">
+                                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
+                                    <div class="flex flex-wrap">
+                                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                                            <li class="mb-2 flex items-center">
+                                                @if($match->team1 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                @if($match->team2 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            </li>
+                                        </ul>
+                                        @if ($match->team1 !== 'NA')
+                                        <div class="basis-1/2 flex items-center justify-center">
+                                            <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </li>
+                                @endforeach
+                            @endauth
+                        </ul>
+                        <ul class="bracket bracket-3">
+                            @auth
+                                @foreach ($myguessSemiFinal as $match)
+                                    <li class="team-item ">
+                                        @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
+                                    </li>
+                                @endforeach
+                            @else
+                                @foreach($match_semi_finals as $match)
+                                <li class="team-item">
+                                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
+                                    <div class="flex flex-wrap">
+                                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                                            <li class="mb-2 flex items-center">
+                                                @if($match->team1 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                @if($match->team2 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            </li>
+                                        </ul>
+                                        @if ($match->team1 !== 'NA')
+                                        <div class="basis-1/2 flex items-center justify-center">
+                                            <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </li>
+                                @endforeach
+                            @endauth
+                        </ul>
+                        <ul class="bracket bracket-4">
+                            @auth
+                                @foreach ($myguessFinal as $match)
                                 <li class="team-item ">
                                     @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
                                 </li>
-                            @endforeach
-                        @else
-                            @foreach($match_quarter as $match)
-                            <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
-                                <div class="flex flex-wrap">
-                                    <ul class="basis-1/2 border-r-[1px] border-[#383838]">
-                                        <li class="mb-2 flex items-center">
-                                            @if($match->team1 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
-                                        </li>
-                                        <li class="flex items-center">
-                                            @if($match->team2 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
-                                        </li>
-                                    </ul>
-                                    @if ($match->team1 !== 'NA')
-                                    <div class="basis-1/2 flex items-center justify-center">
-                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                @endforeach
+                            @else
+                                @foreach($match_final as $match)
+                                <li class="team-item">
+                                    <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
+                                    <div class="flex flex-wrap">
+                                        <ul class="basis-1/2 border-r-[1px] border-[#383838]">
+                                            <li class="mb-2 flex items-center">
+                                                @if($match->team1 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
+                                            </li>
+                                            <li class="flex items-center">
+                                                @if($match->team2 == 'NA')
+                                                <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
+                                                @else
+                                                <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
+                                                @endif
+                                                <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
+                                            </li>
+                                        </ul>
+                                        @if ($match->team1 !== 'NA')
+                                        <div class="basis-1/2 flex items-center justify-center">
+                                            <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
+                                        </div>
+                                        @endif
                                     </div>
-                                    @endif
-                                </div>
-                            </li>
-                            @endforeach
-                        @endauth
-                      </ul>
-                      <ul class="bracket bracket-3">
-                        @auth
-                            @foreach ($myguessSemiFinal as $match)
-                                <li class="team-item ">
-                                    @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
                                 </li>
-                            @endforeach
-                        @else
-                            @foreach($match_semi_finals as $match)
-                            <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
-                                <div class="flex flex-wrap">
-                                    <ul class="basis-1/2 border-r-[1px] border-[#383838]">
-                                        <li class="mb-2 flex items-center">
-                                            @if($match->team1 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
-                                        </li>
-                                        <li class="flex items-center">
-                                            @if($match->team2 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
-                                        </li>
-                                    </ul>
-                                    @if ($match->team1 !== 'NA')
-                                    <div class="basis-1/2 flex items-center justify-center">
-                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
-                                    </div>
-                                    @endif
-                                </div>
-                            </li>
-                            @endforeach
-                        @endauth
-                      </ul>
-                      <ul class="bracket bracket-4">
-                        @auth
-                            @foreach ($myguessFinal as $match)
-                            <li class="team-item ">
-                                @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
-                            </li>
-                            @endforeach
-                        @else
-                            @foreach($match_final as $match)
-                            <li class="team-item">
-                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
-                                <div class="flex flex-wrap">
-                                    <ul class="basis-1/2 border-r-[1px] border-[#383838]">
-                                        <li class="mb-2 flex items-center">
-                                            @if($match->team1 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team1}}</p>
-                                        </li>
-                                        <li class="flex items-center">
-                                            @if($match->team2 == 'NA')
-                                            <div class="rounded-full w-[30px] h-[30px] bg-[#989CA5]"></div>
-                                            @else
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[30px]"/>
-                                            @endif
-                                            <p class="text-[#989CA5] font-bold font-sans ml-1.5 text-[15px] leading-tight">{{$match->team2}}</p>
-                                        </li>
-                                    </ul>
-                                    @if ($match->team1 !== 'NA')
-                                    <div class="basis-1/2 flex items-center justify-center">
-                                        <a href="{{route('masuk')}}" class="bg-[#FF0000] text-white text-[12px] rounded-2xl py-1 px-2 w-[100px] text-center cursor-pointer">Tebak Skor</a>
-                                    </div>
-                                    @endif
-                                </div>
-                            </li>
-                            @endforeach
-                        @endauth
-                      </ul>
+                                @endforeach
+                            @endauth
+                        </ul>
+                        </div>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
         @endif

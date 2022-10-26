@@ -4,7 +4,7 @@ import './bootstrap';
 import 'flowbite';
 
 // Modules
-import { Auth, Quiz, GuessScore, Register } from './modules';
+import { Auth, Quiz, GuessScore, Register, Menu } from './modules';
 
 // Utils
 import { getCurrentDate } from './utils/index';
@@ -31,8 +31,12 @@ import { getCurrentDate } from './utils/index';
             const guess = new GuessScore();
             const quiz = new Quiz(0,10);
             const register = new Register();
+            const menu = new Menu();
 
             // Init all functionality
+            menu.openMenuMobile();
+            menu.closeMenuMobile();
+
             guess.openGuessModal();
             guess.tebakSkor();
             guess.closeModal();

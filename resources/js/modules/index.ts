@@ -365,6 +365,22 @@ export class Register{
     }
 }
 
+export class Menu {
+    openMenuMobile(): void {
+        $('#menu-hamburger').on('click',function (e) {
+            $('.menu-mobile').css('display','block')
+            $('body').css('overflow','hidden')
+        })
+    }
+
+    closeMenuMobile(): void {
+        $('.menu-mobile .close').on('click',function (e) {
+            $('.menu-mobile').css('display','none')
+            $('body').css('overflow','auto')
+        })
+    }
+}
+
 export function sum(a: number, b:number): number {
     return a + b;
 }
