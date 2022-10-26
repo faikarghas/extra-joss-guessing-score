@@ -123,7 +123,7 @@ class HomeController extends Controller
         }
 
         if (count($latestMatch) == 0) {
-            $latestMatch = $twoLatestMatch[0];
+            array_push($latestMatch,$twoLatestMatch[0]);
         }
 
         if (Auth::check()) {
@@ -143,7 +143,7 @@ class HomeController extends Controller
             ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
             ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
             ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
-            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","4"]])
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","5"]])
             ->get();
 
             $myguessQuarter = Guessing::leftJoin('users','guessings.id_user','=','users.id')
@@ -152,7 +152,7 @@ class HomeController extends Controller
             ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
             ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
             ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
-            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","5"]])
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","6"]])
             ->get();
 
             $myguessSemiFinal = Guessing::leftJoin('users','guessings.id_user','=','users.id')
@@ -161,7 +161,7 @@ class HomeController extends Controller
             ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
             ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
             ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
-            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","6"]])
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","7"]])
             ->get();
 
             $myguessFinal = Guessing::leftJoin('users','guessings.id_user','=','users.id')
@@ -170,7 +170,7 @@ class HomeController extends Controller
             ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
             ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
             ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
-            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","8"]])
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","9"]])
             ->get();
 
             $listranking = User::select(DB::raw('ROW_NUMBER() OVER(ORDER BY total_point DESC) AS rank,name,total_point,id'))

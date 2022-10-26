@@ -1,4 +1,9 @@
+@if ($round[0]->id == 4)
+<span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{$match->match_time}}</span>
+@else
 <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{$match->match_time}}</span>
+@endif
+
 <div class="flex flex-wrap">
     @if ($match->team1 !== 'NA')
     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -69,7 +74,7 @@
                                 <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
                             </div>
                         </div>
-                    @else
+                    @elseif($match->guessing_result == 0)
                     {{-- sudah expire, sudah tebak skor dan hasil pertaningan belum ada--}}
                     <ul class="score">
                         <li class="flex items-center">
@@ -86,6 +91,16 @@
                             <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
                         </div>
                     </div>
+                    @else
+                    <ul class="score">
+                        <li class="flex items-center">
+                            <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
+                        </li>
+                        <li class="flex items-center">
+                            <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
+                        </li>
+                    </ul>
+                    <div class="cursor-pointer bg-[#6D6D6D] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
                     @endif
                 @else
                     {{-- sudah expire dan belum tebak skor --}}
