@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\FacebookLoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\GoogleLoginController;
+use App\Http\Controllers\Web\FacebookLoginController;
 use App\Http\Controllers\Admin\DasboardController;
+
 
 /*
 |--------------------------------------------------------------------------
