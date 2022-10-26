@@ -33,6 +33,7 @@ class User extends Authenticatable
         'password',
         'type',
         'google_id',
+        'facebook_id',
         'point',
         'role'
     ];

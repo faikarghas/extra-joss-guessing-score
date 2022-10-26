@@ -177,7 +177,11 @@ class HomeController extends Controller
             ->orderBy('total_point','DESC')
             ->get();
 
-            $checkQuiz = QuizIndicator::where([['id_user',Auth::user()->id],['quiz_1',1]])->get();
+            $currenRound = $round[0]->id;
+
+            $checkQuiz = QuizIndicator::where([['id_user',Auth::user()->id],['quiz_'.$currenRound,1]])->get();
+
+            // dd($checkQuiz);
 
             foreach ($listranking as $key => $data) {
                 if ($data->id == Auth::user()->id) {
@@ -359,6 +363,7 @@ class HomeController extends Controller
 
     public function storeQuiz(Request $request){
         $req = $request->all();
+        $round = Round::where('status',1)->get();
 
         foreach ($req['result'] as $key => $res) {
             UserQuestionAnswers::updateOrCreate([
@@ -396,10 +401,11 @@ class HomeController extends Controller
             }
         }
 
+        $currenRound = $round[0]->id;
         QuizIndicator::updateOrCreate([
             'id_user'   => Auth::user()->id,
         ],[
-            'quiz_1' => 1,
+            'quiz_'.$currenRound => 1,
         ]);
 
         return response()->json([
