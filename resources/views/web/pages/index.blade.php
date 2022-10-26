@@ -19,7 +19,7 @@
             <div class="flex flex-wrap flex-row justify-center items-center gap-10 mb-4">
                 <div class="flex flex-col lg:flex-row lg:gap-20">
                     {{-- onGoingMatches --}}
-                    {{-- @if ($latestMatch)
+                    {{-- @if (count($latestMatch) == 0)
                     @foreach ($latestMatch as $match)
                     <div class="mb-8">
                         <div class="text-center mb-0 lg:mb-8">
@@ -89,7 +89,7 @@
         </div>
         <div class="mb-8">
             <h2 class="text-black font-head text-[60px] text-center mb-2 uppercase leading-[50px]">Tebak Skor</h2>
-            <h5 class="text-black font-head text-[20px] text-center uppercase">MINGGU KE 1</h5>
+            <h5 class="text-black font-head text-[20px] text-center uppercase">PUTARAN KE {{$round[0]->id}}</h5>
         </div>
 
         @if ($round[0]->id !== 4)

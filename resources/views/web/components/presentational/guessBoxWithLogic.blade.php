@@ -53,6 +53,7 @@
             @if ($match->team1 !== 'NA')
                 @if ($match->is_guess == 1)
                     @if($match->guessing_result == 1)
+                        {{-- kalo menang --}}
                         <ul class="score">
                             <li class="flex items-center">
                                 <p class="text-[#6D6D6D] font-sans ml-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_a}}</p>
@@ -78,7 +79,13 @@
                             <p class="text-[#6D6D6D] font-sans mr-4 text-[22px] font-bold leading-tight">{{$match->guessing_score_b}}</p>
                         </li>
                     </ul>
-                    <div class="bg-[#6D6D6D] text-white text-[12px] rounded-2xl py-1 px-2 w-[94px] text-center">Edit Skor</div>
+                    <div class="flex items-center ml-4">
+                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                        <div>
+                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                        </div>
+                    </div>
                     @endif
                 @else
                     {{-- sudah expire dan belum tebak skor --}}
