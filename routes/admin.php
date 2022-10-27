@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 Route::middleware(['web','auth', 'user-access:admin'])->group(function () {
   //Dashboard
   Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+  Route::get('/updateScore', [\App\Http\Controllers\Admin\DashboardController::class, 'updateScore'])->name('dashboard.updateScore');
   //Slider
   Route::resource('/sliders', \App\Http\Controllers\Admin\SliderController::class);
   //Categories

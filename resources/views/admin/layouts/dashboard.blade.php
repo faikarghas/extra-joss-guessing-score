@@ -72,5 +72,25 @@
    {{-- javascript:external --}}
    @stack('javascript-external')
    @stack('javascript-internal')
+
+   
+   <script>
+      let base_url = window.location.origin;
+
+      $('.updateSkor').on('click',function () {
+          $.ajax({
+              url:`${base_url}/admin/updateScore`,
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              error: function(xhr, error){
+                  if (xhr.status === 500) {
+                  }
+              },
+              success:(response) => {
+                  console.log(response);
+                  location.reload()
+              }
+          })
+      })
+  </script>
 </body>
 </html>  

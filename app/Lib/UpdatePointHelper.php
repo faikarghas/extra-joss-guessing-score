@@ -30,6 +30,42 @@ class UpdatePointHelper{
             $point = 2000;
         }
 
+        if ($round[0]->id == 1) {
+            foreach ($userNeedUpdateForGuess as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id_user]])
+                    ->increment('point_1', $point);
+                }
+            }
+        }
+
+        if ($round[0]->id == 2) {
+            foreach ($userNeedUpdateForGuess as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id_user]])
+                    ->increment('point_2', $point);
+                }
+            }
+        }
+
+        if ($round[0]->id == 3) {
+            foreach ($userNeedUpdateForGuess as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id_user]])
+                    ->increment('point_3', $point);
+                }
+            }
+        }
+
+        if ($round[0]->id == 4) {
+            foreach ($userNeedUpdateForGuess as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id_user]])
+                    ->increment('point_4', $point);
+                }
+            }
+        }
+
         foreach ($userNeedUpdateForGuess as $key => $value) {
             if ($value->status == 0) {
                 User::where([['id','=',$value->id_user]])
@@ -52,7 +88,7 @@ class UpdatePointHelper{
         ->whereRaw(
             '(
                 CASE
-                    WHEN ( guessings.guessing_score_a != fmatches.score_a AND
+                    WHEN ( guessings.guessing_score_a != fmatches.score_a OR
                      guessings.guessing_score_b != fmatches.score_b ) THEN true ELSE false
                 END
             )'
