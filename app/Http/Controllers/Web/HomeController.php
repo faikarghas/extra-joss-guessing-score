@@ -423,7 +423,7 @@ class HomeController extends Controller
     {
         $round = Round::where('status',1)->get();
 
-        $soal = Questions::where('rounds_id',$round[0]->id)->get();
+        $soal = Questions::where('rounds_id',$round[0]->id)->inRandomOrder()->get();
         $option =  QuestionChoices::select('choice', 'id', 'question_id')->get();
 
 
