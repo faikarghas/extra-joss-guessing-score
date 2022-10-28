@@ -191,11 +191,12 @@ class HomeController extends Controller
 
         }
 
-        $klasemens = User::where('role',0)
-        ->orderBy('total_point','DESC')
-        ->orderBy('name','ASC')
-        ->limit(30)->get();
+        // $klasemens = User::where('role',0)
+        // ->orderBy('total_point','DESC')
+        // ->orderBy('name','ASC')
+        // ->limit(30)->get();
 
+        // buat paginate yah san 
         $klasemens = User::where('role',0)
         ->orderBy('total_point','DESC')
         ->orderBy('name','ASC')
@@ -267,6 +268,26 @@ class HomeController extends Controller
             'profil' => $profil
         ];
         return view('web.pages.profil',$data);
+    }
+
+    public function updateprofil(Request $request, $id)
+    {
+        $profile = User::find($id);
+
+        $profile->name= $request->input('name');
+        $profile->email= $request->input('email');
+        $profile->username= $request->input('username');
+        $profile->phone= $request->input('phone');
+        $profile->nik= $request->input('nik');
+        $profile->kota= $request->input('kota');
+        $profile->kecamatan= $request->input('kecamatan');
+        $profile->address= $request->input('address');
+        $profile->size_jersey= $request->input('size_jersey');
+        $profile->size_sepatu= $request->input('size_sepatu');      
+        
+        $profile->save();
+        
+        return redirect()->route('/');
     }
     // bulk create guessing
     public function storeGuess(){
@@ -453,6 +474,22 @@ class HomeController extends Controller
 
     public function createUser(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|min:3| unique:users,username',
+            'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'provinsi' => 'required',
+            'city' => 'required',
+            'address' => 'required|min:10',
+            'phone' => 'required|min:10',
+            'size_jersey' => 'required|string',
+            'size_sepatu' => 'required|numeric',
+            'nik' => 'required|min:16',
+         ]);
+
+        DB::beginTransaction();
         try {
             $data = $request->all();
 

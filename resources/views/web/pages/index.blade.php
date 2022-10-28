@@ -404,9 +404,12 @@
                 @endforeach
                 
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col basis-[55%]">
                 <span class="m-auto">
+                {{-- jika tailwind --}}
                 {!! $klasemens->withQueryString()->links() !!}
+                {{-- Bootsrap --}}
+                {{-- {!! $klasemens->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                 </span>
             </div>
         </div>
