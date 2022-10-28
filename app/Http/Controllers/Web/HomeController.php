@@ -47,7 +47,6 @@ class HomeController extends Controller
         $myguessQuarter=[];
         $myguessSemiFinal=[];
         $myguessFinal=[];
-        $myranking=[];
         $checkQuiz=[];
 
         // current round
@@ -174,6 +173,7 @@ class HomeController extends Controller
             ->get();
 
             $listranking = User::select(DB::raw('ROW_NUMBER() OVER(ORDER BY total_point DESC) AS rank,name,total_point,id'))
+            ->where('role',0)
             ->orderBy('total_point','DESC')
             ->get();
 
@@ -181,7 +181,7 @@ class HomeController extends Controller
 
             $checkQuiz = QuizIndicator::where([['id_user',Auth::user()->id],['quiz_'.$currenRound,1]])->get();
 
-            // dd($checkQuiz);
+            // dd($listranking);
 
             foreach ($listranking as $key => $data) {
                 if ($data->id == Auth::user()->id) {
@@ -201,7 +201,6 @@ class HomeController extends Controller
         // ->orderBy('total_point','DESC')
         // ->orderBy('name','ASC')
         // ->paginate(4);
-
         $data = [
             'latestMatch' => $latestMatch,
             'onGoingMatches' => $onGoingMatches,

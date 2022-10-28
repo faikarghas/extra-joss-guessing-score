@@ -353,7 +353,11 @@
             <div class="flex flex-col lg:flex-row justify-center pt-4 pb-8 gap-12 items-center">
                 <ul class="flex order-2 lg:order-1 flex-col justify-center items-center w-[180px]">
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
-                        @auth {{$myranking[0]->rank}} @else 0 @endauth
+                        @auth 
+                        <?php 
+                            echo $myranking[0]->rank + 1;
+                        ?>
+                        @else 0 @endauth
                     </li>
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Ranking</li>
                 </ul>
