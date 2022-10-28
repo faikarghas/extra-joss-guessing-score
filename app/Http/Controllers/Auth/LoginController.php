@@ -61,11 +61,11 @@ class LoginController extends Controller
                 }
             }else{
                 return redirect()->route('masuk')
-                    ->with('error','Password Salah.');
+                    ->with('error_password','Password Salah.');
             }
         } else {
             return redirect()->route('masuk')
-                ->with('error','Email belum terdaftar.');
+                ->with('error_email','Email belum terdaftar.');
         }
 
     }

@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\DasboardController;
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/daftar',[HomeController::class,'daftar'])->name('daftar');
 Route::get('/masuk',[HomeController::class,'masuk'])->name('masuk');
+Route::get('/lupa',[HomeController::class,'lupapassword'])->name('password.request.custom');
 Route::get('/mekanisme',[HomeController::class,'mekanisme'])->name('mekanisme');
 Route::get('/hadiah',[HomeController::class,'hadiah'])->name('hadiah');
 Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
@@ -75,7 +76,11 @@ Route::get('logout', function ()
     return Redirect::to('/');
 })->name('logout');
 
+
 Route::get('/storage', function(){
     \Artisan::call('storage:link');
     return "storage link sukses";
 });
+
+
+

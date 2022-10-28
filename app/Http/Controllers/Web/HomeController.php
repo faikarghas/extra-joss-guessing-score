@@ -552,4 +552,8 @@ class HomeController extends Controller
         }
     }
 
+    public function lupapassword(){
+        return view('web.pages.forgot_password');
+    }
+
 }

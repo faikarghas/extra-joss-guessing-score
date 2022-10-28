@@ -22,26 +22,38 @@
                 @csrf
                   <div class="relative z-0 mb-6 w-full group">
                         <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">EMAIL ADDRESS</label>
-                        <input type="email" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required>
+                        <input type="email" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required value="{{ old('email') }}">
+                        @if($message = Session::get('error_email'))
+                        <div class="p-4 mt-4 text-[12px] text-red-700 bg-red-100  dark:bg-red-200 dark:text-red-800" role="alert">
+                            <span class="font-medium">{{$message}}</span>
+                        </div>
+                    @endif
                   </div>
                   <div class="relative z-0 mb-6 w-full group">
                         <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">PASSWORD</label>
-                        <input type="password" name="password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="Password" required="">
+                        <input type="password" name="password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="Password" required >
+                        @if($message = Session::get('error_password'))
+                        <div class="p-4 mt-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                            <span class="font-medium">{{$message}}</span>
+                        </div>
+                    @endif
                   </div>
                   <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">LOG IN</button>
                 </form>
                 <div class="absolute right-[-15%] top-[50%] translate-y-[-50%] hidden lg:block">OR</div>
 
-                @if($message = Session::get('error'))
-                    <div class="p-4 mt-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                        <span class="font-medium">{{$message}}</span>
-                    </div>
-                @endif
+               
 
                 <div class="flex mt-4 justify-center">
                    <p class="font-sans mr-2">Belum punya akun? </p>
                    <a href={{route('daftar')}} class="font-sans text-blue-700">Daftar sekarang</a>
                 </div>
+                 @if (Route::has('password.request'))
+                    <div class="flex mt-4 justify-center">
+                        <a href={{ route('password.request.custom') }} class="font-sans text-blue-700">{{ __('Lupa Password ?') }}</a>
+                    </div>
+                 @endif
+
             </div>
             <div class="basis-full lg:basis-[48%]">
                 <span class="block font-sans text-center mb-5 text-[#A0A0A0]"> atau login dengan </span>
