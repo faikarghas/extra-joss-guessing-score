@@ -479,7 +479,23 @@ class HomeController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
             'username' => 'required|min:3| unique:users,username',
-            'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'provinsi' => 'required',
+            'city' => 'required',
+            'address' => 'required|min:10',
+            'phone' => 'required|min:10',
+            'size_jersey' => 'required|string',
+            'size_sepatu' => 'required|numeric',
+            'nik' => 'required|min:16',
+         ]);
+
+         
+
+        DB::beginTransaction();
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|min:3| unique:users,username',
             'provinsi' => 'required',
             'city' => 'required',
             'address' => 'required|min:10',
@@ -531,7 +547,7 @@ class HomeController extends Controller
                 return redirect()->intended('/masuk');
 
         } catch (\Throwable $e) {
-            Session::flash('email_duplicate', 'Email sudah terpakai');
+            // Session::flash('email_duplicate', 'Email sudah terpakai');
             return redirect()->intended('/daftar');
         }
     }
