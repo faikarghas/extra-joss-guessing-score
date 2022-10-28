@@ -191,18 +191,16 @@ class HomeController extends Controller
 
         }
 
-        // $klasemens = User::where('role',0)
-        // ->orderBy('total_point','DESC')
-        // ->orderBy('name','ASC')
-        // ->limit(30)->get();
-
-        // buat paginate yah san 
         $klasemens = User::where('role',0)
         ->orderBy('total_point','DESC')
         ->orderBy('name','ASC')
-        ->paginate(1);
+        ->limit(30)->get();
 
-        
+        // buat paginate yah san 
+        // $klasemens = User::where('role',0)
+        // ->orderBy('total_point','DESC')
+        // ->orderBy('name','ASC')
+        // ->paginate(4);
 
         $data = [
             'latestMatch' => $latestMatch,

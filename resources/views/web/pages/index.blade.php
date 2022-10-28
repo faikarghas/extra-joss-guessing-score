@@ -384,7 +384,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
                 @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
-                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $klasemens->firstItem() + $key }}</span>
+                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $key + 1 }}</span>
                         <div class="basis-[25%]">
                             <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
                                 <?php
@@ -402,16 +402,15 @@
                         </div>
                     </div>
                 @endforeach
-                
             </div>
-            <div class="flex flex-col basis-[55%]">
+            {{-- <div class="flex flex-col basis-[55%]">
                 <span class="m-auto">
-                {{-- jika tailwind --}}
+                jika tailwind
                 {!! $klasemens->withQueryString()->links() !!}
-                {{-- Bootsrap --}}
-                {{-- {!! $klasemens->withQueryString()->links('pagination::bootstrap-5') !!} --}}
+                Bootsrap
+                {!! $klasemens->withQueryString()->links('pagination::bootstrap-5') !!}
                 </span>
-            </div>
+            </div> --}}
         </div>
     </section>
     <div class="pb-14 pt-10 bg-[#FFEC00]">
