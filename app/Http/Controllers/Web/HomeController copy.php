@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
+
 class HomeController extends Controller
 {
 
@@ -195,13 +196,6 @@ class HomeController extends Controller
         ->orderBy('total_point','DESC')
         ->orderBy('name','ASC')
         ->limit(30)->get();
-
-        $klasemens = User::where('role',0)
-        ->orderBy('total_point','DESC')
-        ->orderBy('name','ASC')
-        ->paginate(1);
-
-        
 
         $data = [
             'latestMatch' => $latestMatch,
@@ -430,7 +424,7 @@ class HomeController extends Controller
     {
         $round = Round::where('status',1)->get();
 
-        $soal = Questions::where('rounds_id',$round[0]->id)->inRandomOrder()->get();
+        $soal = Questions::where('rounds_id',$round[0]->id)->get();
         $option =  QuestionChoices::select('choice', 'id', 'question_id')->get();
 
 
@@ -446,16 +440,50 @@ class HomeController extends Controller
     public function storeRegister(Request $request)
     {
 
-        $data = $request->all();
-        $check = $this->createUser($data);
+        $request->validate([
+
+            'name' => 'required|min:3',
+ 
+           
+ 
+         ]);
+
+        dd($validated);
+
+        //$validatedData['password'] = bcrypt($validatedData['password']);
+
+        
+
+            //$data = $request->all();
+            
+            $check = $this->createUser($validatedData);
+
+        
 
     }
 
     public function createUser(Request $request)
     {
+
+
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|min:3| unique:users,username',
+            'password' => 'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+            'provinsi' => 'required',
+            'city' => 'required',
+            'address' => 'required|min:10',
+            'phone' => 'required|min:10',
+            'size_jersey' => 'required|string',
+            'size_sepatu' => 'required|numeric',
+            'nik' => 'required|min:16',
+         ]);
+
+
+        DB::beginTransaction();
         try {
             $data = $request->all();
-
             $createUser = User::create([
                 'name' => $data['name'],
                 'username' => $data['username'],
@@ -490,7 +518,7 @@ class HomeController extends Controller
                         'guessing_score_b' => 0,
                     ]);
                 }
-
+                
                 return redirect()->intended('/masuk');
 
         } catch (\Throwable $e) {

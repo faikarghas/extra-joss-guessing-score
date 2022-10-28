@@ -384,7 +384,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
                 @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
-                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{$key + 1}}</span>
+                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $klasemens->firstItem() + $key }}</span>
                         <div class="basis-[25%]">
                             <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
                                 <?php
@@ -402,6 +402,12 @@
                         </div>
                     </div>
                 @endforeach
+                
+            </div>
+            <div class="flex flex-col">
+                <span class="m-auto">
+                {!! $klasemens->withQueryString()->links() !!}
+                </span>
             </div>
         </div>
     </section>
