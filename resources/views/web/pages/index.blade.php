@@ -27,7 +27,7 @@
                         <div class="flex justify-center">
                             <div class="flex flex-wrap flex-row">
                                 <div class="text-white flex flex-row">
-                                    <div class="text-center mr-6 flex flex-col items-center">
+                                    <div class="text-center mr-6 flex flex-col items-center w-[90px]">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[40px] sm:h-[50px] md:h-[77px]"/>
                                         </div>
@@ -50,11 +50,11 @@
                                             <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->guessing_score_b ? $match->guessing_score_b : 0}}</h6>
                                         </div>
                                     </div>
-                                    <div class="text-center ml-6 flex flex-col items-center">
+                                    <div class="text-center ml-6 flex flex-col items-center w-[90px]">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[40px] sm:h-[50px] md:h-[77px]"/>
                                         </div>
-                                        <span class="font-sans text-[16px] font-bold">{{$match->team2}}</span>
+                                        <span class="font-sans text-[13px] lg:text-[16px] font-bold">{{$match->team2}}</span>
                                     </div>
                                 </div>
                             </div>
