@@ -119,7 +119,7 @@
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN SEPATU*</label>
-                            <input type="text" name="size_sepatu" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="39, 40, 41" required value="{{ old('size_sepatu') }}">
+                            <input type="text" name="size_sepatu" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="36, 37, 38, 39, 40, 41, 42, 43, 44, 45" required value="{{ old('size_sepatu') }}">
                             @if ($errors->has('size_sepatu'))
                                 <div class="p-1 mt-2 text-[12px] text-red-700  role="alert">
                                 <span class="font-medium">{{ $errors->first('size_sepatu') }}</span>
