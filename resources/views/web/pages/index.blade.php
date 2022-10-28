@@ -11,7 +11,7 @@
 @endsection
 @section('main')
 <main>
-    <section class="bg-black pt-4 xl:pt-20 pb-8 xl:pb-32 relative px-8 xl:h-[424px]">
+    <section class="bg-black pt-4 xl:pt-20 pb-8 xl:pb-32 relative px-4 sm:px-8 xl:h-[424px]">
         <div class="relative flex flex-col items-center xl:border-[4px] xl:border-[#383838] w-[90%] m-auto xl:pt-16">
             <div class="text-center xl:absolute bg-black xl:px-20 xl:top-[-40px] xl:h-[40px] xl:left-[50%] xl:translate-x-[-50%]">
                 <h3 class="text-[40px] xl:text-[60px] text-white font-head mb-4">Hasil Terakhir</h3>
@@ -29,7 +29,7 @@
                                 <div class="text-white flex flex-row">
                                     <div class="text-center mr-6 flex flex-col items-center">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[50px] md:h-[77px]"/>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[40px] sm:h-[50px] md:h-[77px]"/>
                                         </div>
                                         <span class="font-sans text-[16px] font-bold">{{$match->team1}}</span>
                                     </div>
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="text-center ml-6 flex flex-col items-center">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
-                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[50px] md:h-[77px]"/>
+                                            <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[40px] sm:h-[50px] md:h-[77px]"/>
                                         </div>
                                         <span class="font-sans text-[16px] font-bold">{{$match->team2}}</span>
                                     </div>
@@ -68,7 +68,7 @@
                 <h2 class="text-black font-head text-[60px] text-center mb-6">IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</h2>
                 @auth
                     @if(count($checkQuiz) == 0)
-                        <div class="qz cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
+                        <div class="qz cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center z-50">Lihat Quiz</div>
                     @else
                         <div class="qz-disabled cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
                     @endif
@@ -81,7 +81,7 @@
     <section class="relative xl:static bg-top bg-cover bg-no-repeat pt-[60px] xl:pt-[25rem] px-8" style="background-image: url(/images/bg-yellow.png)">
         <img src="{{asset("/images/lap2.png")}}" class="block xl:hidden object-contain h-[100px] w-[300px] absolute xl:relative top-[-40px] md:bottom-[-24%] left-[50%] translate-x-[-50%] xl:translate-x-0"/>
 
-        <div class="flex xl:hidden items-center flex-col mb-20">
+        <div class="tebak-quiz flex xl:hidden items-center flex-col mb-20">
             <h2 class="text-black font-head leading-[35px] xl:leading-tight text-[40px] xl:text-[60px] text-center mb-6">IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</h2>
             <div class="qz bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
         </div>

@@ -19,31 +19,31 @@
                 {{-- <h2 class="font-head text-[60px] text-[#FFA800] flex leading-[54px] items-center">DAPATKAN <img class="mx-2 object-contain h-[36px]" src="{{asset('/images/acv2.png')}}" />  60 Poin AWAL!</h2> --}}
             </div>
             <div class="basis-full relative">
-                <form class="flex flex-wrap justify-between" method="POST" action="{{ route('update.profile',$profil->id) }}" >
+                <form class="flex flex-wrap justify-between" method="POST" action="{{ route('update.profile',$profil[0]->id) }}" >
                     <div class="basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="nama" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NAMA*</label>
-                            <input id="nama" type="text" name="nama" value="{{ $profil->name }}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer"  required>
+                            <input id="nama" type="text" name="nama" value="{{ $profil[0]->name }}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer"  required>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="username" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME*</label>
-                            <input id="username" type="text" value="{{$profil->username}}" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
+                            <input id="username" type="text" value="{{$profil[0]->username}}" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="instagram" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">AKUN INSTAGRAM*</label>
-                            <input id="instagram" type="text" name="instagram" value="{{$profil->account_instagram}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="@">
+                            <input id="instagram" type="text" name="instagram" value="{{$profil[0]->account_instagram}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="@">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT EMAIL*</label>
-                            <input id="email" type="text" name="email" value="{{$profil->email}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
+                            <input id="email" type="text" name="email" value="{{$profil[0]->email}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="phone" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NO HANDPHONE*</label>
-                            <input id="phone" type="tel" name="phone" value="{{$profil->phone}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
+                            <input id="phone" type="tel" name="phone" value="{{$profil[0]->phone}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="nik" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NO IDENTITAS KEPENDUDUKAN*</label>
-                            <input id="nik" type="text" name="nik" value="{{$profil->nik}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
+                            <input id="nik" type="text" name="nik" value="{{$profil[0]->nik}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
                     </div>
                     
