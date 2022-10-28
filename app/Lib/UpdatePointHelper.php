@@ -81,7 +81,6 @@ class UpdatePointHelper{
         }
 
         // User yg menebak salah
-
         $userWrongGuess = Guessing::select('guessings.id','guessings.id_user','guessings.id_match','guessing_score_a','guessing_score_b','guessings.status')
         ->leftJoin('users','guessings.id_user','=','users.id')
         ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')

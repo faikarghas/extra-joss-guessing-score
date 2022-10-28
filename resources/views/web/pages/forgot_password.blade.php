@@ -29,16 +29,16 @@
                         </div>
                     @endif
                   </div>
-                  
+
                   <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">SEND</button>
                 </form>
-               
 
-               
 
-                
+
+
+
             </div>
-            
+
         </div>
         <div class="pb-14 pt-10">
             <img alt="logo extra joss" class="m-auto mb-2" src="{{asset('/images/logo.png')}}"/>

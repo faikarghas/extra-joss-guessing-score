@@ -413,10 +413,53 @@ class HomeController extends Controller
         ->where([['user_question_answers.status','=',0]])
         ->get();
 
-        foreach ($userNeedUpdateForQuiz as $key => $value) {
-            if ($value->status == 0) {
-                User::where([['id','=',$value->id]])
-                ->increment('total_point', 40);
+
+        $point = 40;
+        if ($round[0]->id == 1) {
+            foreach ($userNeedUpdateForQuiz as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id]])
+                    ->increment('total_point', 40);
+
+                    User::where([['id','=',$value->id]])
+                    ->increment('point_1', 40);
+                }
+            }
+        }
+
+        if ($round[0]->id == 2) {
+            foreach ($userNeedUpdateForQuiz as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id]])
+                    ->increment('total_point', 40);
+
+                    User::where([['id','=',$value->id]])
+                    ->increment('point_2', 40);
+                }
+            }
+        }
+
+        if ($round[0]->id == 3) {
+            foreach ($userNeedUpdateForQuiz as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id]])
+                    ->increment('total_point', 40);
+
+                    User::where([['id','=',$value->id]])
+                    ->increment('point_3', 40);
+                }
+            }
+        }
+
+        if ($round[0]->id == 4) {
+            foreach ($userNeedUpdateForQuiz as $key => $value) {
+                if ($value->status == 0) {
+                    User::where([['id','=',$value->id]])
+                    ->increment('total_point', 40);
+
+                    User::where([['id','=',$value->id]])
+                    ->increment('point_4', 40);
+                }
             }
         }
 
@@ -427,11 +470,11 @@ class HomeController extends Controller
             }
         }
 
-        $currenRound = $round[0]->id;
+        $currentRound = $round[0]->id;
         QuizIndicator::updateOrCreate([
             'id_user'   => Auth::user()->id,
         ],[
-            'quiz_'.$currenRound => 1,
+            'quiz_'.$currentRound => 1,
         ]);
 
         return response()->json([
@@ -440,8 +483,6 @@ class HomeController extends Controller
             'totalTrue' => count($userNeedUpdateForQuiz),
             'quiz' => true
         ],200);
-
-
 
     }
 
