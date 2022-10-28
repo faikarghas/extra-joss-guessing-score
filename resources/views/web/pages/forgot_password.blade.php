@@ -7,7 +7,7 @@
 @endsection
 @section('main')
 <main>
-    <div class="modal-login w-full left-0 bg-[#FFEC00] px-9 lg:px-14 pt-9 lg:pt-20">
+    <div class="modal-login w-full h-screen left-0 bg-[#FFEC00] px-9 lg:px-14 pt-9 lg:pt-20">
         <div class="bg-white flex flex-wrap py-14 px-4 lg:px-20 relative justify-between">
             <div class="close-login absolute top-[-22px] right-[-22px] rigth lg:top-[35px] lg:right-[35px] cursor-pointer                       ">
                 <a href="{{route('home')}}" class="w-[44px] h-[44px] bg-black rounded-full flex items-center justify-center">
