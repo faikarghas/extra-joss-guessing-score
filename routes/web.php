@@ -29,7 +29,7 @@ Route::get('/profil',[HomeController::class,'profil'])->name('profil');
 
 Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
 Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
-
+Route::get('/klasemen/{offset}',[HomeController::class,'klasemen'])->name('klasemen');
 
 Route::post('/storeRegister',[HomeController::class,'createUser'])->name('storeRegister');
 Route::post('/selectCity/{id}', [HomeController::class,'selectCity'])->name('selectcity');
@@ -59,7 +59,6 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::post('/guess-score/{id_match}',[HomeController::class,'storeOrUpdateScore'])->name('sous');
     Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
 
-    Route::get('/klasemen/{offset}',[HomeController::class,'klasemen'])->name('klasemen');
 
 });
 
