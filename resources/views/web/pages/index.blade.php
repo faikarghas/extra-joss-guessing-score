@@ -27,7 +27,7 @@
                         <div class="flex justify-center">
                             <div class="flex flex-wrap flex-row">
                                 <div class="text-white flex flex-row">
-                                    <div class="text-center mr-6 flex flex-col items-center w-[90px]">
+                                    <div class="text-center mr-6 flex flex-col items-center w-[60px] md:w-[90px]">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team1}}" class="h-[40px] sm:h-[50px] md:h-[77px]"/>
                                         </div>
@@ -50,7 +50,7 @@
                                             <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->guessing_score_b ? $match->guessing_score_b : 0}}</h6>
                                         </div>
                                     </div>
-                                    <div class="text-center ml-6 flex flex-col items-center w-[90px]">
+                                    <div class="text-center ml-6 flex flex-col items-center w-[60px] md:w-[90px]">
                                         <div class="h-[50px] xl:h-[78px] mb-4">
                                             <img src="{{asset('/images/countries')}}/{{$match->flag_team2}}" class="h-[40px] sm:h-[50px] md:h-[77px]"/>
                                         </div>
@@ -68,12 +68,12 @@
                 <h2 class="text-black font-head text-[60px] text-center mb-6">IKUT KICKOFF QUIZ UNTUK NAMBAH POIN!</h2>
                 @auth
                     @if(count($checkQuiz) == 0)
-                        <div class="qz cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center z-50">Lihat Quiz</div>
+                        <div class="qz cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center z-50">Lihat Quiz</div>
                     @else
-                        <div class="qz-disabled cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
+                        <div class="qz-disabled cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</div>
                     @endif
                 @else
-                    <a href="{{route('masuk')}}" class="cursor-pointer bg-black py-1.5 rounded-2xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</a>
+                    <a href="{{route('masuk')}}" class="cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Quiz</a>
                 @endauth
             </div>
         </div>
@@ -355,7 +355,7 @@
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
                         @auth 
                         <?php 
-                            echo $myranking[0]->rank + 1;
+                            echo $myranking[0]->rank;
                         ?>
                         @else 0 @endauth
                     </li>
@@ -385,7 +385,7 @@
                 </ul>
             </div>
             {{-- grid-flow-col --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
+            <div class="klasemen grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
                 @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
                         <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $key + 1 }}</span>
@@ -407,14 +407,9 @@
                     </div>
                 @endforeach
             </div>
-            {{-- <div class="flex flex-col basis-[55%]">
-                <span class="m-auto">
-                jika tailwind
-                {!! $klasemens->withQueryString()->links() !!}
-                Bootsrap
-                {!! $klasemens->withQueryString()->links('pagination::bootstrap-5') !!}
-                </span>
-            </div> --}}
+            <div class="flex">
+                <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Liat Semua Leaderboard</div>
+            </div>
         </div>
     </section>
     <div class="pb-14 pt-10 bg-[#FFEC00]">
@@ -428,7 +423,7 @@
 
     {{-- MODAL QUIZ --}}
     @include('web.components.modal.quiz')
-    <div class="modal-quizDis z-50 hidden flex-wrap bg-black w-[400px] md:w-[600px] p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+    <div class="modal-quizDis z-50 hidden flex-wrap bg-black w-[400px] md:w-[600px] p-4 lg:p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
         <div class="close">
             <div class="">
                 <img src="{{asset('/images/close.png')}}" />

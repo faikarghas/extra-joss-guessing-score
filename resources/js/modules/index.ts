@@ -33,6 +33,20 @@ export class Auth {
 }
 
 export class GuessScore {
+    filterInput(): void {
+        const reg = new RegExp('^[0-9]+$');
+        const invalidChars = ["-", "e", "+", "E",",","."];
+        $('.modal-form').on('keydown','input', function (e) {
+            if(invalidChars.includes(e.key)){
+                e.preventDefault();
+           }
+        })
+
+        $('.modal-form').on('paste','input',function (e) {
+           e.preventDefault();
+        })
+    }
+
     tebakSkor(): void {
         $('.modal-form').on('click','button.kirim-tebakan',function (e) {
             e.preventDefault()
@@ -109,7 +123,7 @@ export class GuessScore {
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam1}" />
                                     <span class="text-white font-sans mr-6">${team1}</span>
                                 </div>
-                                <input value="${skor1}" class="form-tebak" type="number" name="guess_score_a"
+                                <input value="${skor1}" min="0" class="form-tebak" type="number" name="guess_score_a"
                                 value=""></input>
                             </div>
                             <div class="flex items-center mb-12">
@@ -117,7 +131,7 @@ export class GuessScore {
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam2}" />
                                     <span class="text-white font-sans mr-6">${team2}</span>
                                 </div>
-                                <input value="${skor2}" class="form-tebak" type="number" name="guess_score_b"
+                                <input value="${skor2}" min="0" class="form-tebak" type="number" name="guess_score_b"
                                 value=""></input>
                             </div>
                             <button data-im="${id}" class="kirim-tebakan">Kirim</button>
@@ -167,7 +181,7 @@ export class Quiz{
                 },
                 success:(data) => {
                     console.log(data);
-                    
+
                     $('.qz').html('lihat quiz');
                     $('.modal-quiz').css('display','block')
 
@@ -335,7 +349,6 @@ export class Quiz{
 
     }
 
-
 }
 
 export class Register{
@@ -378,6 +391,62 @@ export class Menu {
             $('.menu-mobile').css('display','none')
             $('body').css('overflow','auto')
         })
+    }
+}
+
+export class Klasemen {
+    offestLoad:number;
+
+    constructor(){
+        this.offestLoad = 8
+    }
+
+    loadMore(): void {
+        $('.loadMore').on('click', (e) => {
+            $(e.target).html('loading...')
+            $.ajax({
+                type:'GET',
+                url:`${base_url}/klasemen/${this.offestLoad}`,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                error: function(xhr, error){
+                    if (xhr.status === 500) {
+                        console.log(error);
+                    }
+                },
+                success:function(res){
+                    if (res.data.length < 8) {
+                        $(e.target).remove();
+                    }
+
+                    res.data.forEach((el,i) => {
+                        let splitName = el.name.split(' ')
+                        let initialName = '';
+                        if(splitName.length>1) {
+                            initialName = el.name.split(' ')[1].split('')[0]
+                        }
+                        $('.klasemen').append(`
+                        <div class="flex items-center">
+                            <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${i + 9}</span>
+                            <div class="basis-[25%]">
+                                <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
+                                    ${el.name.split('')[0]}${initialName}
+                                </div>
+                            </div>
+                            <div class="flex flex-col basis-[55%]">
+                                <span class="block font-sans font-bold text-[17px]">${el.name}</span>
+                                <span class="block font-sans ">${el.total_point} points</span>
+                            </div>
+                        </div>
+                        `)
+                    });
+                    $(e.target).html('Liat Semua Leaderboard')
+                }
+            });
+
+            this.offestLoad+=8
+
+        })
+
     }
 }
 

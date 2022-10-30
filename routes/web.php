@@ -58,6 +58,9 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::post('/store-quiz/{id}',[HomeController::class,'storeQuiz']);
     Route::post('/guess-score/{id_match}',[HomeController::class,'storeOrUpdateScore'])->name('sous');
     Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
+
+    Route::get('/klasemen/{offset}',[HomeController::class,'klasemen'])->name('klasemen');
+
 });
 
 /*------------------------------------------

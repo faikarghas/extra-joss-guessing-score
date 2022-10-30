@@ -181,7 +181,6 @@ class HomeController extends Controller
 
             $checkQuiz = QuizIndicator::where([['id_user',Auth::user()->id],['quiz_'.$currenRound,1]])->get();
 
-            // dd($listranking);
 
             foreach ($listranking as $key => $data) {
                 if ($data->id == Auth::user()->id) {
@@ -194,13 +193,8 @@ class HomeController extends Controller
         $klasemens = User::where('role',0)
         ->orderBy('total_point','DESC')
         ->orderBy('name','ASC')
-        ->limit(30)->get();
+        ->limit(8)->get();
 
-        // buat paginate yah san 
-        // $klasemens = User::where('role',0)
-        // ->orderBy('total_point','DESC')
-        // ->orderBy('name','ASC')
-        // ->paginate(4);
         $data = [
             'latestMatch' => $latestMatch,
             'onGoingMatches' => $onGoingMatches,
@@ -280,10 +274,10 @@ class HomeController extends Controller
         $profile->kecamatan= $request->input('kecamatan');
         $profile->address= $request->input('address');
         $profile->size_jersey= $request->input('size_jersey');
-        $profile->size_sepatu= $request->input('size_sepatu');      
-        
+        $profile->size_sepatu= $request->input('size_sepatu');
+
         $profile->save();
-        
+
         return redirect()->route('/');
     }
     // bulk create guessing
@@ -415,6 +409,12 @@ class HomeController extends Controller
 
         $point = 40;
         if ($round[0]->id == 1) {
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('total_point', 20);
+
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('point_1', 20);
+
             foreach ($userNeedUpdateForQuiz as $key => $value) {
                 if ($value->status == 0) {
                     User::where([['id','=',$value->id]])
@@ -427,6 +427,11 @@ class HomeController extends Controller
         }
 
         if ($round[0]->id == 2) {
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('total_point', 20);
+
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('point_2', 20);
             foreach ($userNeedUpdateForQuiz as $key => $value) {
                 if ($value->status == 0) {
                     User::where([['id','=',$value->id]])
@@ -439,6 +444,11 @@ class HomeController extends Controller
         }
 
         if ($round[0]->id == 3) {
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('total_point', 20);
+
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('point_3', 20);
             foreach ($userNeedUpdateForQuiz as $key => $value) {
                 if ($value->status == 0) {
                     User::where([['id','=',$value->id]])
@@ -451,6 +461,11 @@ class HomeController extends Controller
         }
 
         if ($round[0]->id == 4) {
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('total_point', 20);
+
+            User::where([['id','=',Auth::user()->id]])
+            ->increment('point_4', 20);
             foreach ($userNeedUpdateForQuiz as $key => $value) {
                 if ($value->status == 0) {
                     User::where([['id','=',$value->id]])
@@ -526,24 +541,10 @@ class HomeController extends Controller
             'nik' => 'required|min:16',
          ]);
 
-         
+
 
         DB::beginTransaction();
 
-        $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users,email',
-            'username' => 'required|min:3| unique:users,username',
-            'provinsi' => 'required',
-            'city' => 'required',
-            'address' => 'required|min:10',
-            'phone' => 'required|min:10',
-            'size_jersey' => 'required|string',
-            'size_sepatu' => 'required|numeric',
-            'nik' => 'required|min:16',
-         ]);
-
-        DB::beginTransaction();
         try {
             $data = $request->all();
 
@@ -560,10 +561,14 @@ class HomeController extends Controller
                 'size_jersey' => $data['size_jersey'],
                 'size_sepatu' => $data['size_sepatu'],
                 'role' => 0,
+                'point_1'=> 60,
+                'point_2'=> 60,
+                'point_3'=> 60,
+                'point_4'=> 60,
                 'total_point' => 60,
                 'password' => Hash::make($data['password']),
               ]);
-        
+
               $userLastId = $createUser->id;
 
               $matches = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
@@ -592,6 +597,21 @@ class HomeController extends Controller
 
     public function lupapassword(){
         return view('web.pages.forgot_password');
+    }
+
+    public function klasemen($offset){
+
+            $klasemens = User::where('role' , 0)->skip($offset)
+            ->take(8)
+            ->orderBy('total_point','DESC')
+            ->orderBy('name','ASC')
+            ->get();
+
+            return response()->json([
+                'code' => '200',
+                'data' => $klasemens
+            ],200);
+
     }
 
 }

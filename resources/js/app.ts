@@ -4,7 +4,7 @@ import './bootstrap';
 import 'flowbite';
 
 // Modules
-import { Auth, Quiz, GuessScore, Register, Menu } from './modules';
+import { Auth, Quiz, GuessScore, Register, Menu, Klasemen } from './modules';
 
 // Utils
 import { getCurrentDate } from './utils/index';
@@ -32,16 +32,18 @@ import { getCurrentDate } from './utils/index';
             const quiz = new Quiz(0,10);
             const register = new Register();
             const menu = new Menu();
+            const klasemen = new Klasemen();
 
             // Init all functionality
             menu.openMenuMobile();
             menu.closeMenuMobile();
 
+            guess.filterInput();
             guess.openGuessModal();
             guess.tebakSkor();
             guess.closeModal();
 
-            quiz.getQuiz()
+            quiz.getQuiz();
             quiz.openQuizModal();
             quiz.openQuizModalDisabled();
             quiz.closeQuizModal();
@@ -51,6 +53,8 @@ import { getCurrentDate } from './utils/index';
             quiz.storeCheckedInput();
 
             register.seletCity();
+
+            klasemen.loadMore();
 
             console.log(
                 Window.list
