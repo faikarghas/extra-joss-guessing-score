@@ -31,7 +31,7 @@
                             <input id="username" type="text" value="{{$profil[0]->username}}" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
-                            <label for="instagram" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">AKUN INSTAGRAM*</label>
+                            <label for="instagram" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">AKUN INSTAGRAM</label>
                             <input id="instagram" type="text" name="instagram" value="{{$profil[0]->account_instagram}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="@">
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
