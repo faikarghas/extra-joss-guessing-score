@@ -419,7 +419,7 @@
 
     <div class="overlay hidden fixed top-0 left-0 w-full h-full bg-slate-900 opacity-70 z-40"></div>
     {{-- MODAL TEBAK SKOR --}}
-    <div class="modal-form z-50 hidden flex-wrap bg-black w-[400px] md:w-[600px] p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
+    <div class="modal-form z-50 hidden flex-wrap bg-[#FCEF0A] w-[400px] md:w-[600px] p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"></div>
 
     {{-- MODAL QUIZ --}}
     @include('web.components.modal.quiz')

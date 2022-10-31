@@ -1,5 +1,5 @@
 {{-- MODAL QUIZ --}}
-<div class="modal-quiz z-50 hidden flex-wrap bg-black w-[400px] md:w-[750px] py-14 px-8 lg:px-20 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+<div class="modal-quiz z-50 hidden flex-wrap bg-[#FFEC00] w-[400px] md:w-[750px] py-14 px-8 lg:px-20 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
 
   <div class="close">
       <div class="">

@@ -116,12 +116,12 @@ export class GuessScore {
                         </div>
                     </div>
                     <div class="basis60">
-                        <h2 class="text-[#FCEF0A] leading-[1] text-[40px] font-head mb-12">MASUKAN SKOR ANDA</h2>
+                        <h2 class="text-black leading-[1] text-[40px] font-head mb-12">MASUKAN SKOR ANDA</h2>
                         <form class="">
                             <div class="flex items-center mb-4">
                                 <div class="label">
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam1}" />
-                                    <span class="text-white font-sans mr-6">${team1}</span>
+                                    <span class="text-black font-sans mr-6">${team1}</span>
                                 </div>
                                 <input value="${skor1}" min="0" class="form-tebak" type="number" name="guess_score_a"
                                 value=""></input>
@@ -129,7 +129,7 @@ export class GuessScore {
                             <div class="flex items-center mb-12">
                                 <div class="label">
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam2}" />
-                                    <span class="text-white font-sans mr-6">${team2}</span>
+                                    <span class="text-black font-sans mr-6">${team2}</span>
                                 </div>
                                 <input value="${skor2}" min="0" class="form-tebak" type="number" name="guess_score_b"
                                 value=""></input>
@@ -140,7 +140,7 @@ export class GuessScore {
                     <div class="basis40 flex items-end justify-end">
                         <div class="flex items-center">
                             <img class="mr-1" width="22px" src="${base_url}/images/acv.png" />
-                            <span class="block text-white text-[24px] font-black font-sans">1.000 Poin</span>
+                            <span class="block text-black text-[24px] font-black font-sans">1.000 Poin</span>
                         </div>
                     </div>
                     </div>
@@ -439,7 +439,7 @@ export class Klasemen {
                         </div>
                         `)
                     });
-                    $(e.target).html('Liat Semua Leaderboard')
+                    $(e.target).html('Lihat Semua Leaderboard')
                 }
             });
 
