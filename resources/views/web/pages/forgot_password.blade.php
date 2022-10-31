@@ -18,19 +18,28 @@
                 <h2 class="font-head text-[60px]">LUPA PASSWORD</h2>
             </div>
             <div class="basis-full lg:basis-[100%] relative">
-                <form method="POST" action="{{ route('login') }}">
-                @csrf
-                  <div class="relative z-0 mb-6 w-full group">
-                        <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">EMAIL ADDRESS</label>
-                        <input type="email" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required value="{{ old('email') }}">
-                        @if($message = Session::get('error_email'))
-                        <div class="p-4 mt-4 text-[12px] text-red-700 bg-red-100  dark:bg-red-200 dark:text-red-800" role="alert">
-                            <span class="font-medium">{{$message}}</span>
+                @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
                         </div>
                     @endif
+                <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+                 
+                  <div class="relative z-0 mb-6 w-full group">
+                        <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">EMAIL ADDRESS</label>
+
+                        <input type="email" name="email" id="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                       
+                        @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                   </div>
 
-                  <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">SEND</button>
+                  <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">  {{ __('Send Password Reset Link') }}</button>
                 </form>
 
 
