@@ -54,7 +54,9 @@ import { getCurrentDate } from './utils/index';
 
             register.seletCity();
 
+            klasemen.fetchKlasemenData();
             klasemen.loadMore();
+            klasemen.onChangeSelect();
 
             console.log(
                 Window.list

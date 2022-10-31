@@ -601,18 +601,39 @@ class HomeController extends Controller
         return view('web.pages.forgot_password');
     }
 
-    public function klasemen($offset){
+    public function klasemen($offset,$putaran){
+        $cr; 
+        switch ($putaran) {
+            case 5:
+                $cr = 'total_point';
+                break;
+            case 1:
+                $cr = 'point_1';
+                break;
+            case 2:
+                $cr = 'point_2';
+                break;
+            case 3:
+                $cr = 'point_3';
+                break;
+            case 4:
+                $cr = 'point_4';
+                break;
+            default:
+                # code...
+                break;
+        }
 
-            $klasemens = User::where('role' , 0)->skip($offset)
-            ->take(8)
-            ->orderBy('total_point','DESC')
-            ->orderBy('name','ASC')
-            ->get();
+        $klasemens = User::where('role' , 0)->skip($offset)
+        ->take(16)
+        ->orderBy($cr,'DESC')
+        ->orderBy('name','ASC')
+        ->get();
 
-            return response()->json([
-                'code' => '200',
-                'data' => $klasemens
-            ],200);
+        return response()->json([
+            'code' => '200',
+            'data' => $klasemens
+        ],200);
 
     }
 

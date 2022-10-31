@@ -396,9 +396,11 @@ export class Menu {
 
 export class Klasemen {
     offestLoad:number;
+    currentRound:any;
 
     constructor(){
-        this.offestLoad = 8
+        this.offestLoad = 16
+        this.currentRound = 5
     }
 
     loadMore(): void {
@@ -406,16 +408,16 @@ export class Klasemen {
             $(e.target).html('loading...')
             $.ajax({
                 type:'GET',
-                url:`${base_url}/klasemen/${this.offestLoad}`,
+                url:`${base_url}/klasemen/${this.offestLoad}/${this.currentRound}`,
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 error: function(xhr, error){
                     if (xhr.status === 500) {
                         console.log(error);
                     }
                 },
-                success:function(res){
-                    if (res.data.length < 8) {
-                        $(e.target).remove();
+                success:(res)=>{
+                    if (res.data.length < 16) {
+                        // $(e.target).remove();
                     }
 
                     res.data.forEach((el,i) => {
@@ -424,6 +426,7 @@ export class Klasemen {
                         if(splitName.length>1) {
                             initialName = el.name.split(' ')[1].split('')[0]
                         }
+
                         $('.klasemen').append(`
                         <div class="flex items-center">
                             <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${i + 9}</span>
@@ -434,7 +437,7 @@ export class Klasemen {
                             </div>
                             <div class="flex flex-col basis-[55%]">
                                 <span class="block font-sans font-bold text-[17px]">${el.name}</span>
-                                <span class="block font-sans ">${el.total_point} points</span>
+                                <span class="block font-sans ">${this.getPoint(el)} points</span>
                             </div>
                         </div>
                         `)
@@ -447,6 +450,116 @@ export class Klasemen {
 
         })
 
+    }
+
+    onChangeSelect(): void{
+        $('.select-putaran').on('change init', (e) => {
+            let selectedOption = $(e.target).val();
+            this.currentRound = $(e.target).val();
+
+
+            $.ajax({
+                type:'GET',
+                url:`${base_url}/klasemen/0/${selectedOption}`,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                error: function(xhr, error){
+                    if (xhr.status === 500) {
+                        console.log(error);
+                    }
+                },
+                success:(res) => {
+                    $('.klasemen').empty()
+                    this.offestLoad = 8
+                    res.data.forEach((el,i) => {
+                        let splitName = el.name.split(' ')
+                        let initialName = '';
+                        if(splitName.length>1) {
+                            initialName = el.name.split(' ')[1].split('')[0]
+                        }
+
+                        $('.klasemen').append(`
+                        <div class="flex items-center">
+                            <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${i + 1}</span>
+                            <div class="basis-[25%]">
+                                <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
+                                    ${el.name.split('')[0]}${initialName}
+                                </div>
+                            </div>
+                            <div class="flex flex-col basis-[55%]">
+                                <span class="block font-sans font-bold text-[17px]">${el.name}</span>
+                                <span class="block font-sans ">${this.getPoint(el)} points</span>
+                            </div>
+                        </div>
+                        `)
+                    });
+                }
+            });
+        })
+    }
+
+    fetchKlasemenData(): void{
+        $.ajax({
+            type:'GET',
+            url:`${base_url}/klasemen/0/5`,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            error: function(xhr, error){
+                if (xhr.status === 500) {
+                    console.log(error);
+                }
+            },
+            success:(res) => {
+                if (res.data.length < 16) {
+                    $('.loadMore').remove();
+                }
+                $('.klasemen').empty()
+                this.offestLoad = 8
+                res.data.forEach((el,i) => {
+                    let splitName = el.name.split(' ')
+                    let initialName = '';
+                    if(splitName.length>1) {
+                        initialName = el.name.split(' ')[1].split('')[0]
+                    }
+                    $('.klasemen').append(`
+                    <div class="flex items-center">
+                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${i + 1}</span>
+                        <div class="basis-[25%]">
+                            <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
+                                ${el.name.split('')[0]}${initialName}
+                            </div>
+                        </div>
+                        <div class="flex flex-col basis-[55%]">
+                            <span class="block font-sans font-bold text-[17px]">${el.name}</span>
+                            <span class="block font-sans ">${el.total_point} points</span>
+                        </div>
+                    </div>
+                    `)
+                });
+            }
+        });
+    }
+
+    getPoint(el): any{
+        let whichRound;
+        if (this.currentRound == 5) {
+            whichRound = el.total_point;
+        }
+
+        if (this.currentRound == 1) {
+            whichRound = el.point_1;
+        }
+
+        if (this.currentRound == 2) {
+            whichRound = el.point_2;
+        }
+
+        if (this.currentRound == 3) {
+            whichRound = el.point_3;
+        }
+
+        if (this.currentRound == 4) {
+            whichRound = el.point_4;
+        }
+        return whichRound
     }
 }
 

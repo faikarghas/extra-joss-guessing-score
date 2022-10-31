@@ -29,7 +29,7 @@ Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
 
 Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
 Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
-Route::get('/klasemen/{offset}',[HomeController::class,'klasemen'])->name('klasemen');
+Route::get('/klasemen/{offset}/{putaran}',[HomeController::class,'klasemen'])->name('klasemen');
 
 Route::post('/storeRegister',[HomeController::class,'createUser'])->name('storeRegister');
 Route::post('/selectCity/{id}', [HomeController::class,'selectCity'])->name('selectcity');
