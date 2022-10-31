@@ -54,27 +54,39 @@ class LoginController extends Controller
         $input = $request->all();
 
         $this->validate($request, [
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required',
         ]);
 
-        $checkEmail = User::where('email',$input['email'])->get();
+        //$checkEmail = User::where('email',$input['email'])->get();
 
-        if (count($checkEmail) > 0) {
-            if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))){
-                if (auth()->user()->role == 'admin') {
-                    return redirect()->route('dashboard.index');
-                }else{
-                    return redirect()->route('home');
-                }
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
+            if (auth()->user()->role == 'admin') {
+                return redirect()->route('dashboard.index');
             }else{
-                return redirect()->route('masuk')
-                    ->with('error_password','Password Salah.');
+                return redirect()->route('home');
             }
         } else {
-            return redirect()->route('masuk')
-                ->with('error_email','Email belum terdaftar.');
+            return redirect()->route('masuk')->with('error','Email-Address Or Password Are Wrong.');
         }
+
+        // if (count($checkEmail) > 0) {
+        //     if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))){
+        //         if (auth()->user()->role == 'admin') {
+        //             return redirect()->route('dashboard.index');
+        //         }else{
+        //             return redirect()->route('home');
+        //         }
+        //     }else{
+        //         return redirect()->route('masuk')
+        //             ->with('error_password','Password Salah.');
+        //     }
+        // } else {
+        //     return redirect()->route('masuk')
+        //         ->with('error_username','Email / username belum terdaftar.');
+        // }
 
     }
     /**

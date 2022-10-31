@@ -533,14 +533,14 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
-            'username' => 'required|min:3| unique:users,username',
+            'username' => 'required|min:3|unique:users,username|alpha_dash',
             'provinsi' => 'required',
             'city' => 'required',
             'address' => 'required|min:10',
             'phone' => 'required|min:10',
             'size_jersey' => 'required|string',
             'size_sepatu' => 'required|numeric',
-            'nik' => 'required|min:16',
+            'nik' => 'required|min:16|unique:users,nik',
          ]);
 
 

@@ -21,18 +21,18 @@
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                   <div class="relative z-0 mb-6 w-full group">
-                        <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME / EMAIL </label>
-                        <input type="email" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com or username" required value="{{ old('email') }}">
-                        @if($message = Session::get('error_email'))
+                        <label for="username" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME / EMAIL </label>
+                        <input type="text" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com or username" required value="{{ old('username') }}">
+                        {{-- @if($message = Session::get('error'))
                         <div class="p-4 mt-4 text-[12px] text-red-700 bg-red-100  dark:bg-red-200 dark:text-red-800" role="alert">
                             <span class="font-medium">{{$message}}</span>
                         </div>
-                    @endif
+                        @endif --}}
                   </div>
                   <div class="relative z-0 mb-6 w-full group">
                         <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">PASSWORD</label>
                         <input type="password" name="password" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="Password" required >
-                        @if($message = Session::get('error_password'))
+                        @if($message = Session::get('error'))
                         <div class="p-4 mt-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                             <span class="font-medium">{{$message}}</span>
                         </div>
