@@ -266,22 +266,21 @@ class HomeController extends Controller
 
     public function updateprofil(Request $request, $id)
     {
-        $profile = User::find($id);
-        dd($profile);   
-        $profile->name= $request->input('name');
+        $profile = User::find($id);   
+        $profile->name= $request->input('nama');
         $profile->email= $request->input('email');
         $profile->username= $request->input('username');
         $profile->phone= $request->input('phone');
         $profile->nik= $request->input('nik');
-        $profile->kota= $request->input('kota');
-        $profile->kecamatan= $request->input('kecamatan');
+        $profile->kota= $request->input('provinsi');
+        $profile->kecamatan= $request->input('city');
         $profile->address= $request->input('address');
         $profile->size_jersey= $request->input('size_jersey');
         $profile->size_sepatu= $request->input('size_sepatu');
 
         $profile->save();
 
-        return redirect()->route('/');
+        return redirect()->route('home');
     }
     // bulk create guessing
     public function storeGuess(){

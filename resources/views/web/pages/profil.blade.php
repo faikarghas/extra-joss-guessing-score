@@ -51,7 +51,7 @@
 
                     <div class="basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
-                            <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KO TA*</label>
+                            <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KOTA*</label>
                             <select id="provinsi" name="provinsi" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer">
                                 <option value="">Pilih provinsi</option>
                                 @foreach ($province as $row )

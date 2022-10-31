@@ -60,7 +60,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::post('/guess-score/{id_match}',[HomeController::class,'storeOrUpdateScore'])->name('sous');
     Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
     Route::get('/profil',[HomeController::class,'profil'])->name('profil');
-    Route::any('/updateprofile/{$id}', [HomeController::class, 'updateprofil'])->name('update.profile');
+    Route::post('/updateprofile/{id}', [HomeController::class, 'updateprofil'])->name('update.profile');
 
 
 });
