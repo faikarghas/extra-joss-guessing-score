@@ -34,6 +34,12 @@ Route::get('/klasemen/{offset}/{putaran}',[HomeController::class,'klasemen'])->n
 Route::post('/storeRegister',[HomeController::class,'createUser'])->name('storeRegister');
 Route::post('/selectCity/{id}', [HomeController::class,'selectCity'])->name('selectcity');
 
+// Route::get('reset-password/{token}', [HomeController::class, 'showResetPasswordForm'])->name('reset.password.get');
+
+Route::get('reset-password', [HomeController::class, 'showResetPasswordForm'])->name('reset.password.get');
+
+Route::post('reset-password', [HomeController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 
 Route::group(['middleware' => ['guest']], function() {
      /* Google Social Login */

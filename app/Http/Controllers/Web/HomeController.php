@@ -637,4 +637,10 @@ class HomeController extends Controller
 
     }
 
+    //public function showResetPasswordForm($token) {
+    public function showResetPasswordForm() { 
+        //return view('auth.forgetPasswordLink', ['token' => $token]);
+        return view('web.pages.reset_password');
+     }
+
 }
