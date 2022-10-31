@@ -21,8 +21,8 @@
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                   <div class="relative z-0 mb-6 w-full group">
-                        <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">EMAIL ADDRESS</label>
-                        <input type="email" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com" required value="{{ old('email') }}">
+                        <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME / EMAIL </label>
+                        <input type="email" name="email" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="name@example.com or username" required value="{{ old('email') }}">
                         @if($message = Session::get('error_email'))
                         <div class="p-4 mt-4 text-[12px] text-red-700 bg-red-100  dark:bg-red-200 dark:text-red-800" role="alert">
                             <span class="font-medium">{{$message}}</span>
@@ -58,7 +58,7 @@
             <div class="basis-full lg:basis-[48%]">
                 <span class="block font-sans text-center mb-5 text-[#A0A0A0]"> atau login dengan </span>
                 <a href="{{ url('login/google') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto mb-4 font-sans font-black text-[14px] lg:text-[16px]"><img width="26px" alt="google logo" class="mr-4 lg:mr-16" src="{{asset('images/google.png')}}"/>Continue With Google</a>
-                <a href="{{ url('/login/facebook') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto font-sans font-black text-[14px] lg:text-[16px]"><img width="26px" alt="fb logo" class="mr-4 lg:mr-16" src="{{asset('images/facebook.png')}}"/>Continue With Facebook</a>
+                {{-- <a href="{{ url('/login/facebook') }}" class="flex items-center w-full lg:w-[65%] border-black border-2 py-4 px-6 m-auto font-sans font-black text-[14px] lg:text-[16px]"><img width="26px" alt="fb logo" class="mr-4 lg:mr-16" src="{{asset('images/facebook.png')}}"/>Continue With Facebook</a> --}}
             </div>
         </div>
         <div class="pb-14 pt-10">

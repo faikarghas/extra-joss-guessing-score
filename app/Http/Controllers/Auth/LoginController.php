@@ -30,6 +30,14 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    
+    /**
+     * Login username to be used by the controller.
+     *
+     * @var string
+     */
+    protected $username;
+
     /**
      * Create a new controller instance.
      *
@@ -68,5 +76,14 @@ class LoginController extends Controller
                 ->with('error_email','Email belum terdaftar.');
         }
 
+    }
+    /**
+     * Get username property.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->username;
     }
 }
