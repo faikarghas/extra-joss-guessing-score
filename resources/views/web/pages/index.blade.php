@@ -408,7 +408,7 @@
                 @endforeach
             </div>
             <div class="flex">
-                <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Liat Semua Leaderboard</div>
+                <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Semua Leaderboard</div>
             </div>
         </div>
     </section>
