@@ -25,7 +25,7 @@ Route::get('/lupa',[HomeController::class,'lupapassword'])->name('password.reque
 Route::get('/mekanisme',[HomeController::class,'mekanisme'])->name('mekanisme');
 Route::get('/hadiah',[HomeController::class,'hadiah'])->name('hadiah');
 Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
-Route::get('/profil',[HomeController::class,'profil'])->name('profil');
+
 
 Route::get('/updGuessing',[HomeController::class,'storeGuess'])->name('storeGuess');
 Route::get('/upd',[HomeController::class,'update_t'])->name('upd');
@@ -43,6 +43,7 @@ Route::group(['middleware' => ['guest']], function() {
     /* facebook Login */
     Route::get('/login/facebook', [FacebookLoginController::class, 'redirect'])->name('login.facebook-redirect');
     Route::get('/login/facebook/callback', [FacebookLoginController::class, 'callback'])->name('login.facebook-callback');
+    
 });
 
 Auth::routes();
@@ -58,6 +59,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::post('/store-quiz/{id}',[HomeController::class,'storeQuiz']);
     Route::post('/guess-score/{id_match}',[HomeController::class,'storeOrUpdateScore'])->name('sous');
     Route::get('/guess/{id_match}',[HomeController::class,'guess'])->name('gs');
+    Route::get('/profil',[HomeController::class,'profil'])->name('profil');
+    Route::any('/updateprofile/{$id}', [HomeController::class, 'updateprofil'])->name('update.profile');
 
 
 });

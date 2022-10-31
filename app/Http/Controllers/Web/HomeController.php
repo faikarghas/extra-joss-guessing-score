@@ -255,8 +255,11 @@ class HomeController extends Controller
 
     public function profil(){
         $profil = User::where('id',Auth::user()->id)->get();
+        //dd($profil);
         $data = [
-            'profil' => $profil
+            'profil' => $profil,
+            'province' => Province::all(),
+            'regencie' => Regencie::all()
         ];
         return view('web.pages.profil',$data);
     }
@@ -264,7 +267,7 @@ class HomeController extends Controller
     public function updateprofil(Request $request, $id)
     {
         $profile = User::find($id);
-
+        dd($profile);   
         $profile->name= $request->input('name');
         $profile->email= $request->input('email');
         $profile->username= $request->input('username');

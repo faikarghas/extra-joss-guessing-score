@@ -20,6 +20,7 @@
             </div>
             <div class="basis-full relative">
                 <form class="flex flex-wrap justify-between" method="POST" action="{{ route('update.profile',$profil[0]->id) }}" >
+                @csrf
                     <div class="basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="nama" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NAMA*</label>
@@ -52,11 +53,11 @@
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KO TA*</label>
                             <select id="provinsi" name="provinsi" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer">
-                                <option value="">Pilih Kota</option>
-                                {{-- @foreach ($propinsi as $row)
-                                    <option @selected($row->id == $profil->kota)
-                                    value="{{$row->id}}"> {{$row->name}}</option>
-                                @endforeach --}}
+                                <option value="">Pilih provinsi</option>
+                                @foreach ($province as $row )
+                                    <option @selected($row->id == $profil[0]->kota)
+                                    value="{{$row->id}}">{{$row->name}}</option>
+                                @endforeach
                                 
                               
                             </select>
@@ -65,8 +66,8 @@
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KECAMATAN*</label>
                             <select id="city" name="city" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer">
                                 <option value="">Pilih Kecamatan</option>
-                                @foreach ($kecamatan as $row)
-                                    <option @selected($row->id == $profil->kecamatan)
+                                @foreach ($regencie as $row)
+                                    <option @selected($row->id == $profil[0]->kecamatan)
                                     value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
                               
@@ -74,15 +75,15 @@
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT RUMAH*</label>
-                            <input type="text" name="address" value="{{$profil->address}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
+                            <input type="text" name="address" value="{{$profil[0]->address}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN JERSEY*</label>
-                            <input type="text" name="size_jersey" value="{{$profil->size_jersey}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="S, M, L, XXL" required=>
+                            <input type="text" name="size_jersey" value="{{$profil[0]->size_jersey}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="S, M, L, XXL" required=>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN SEPATU*</label>
-                            <input type="text" name="size_sepatu" value="{{$profil->size_sepatu}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="36, 37, 38, 39, 40, 41, 42, 43, 44, 45" required>
+                            <input type="text" name="size_sepatu" value="{{$profil[0]->size_sepatu}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="36, 37, 38, 39, 40, 41, 42, 43, 44, 45" required>
                         </div>
                     </div>
                   <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">KIRIM</button>
