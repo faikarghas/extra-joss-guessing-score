@@ -42,8 +42,6 @@
                 </form>
                 <div class="absolute right-[-15%] top-[50%] translate-y-[-50%] hidden lg:block">OR</div>
 
-               
-
                 <div class="flex mt-4 justify-center">
                    <p class="font-sans mr-2">Belum punya akun? </p>
                    <a href={{route('daftar')}} class="font-sans text-blue-700">Daftar sekarang</a>
