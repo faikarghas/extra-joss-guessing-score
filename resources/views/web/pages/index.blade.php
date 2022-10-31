@@ -384,9 +384,21 @@
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Points</li>
                 </ul>
             </div>
+            <div class="lg:p-8">
+                <div>
+                    <label class="text-black font-sans text-[14px] font-semibold">Urutan Leaderboard</label>
+                    <select class="bg-transparent rounded-2xl ml-5 w-[200px] select-putaran">
+                        <option value="5" selected>Semua putaran</option>
+                        <option value="1">Putaran 1</option>
+                        <option value="2">Putaran 2</option>
+                        <option value="3">Putaran 3</option>
+                        <option value="4">Putaran 4</option>
+                    </select>
+                </div>
+            </div>
             {{-- grid-flow-col --}}
             <div class="klasemen grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
-                @foreach ($klasemens as $key => $klasemen)
+                {{-- @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
                         <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $key + 1 }}</span>
                         <div class="basis-[25%]">
@@ -405,10 +417,10 @@
                             <span class="block font-sans ">{{$klasemen->total_point}} points</span>
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
-            <div class="flex">
-                <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Liat Semua Leaderboard</div>
+            <div class="flex mt-5">
+                <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Semua Leaderboard</div>
             </div>
         </div>
     </section>
