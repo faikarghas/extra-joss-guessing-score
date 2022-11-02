@@ -1,14 +1,14 @@
 {
-  "public/fonts/WorkSans-Regular.woff": {
-    "file": "assets/WorkSans-Regular.dac0b258.woff",
-    "src": "public/fonts/WorkSans-Regular.woff"
-  },
   "public/fonts/BebasNeue-Regular.woff": {
     "file": "assets/BebasNeue-Regular.677b7e36.woff",
     "src": "public/fonts/BebasNeue-Regular.woff"
   },
+  "public/fonts/WorkSans-Regular.woff": {
+    "file": "assets/WorkSans-Regular.dac0b258.woff",
+    "src": "public/fonts/WorkSans-Regular.woff"
+  },
   "resources/js/app.ts": {
-    "file": "assets/app.d060d31b.js",
+    "file": "assets/app.d6cf5ab9.js",
     "src": "resources/js/app.ts",
     "isEntry": true
   },
@@ -18,7 +18,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.e7bae177.css",
+    "file": "assets/app.41ae4404.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

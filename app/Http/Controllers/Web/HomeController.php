@@ -195,6 +195,11 @@ class HomeController extends Controller
         ->orderBy('name','ASC')
         ->limit(8)->get();
 
+        $totalp = User::where('role',0)
+        ->get();
+
+        $totalPage = (int) ceil(count($totalp) / 16);
+
         $data = [
             'latestMatch' => $latestMatch,
             'onGoingMatches' => $onGoingMatches,
@@ -212,7 +217,8 @@ class HomeController extends Controller
             'klasemens' => $klasemens,
             'myranking' => $myranking,
             'checkQuiz' => $checkQuiz,
-            'round' => $round
+            'round' => $round,
+            'totalPage' => $totalPage
         ];
 
         return view('web.pages.index',$data);

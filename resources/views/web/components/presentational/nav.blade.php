@@ -13,11 +13,11 @@
         <li class="reg flex items-center list-none cursor-pointer"><a href="{{route('daftar')}}" class="font-head text-black pt-[2px] md:text-[18px] lg:text-[20px] leading-[14px] lg:leading-[20px]">DAFTAR</a></li>
         @endguest
         @auth
-        {{-- <li class="flex items-center list-none cursor-pointer">
-            <img alt="icon user" src="{{asset('images/user.png')}}" class="w-[14px] mr-2 pb-1"/>
-            <a href="{{route('profil')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->email }}</a></li>
-        <li class="flex items-center list-none font-head text-[#FFEC00] text-[20px] mx-2">|</li> --}}
-        <li class="flex items-center list-none cursor-pointer"><a href="{{ route('logout') }}" class="font-head text-[#FFEC00] md:text-[18px] lg:text-[20px] leading-[20px]">LOGOUT</a></li>
+        <li class="flex items-center list-none cursor-pointer">
+            <a href="{{ route('logout') }}" class="font-head text-black md:text-[18px] lg:text-[20px] leading-[20px]"><img alt="icon user" src="{{asset('images/user_black.png')}}" class="w-[14px] pb-1"/></a>
+            {{-- <a href="{{route('profil')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->email }}</a></li> --}}
+        <li class="flex items-center list-none font-head text-black text-[20px] mx-2">|</li>
+        <li class="flex items-center list-none cursor-pointer"><a href="{{ route('logout') }}" class="font-head text-black md:text-[18px] lg:text-[20px] leading-[20px]">LOGOUT</a></li>
         @endauth
     </ul>
 
@@ -55,7 +55,7 @@
                     @endguest
                     @auth
                     <li class="flex items-center list-none cursor-pointer">
-                        <img alt="icon user" src="{{asset('images/user.png')}}" class="w-[14px] mr-2 pb-1"/>
+                        <a href="{{route('profil')}}" class=" w-[14px] mr-2 pb-1"><img alt="icon user" src="{{asset('images/user.png')}}" class=""/></a>
                         <a href="{{route('profil')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->username }}</a></li>
                     <li class="flex items-center list-none font-head text-[#FFEC00] text-[20px] mx-2">|</li>
                     <li class="flex items-center list-none cursor-pointer"><a href="{{ route('logout') }}" class="font-head text-[#FFEC00] md:text-[18px] lg:text-[20px] leading-[20px]">LOGOUT</a></li>

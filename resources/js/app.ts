@@ -57,6 +57,9 @@ import { getCurrentDate } from './utils/index';
             klasemen.fetchKlasemenData();
             klasemen.loadMore();
             klasemen.onChangeSelect();
+            klasemen.selectPage();
+            klasemen.nextPage();
+            klasemen.prevPage();
 
             console.log(
                 Window.list

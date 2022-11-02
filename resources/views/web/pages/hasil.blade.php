@@ -7,16 +7,17 @@
     <div class="relative h-full">
     <header class="relative info bg-no-repeat bg-cover bg-[#FFEC00]" >
         @include('web.components.presentational.nav')
-        <section class="relative z-20 m-auto lg:w-[95%] pt-[85px] sm:pt-[130px] lg:pt-[160px]">
-            <div class="bg-[#202124]  pt-12 pb-12 flex flex-col">
-                <h1 class="text-white text-[60px] font-head mb-8 lg:pl-12 leading-[50px]">HASIL KLASEMEN</h1>
+        <section class="relative z-20 m-auto lg:w-[95%] pt-[124px] md:pt-[85px] sm:pt-[130px] lg:pt-[160px] px-8">
+            <div class="bg-[#202124]  pt-12 flex flex-col">
+                <h1 class="text-white text-[60px] font-head mb-8 lg:pl-12 leading-[50px] px-4">HASIL KLASEMEN</h1>
+
                 <div class="flex flex-col mb-12">
-                    <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12">Putaran 1</h3></div>
+                    <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12 px-4">Putaran 1</h3></div>
                     <div class="flex flex-row flex-wrap lg:flex-nowrap gap-2">
                         <div class="basis-full flex flex-wrap bg-[#202124]">
                             @auth
                                 @foreach ($myguess1 as $key => $match)
-                                <div class="basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                                <div class="basis-full lg:basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                                     <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                     <div class="flex flex-wrap">
                                         <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -83,7 +84,7 @@
                                 @endforeach
                             @else
                                 @foreach ($matches1 as $key => $match)
-                                    <div class="basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                                    <div class="basis-full lg:basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                                         <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                         <div class="flex flex-wrap">
                                             <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -115,12 +116,12 @@
                 </div>
 
                 <div class="flex flex-col mb-12">
-                    <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12">Putaran 2</h3></div>
+                    <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12 px-4">Putaran 2</h3></div>
                     <div class="flex flex-row flex-wrap lg:flex-nowrap gap-2">
                         <div class="basis-full flex flex-wrap bg-[#202124]">
                             @auth
                                 @foreach ($myguess2 as $key => $match)
-                                <div class="basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                                <div class="basis-full lg:basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                                     <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                     <div class="flex flex-wrap">
                                         <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -187,7 +188,7 @@
                                 @endforeach
                             @else
                                 @foreach ($matches2 as $key => $match)
-                                    <div class="basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                                    <div class="basis-full lg:basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                                         <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                         <div class="flex flex-wrap">
                                             <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -219,12 +220,12 @@
                 </div>
 
                 <div class="flex flex-col mb-12">
-                    <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12">Putaran 3</h3></div>
+                    <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12 px-4">Putaran 3</h3></div>
                     <div class="flex flex-row flex-wrap lg:flex-nowrap gap-2">
                         <div class="basis-full flex flex-wrap bg-[#202124]">
                             @auth
                                 @foreach ($myguess3 as $key => $match)
-                                <div class="basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                                <div class="basis-full lg:basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                                     <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                     <div class="flex flex-wrap">
                                         <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -291,7 +292,7 @@
                                 @endforeach
                             @else
                                 @foreach ($matches3 as $key => $match)
-                                    <div class="basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
+                                    <div class="basis-full lg:basis-1/4 border-b-[1px] border-r-[1px] border-[#383838] px-4 py-6">
                                         <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                         <div class="flex flex-wrap">
                                             <ul class="basis-1/2 border-r-[1px] border-[#383838]">
@@ -332,7 +333,7 @@
                                 <h3 class="font-sans uppercase">Semi Finals</h3>
                                 <h3 class="font-sans uppercase">Final</h3>
                                 </div>
-        
+
                                 <div class="tournament-brackets">
                                 <ul class="bracket bracket-1">
                                     @auth
@@ -364,7 +365,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>
@@ -397,7 +398,7 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-            
+
                                                     </div>
                                                 </div>
                                             </li>
@@ -440,7 +441,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>
@@ -510,7 +511,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>
@@ -543,7 +544,7 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-            
+
                                                     </div>
                                                 </div>
                                             </li>
@@ -586,7 +587,7 @@
                                                         $timestamp = strtotime($datetime);
                                                         $time = $timestamp - (1 * 60 * 60);
                                                         $datetime = date("Y-m-d H:i:s", $time);
-        
+
                                                         $d1 = new DateTime($currentTime);
                                                         $d2 = new DateTime($datetime);
                                                     ?>
@@ -656,7 +657,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>
@@ -689,7 +690,7 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-            
+
                                                     </div>
                                                 </div>
                                             </li>
@@ -732,7 +733,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>
@@ -802,7 +803,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>
@@ -835,7 +836,7 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-            
+
                                                     </div>
                                                 </div>
                                             </li>
@@ -878,7 +879,7 @@
                                                             $timestamp = strtotime($datetime);
                                                             $time = $timestamp - (1 * 60 * 60);
                                                             $datetime = date("Y-m-d H:i:s", $time);
-            
+
                                                             $d1 = new DateTime($currentTime);
                                                             $d2 = new DateTime($datetime);
                                                         ?>

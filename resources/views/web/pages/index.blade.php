@@ -5,7 +5,7 @@
 @endsection
 @section('header')
     <header class="relative pt-[85px] sm:pt-[130px] md:pt-0">
-        <img src="{{asset('/images/banner.png')}}" class="w-full h-full"/>
+        <img src="{{asset('/images/banner.jpg')}}" class="w-full h-full"/>
         @include('web.components.presentational.nav')
     </header>
 @endsection
@@ -384,10 +384,10 @@
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Points</li>
                 </ul>
             </div>
-            <div class="lg:p-8">
-                <div>
+            <div class="lg:p-8 pb-8">
+                <div class="md:text-start text-center">
                     <label class="text-black font-sans text-[14px] font-semibold">Urutan Leaderboard</label>
-                    <select class="bg-transparent rounded-2xl ml-5 w-[200px] select-putaran">
+                    <select class="bg-transparent rounded-2xl lg:ml-5 w-full md:w-[200px] select-putaran">
                         <option value="5" selected>Semua putaran</option>
                         <option value="1">Putaran 1</option>
                         <option value="2">Putaran 2</option>
@@ -397,7 +397,7 @@
                 </div>
             </div>
             {{-- grid-flow-col --}}
-            <div class="klasemen grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-4 lg:p-8">
+            <div class="klasemen grid grid-cols-1 lg:grid-rows-4 grid-flow-col  gap-4 lg:p-8">
                 {{-- @foreach ($klasemens as $key => $klasemen)
                     <div class="flex items-center">
                         <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $key + 1 }}</span>
@@ -420,7 +420,28 @@
                 @endforeach --}}
             </div>
             <div class="flex mt-5">
-                <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Semua Leaderboard</div>
+                <nav class="m-auto" aria-label="Page navigation example">
+                    <ul class="inline-flex items-center -space-x-px">
+                        {{-- <li>
+                            <p class="prevPage cursor-pointer block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Previous</span>
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </p>
+                        </li> --}}
+                        @for ($i = 0; $i < $totalPage; $i++)
+                            <li>
+                                <p page="{{$i}}" class="selectPage cursor-pointer py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{$i+1}}</p>
+                            </li>
+                        @endfor
+                        {{-- <li>
+                            <p class="nextPage cursor-pointer block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <span class="sr-only">Next</span>
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            </p>
+                        </li> --}}
+                    </ul>
+                </nav>
+                {{-- <div class="m-auto loadMore cursor-pointer bg-black py-4 rounded-3xl w-[249px] font-sans text-[14px] text-[#FCEF0A] text-center">Lihat Semua Leaderboard</div> --}}
             </div>
         </div>
     </section>
