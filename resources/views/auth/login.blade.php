@@ -20,12 +20,12 @@
           <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
             @csrf
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
+              <label for="email" class="form-label">Email/username</label>
               <input
-                type="email"
+                type="text"
                 class="form-control"
-                id="email"
-                name="email"
+                id="username"
+                name="username"
                 placeholder="Enter your email"
                 autofocus
                 required
