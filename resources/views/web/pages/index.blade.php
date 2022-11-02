@@ -345,9 +345,9 @@
         @endif
     </section>
     <section class="relative bg-[#FFEC00] px-8 pt-6">
-        <div class="bg-[#F8F8F8] p-10">
+        <div class="bg-[#F8F8F8] px-3 py-8 lg:p-10">
             <div class="flex flex-col">
-                <h2 class="text-black font-head text-[60px] leading-[50px] mb-4 m-auto inline-block">LEADERBOARD</h2>
+                <h2 class="text-black font-head text-[50px] lg:text-[60px] leading-[50px] mb-4 m-auto inline-block">LEADERBOARD</h2>
                 <h5 class="text-black font-head text-[20px] m-auto inline-block">STATISTIK ANDA<h5>
             </div>
             <div class="flex flex-col lg:flex-row justify-center pt-4 pb-8 gap-12 items-center">
@@ -397,28 +397,7 @@
                 </div>
             </div>
             {{-- grid-flow-col --}}
-            <div class="klasemen grid grid-cols-1 lg:grid-rows-4 grid-flow-col  gap-4 lg:p-8">
-                {{-- @foreach ($klasemens as $key => $klasemen)
-                    <div class="flex items-center">
-                        <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">{{ $key + 1 }}</span>
-                        <div class="basis-[25%]">
-                            <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
-                                <?php
-                                    $str = $klasemen->name;
-                                    $words = explode(' ', $str);
-                                    $si = count($words) > 1 ? $words[1][0] : '';
-                                    $userInitials = $words[0][0]. $si;
-                                ?>
-                            {{$userInitials}}
-                            </div>
-                        </div>
-                        <div class="flex flex-col basis-[55%]">
-                            <span class="block font-sans font-bold text-[17px]">{{$klasemen->name}}</span>
-                            <span class="block font-sans ">{{$klasemen->total_point}} points</span>
-                        </div>
-                    </div>
-                @endforeach --}}
-            </div>
+            <div class="klasemen grid grid-cols-1 lg:grid-rows-4 lg:grid-flow-col  gap-4 lg:p-8"></div>
             <div class="flex mt-5">
                 <nav class="m-auto" aria-label="Page navigation example">
                     <ul class="inline-flex items-center -space-x-px">

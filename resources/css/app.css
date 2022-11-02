@@ -334,3 +334,7 @@ input:-webkit-autofill:active{
     left: 50%;
     display: none;
   }
+
+  .klasemen .w-260px{
+    width: 260px;
+  }

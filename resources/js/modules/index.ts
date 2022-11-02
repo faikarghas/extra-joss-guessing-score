@@ -521,7 +521,7 @@ export class Klasemen {
                         initialName = el.name.split(' ')[1].split('')[0]
                     }
                     $('.klasemen').append(`
-                    <div class="flex items-center">
+                    <div class="flex items-center w-260px">
                         <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${i + 1}</span>
                         <div class="basis-[25%]">
                             <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
@@ -588,7 +588,7 @@ export class Klasemen {
                             initialName = el.name.split(' ')[1].split('')[0]
                         }
                         $('.klasemen').append(`
-                        <div class="flex items-center">
+                        <div class="flex items-center w-260px">
                             <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(currentPage * this.offestLoad) + (i + 1)}</span>
                             <div class="basis-[25%]">
                                 <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
@@ -631,7 +631,7 @@ export class Klasemen {
                             initialName = el.name.split(' ')[1].split('')[0]
                         }
                         $('.klasemen').append(`
-                        <div class="flex items-center">
+                        <div class="flex items-center w-260px">
                             <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(page * this.offestLoad) + (i + 1)}</span>
                             <div class="basis-[25%]">
                                 <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
@@ -675,7 +675,7 @@ export class Klasemen {
                             initialName = el.name.split(' ')[1].split('')[0]
                         }
                         $('.klasemen').append(`
-                        <div class="flex items-center">
+                        <div class="flex items-center w-260px">
                             <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(currentPage * this.offestLoad) + (i + 1)}</span>
                             <div class="basis-[25%]">
                                 <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
