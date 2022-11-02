@@ -26,7 +26,7 @@
                 class="form-control"
                 id="username"
                 name="username"
-                placeholder="Enter your email"
+                placeholder=""
                 autofocus
                 required
               />
