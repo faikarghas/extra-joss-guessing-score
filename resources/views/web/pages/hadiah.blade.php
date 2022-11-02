@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <div class="pt-14">
+            <div class="pt-14 pb-8">
                 <img alt="logo extra joss" class="m-auto mb-2" src="{{asset('/images/logo.png')}}"/>
                 <p class="font-sans text-center text-[10px]">Copyright © 2022 ExtraJoss</p>
             </div>

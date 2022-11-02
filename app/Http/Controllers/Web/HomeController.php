@@ -245,7 +245,8 @@ class HomeController extends Controller
         return view('web.pages.mekanisme',$data);
      }
 
-    public function hadiah(){
+
+     public function hadiah(){
         $hadiah = Post::where('slug','hadiah')->get();
         $data = [
             'hadiah' => $hadiah
@@ -264,9 +265,164 @@ class HomeController extends Controller
         return view('web.pages.profil',$data);
     }
 
+    public function hasilKlasemen(){
+        $myguess1=[];
+        $myguess2=[];
+        $myguess3=[];
+        $myguessRound16=[];
+        $myguessQuarter=[];
+        $myguessSemiFinal=[];
+        $myguessFinal=[];
+        // GMT +7
+        $cn = Carbon::now()->toDateTimeString();
+        $datetime = date($cn);
+        $timestamp = strtotime($datetime);
+        $time = $timestamp + (7 * 60 * 60);
+        $currentTime = date("Y-m-d H:i:s", $time);
+
+        $matches1 = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.round","=","1"]])
+        ->get();
+
+        $matches2 = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.round","=","2"]])
+        ->get();
+
+        $matches3 = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.round","=","3"]])
+        ->get();
+
+        // Daftar 16 besar
+        $match_round_16 = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.status","0"],["fmatches.round","5"]])
+        ->get();
+
+        // Daftar quarter final
+        $match_quarter = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.status","0"],["fmatches.round","6"]])
+        ->get();
+
+        // Daftar semi final
+        $match_semi_finals = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.status","0"],["fmatches.round","7"]])
+        ->get();
+
+        // Daftar  final
+        $match_final = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.status","0"],["fmatches.round","9"]])
+        ->get();
+
+        if (Auth::check()) {
+            // Tebakan per user
+            $myguess1 = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','score_a','score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","=","1"]])
+            ->get();
+
+            $myguess2 = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','score_a','score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","=","2"]])
+            ->get();
+
+            $myguess3 = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','score_a','score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","=","3"]])
+            ->get();
+
+            $myguessRound16 = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","5"]])
+            ->get();
+
+            $myguessQuarter = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","6"]])
+            ->get();
+
+            $myguessSemiFinal = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","7"]])
+            ->get();
+
+            $myguessFinal = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","0"],["fmatches.round","9"]])
+            ->get();
+        }
+
+        $data = [
+            'currentTime' => $currentTime,
+            'matches1' => $matches1,
+            'matches2' => $matches2,
+            'matches3' => $matches3,
+            'myguess1'  => $myguess1,
+            'myguess2'  => $myguess2,
+            'myguess3'  => $myguess3,
+            'match_round_16' => $match_round_16,
+            'match_quarter' => $match_quarter,
+            'match_semi_finals' => $match_semi_finals,
+            'match_final' => $match_final,
+            'myguessRound16' => $myguessRound16,
+            'myguessQuarter' => $myguessQuarter,
+            'myguessSemiFinal' => $myguessSemiFinal,
+            'myguessFinal' => $myguessFinal
+        ];
+
+        return view('web.pages.hasil',$data);
+    }
+
     public function updateprofil(Request $request, $id)
     {
-        $profile = User::find($id);   
+        $profile = User::find($id);
         $profile->name= $request->input('nama');
         $profile->email= $request->input('email');
         $profile->username= $request->input('username');
@@ -602,7 +758,7 @@ class HomeController extends Controller
     }
 
     public function klasemen($offset,$putaran){
-        $cr; 
+        $cr;
         switch ($putaran) {
             case 5:
                 $cr = 'total_point';
@@ -638,7 +794,7 @@ class HomeController extends Controller
     }
 
     //public function showResetPasswordForm($token) {
-    public function showResetPasswordForm() { 
+    public function showResetPasswordForm() {
         //return view('auth.forgetPasswordLink', ['token' => $token]);
         return view('web.pages.reset_password');
      }
