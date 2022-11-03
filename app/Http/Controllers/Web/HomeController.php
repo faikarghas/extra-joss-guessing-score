@@ -116,13 +116,17 @@ class HomeController extends Controller
 
         $latestMatch = [];
         foreach ($twoLatestMatch as $key => $value) {
-            if ($twoLatestMatch[0]->match_time == $twoLatestMatch[1]->match_time) {
-                array_push($latestMatch,$value);
+            if(count($twoLatestMatch) > 0){
+                if ($twoLatestMatch[0]->match_time == $twoLatestMatch[1]->match_time) {
+                    array_push($latestMatch,$value);
+                }
             }
         }
 
         if (count($latestMatch) == 0) {
+            if(count($twoLatestMatch) > 0){
             array_push($latestMatch,$twoLatestMatch[0]);
+            }
         }
 
         if (Auth::check()) {
