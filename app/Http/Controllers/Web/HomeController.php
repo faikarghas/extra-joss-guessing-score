@@ -730,9 +730,6 @@ class HomeController extends Controller
                 'size_sepatu' => $data['size_sepatu'],
                 'role' => 0,
                 'point_1'=> 60,
-                'point_2'=> 60,
-                'point_3'=> 60,
-                'point_4'=> 60,
                 'total_point' => 60,
                 'password' => Hash::make($data['password']),
               ]);
