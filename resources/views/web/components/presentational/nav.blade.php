@@ -42,7 +42,7 @@
                 <a href="{{route('belanja')}}" class="{{ Request::is('belanja') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head md:text-[18px] lg:text-[24px]" aria-current="page">BELANJA</a>
             </li>
             <li class="flex items-center">
-                <a href="{{route('hasilKlasemen')}}" class="{{ Request::is('hasil-klasemen') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head md:text-[18px] lg:text-[24px]" aria-current="page">Hasil Klasemen</a>
+                <a href="{{route('hasilPertandingan')}}" class="{{ Request::is('hasil-pertandingan') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block pr-4 pl-3 font-head md:text-[18px] lg:text-[24px]" aria-current="page">Hasil Pertandingan</a>
             </li>
             <li>
                 <ul class="m-0 px-6 py-1 flex bg-black rounded-3xl">
@@ -90,7 +90,7 @@
             <a href="{{route('belanja')}}" class="{{ Request::is('belanja') ? 'text-black' : 'text-[#FF0000]' }} leading-[35px] block font-head text-[40px]" aria-current="page">BELANJA</a>
         </li>
         <li class="flex items-center">
-            <a href="{{route('hasilKlasemen')}}" class="{{ Request::is('hasil-klasemen') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block font-head text-[40px]" aria-current="page">Hasil Klasemen</a>
+            <a href="{{route('hasilPertandingan')}}" class="{{ Request::is('hasil-pertandingan') ? 'text-black' : 'text-[#FF0000]' }} leading-[20px] block font-head text-[40px]" aria-current="page">Hasil Klasemen</a>
         </li>
     </ul>
 </div>

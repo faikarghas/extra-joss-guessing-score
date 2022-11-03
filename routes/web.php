@@ -25,7 +25,7 @@ Route::get('/lupa',[HomeController::class,'lupapassword'])->name('password.reque
 Route::get('/mekanisme',[HomeController::class,'mekanisme'])->name('mekanisme');
 Route::get('/hadiah',[HomeController::class,'hadiah'])->name('hadiah');
 Route::get('/belanja',[HomeController::class,'belanja'])->name('belanja');
-Route::get('/hasil-klasemen',[HomeController::class,'hasilKlasemen'])->name('hasilKlasemen');
+Route::get('/hasil-pertandingan',[HomeController::class,'hasilKlasemen'])->name('hasilPertandingan');
 
 
 

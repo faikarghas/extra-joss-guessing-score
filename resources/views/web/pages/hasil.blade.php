@@ -9,7 +9,7 @@
         @include('web.components.presentational.nav')
         <section class="relative z-20 m-auto lg:w-[95%] pt-[124px] md:pt-[85px] sm:pt-[130px] lg:pt-[160px] px-8">
             <div class="bg-[#202124]  pt-12 flex flex-col">
-                <h1 class="text-white text-[60px] font-head mb-8 lg:pl-12 leading-[50px] px-4">HASIL KLASEMEN</h1>
+                <h1 class="text-white text-[60px] font-head mb-8 lg:pl-12 leading-[50px] px-4">HASIL PERTANDINGAN</h1>
 
                 <div class="flex flex-col mb-12">
                     <div class="basis-full"><h3 class="font-sans text-white font-bold text-[20px] lg:pl-12 px-4">Putaran 1</h3></div>
