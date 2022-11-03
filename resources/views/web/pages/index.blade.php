@@ -355,7 +355,9 @@
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
                         @auth 
                         <?php 
+                        if (count($myranking)>0) {
                             echo $myranking[0]->rank;
+                        }
                         ?>
                         @else 0 @endauth
                     </li>
@@ -379,7 +381,11 @@
                 </ul>
                 <ul class="flex order-3 lg:order-3 flex-col justify-center items-center w-[180px]">
                     <li class="text-black text-[36px] leading-[26px] font-sans font-bold">
-                        @auth{{$myranking[0]->total_point}}@else 0 @endauth
+                        @auth
+                        @if (count($myranking)>0)
+                        {{$myranking[0]->total_point}}
+                        @endif
+                        @else 0 @endauth
                     </li>
                     <li class="text-[#A0A0A0] text-[20px] font-sans">Points</li>
                 </ul>
