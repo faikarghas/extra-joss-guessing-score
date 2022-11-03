@@ -16,7 +16,7 @@
             <div class="text-center xl:absolute bg-black xl:px-20 xl:top-[-40px] xl:h-[40px] xl:left-[50%] xl:translate-x-[-50%]">
                 <h3 class="text-[40px] xl:text-[60px] text-white font-head mb-4">Hasil Terakhir</h3>
             </div>
-            <div class="flex flex-wrap flex-row justify-center items-center gap-10 mb-4">
+            <div class="flex flex-wrap flex-row justify-center items-center gap-10 mb-4 min-h-[150px]">
                 <div class="flex flex-col lg:flex-row lg:gap-20">
                     {{-- Final Match --}}
                     @foreach ($latestMatch as $match)
