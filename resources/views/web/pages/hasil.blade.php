@@ -69,15 +69,34 @@
                                                     @endif
                                                 @endif
                                             @else
-                                                <div class="flex items-center ml-2">
-                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                    <div>
-                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                @if ($match->is_guess == 1)
+                                                    @if($match->guessing_result == 1)
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    @else
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                @else
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             @endif
-
                                         </div>
                                     </div>
                                 </div>
@@ -173,13 +192,33 @@
                                                     @endif
                                                 @endif
                                             @else
-                                                <div class="flex items-center ml-2">
-                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                    <div>
-                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                @if ($match->is_guess == 1)
+                                                    @if($match->guessing_result == 1)
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    @else
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                @else
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             @endif
 
                                         </div>
@@ -277,13 +316,33 @@
                                                     @endif
                                                 @endif
                                             @else
-                                                <div class="flex items-center ml-2">
-                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                    <div>
-                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                @if ($match->is_guess == 1)
+                                                    @if($match->guessing_result == 1)
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    @else
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                        </div>
+                                                    </div>
+                                                    @endif
+                                                @else
+                                                    <div class="flex items-center ml-2">
+                                                        <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                        <div>
+                                                            <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                            <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             @endif
 
                                         </div>
@@ -390,13 +449,33 @@
                                                                 @endif
                                                             @endif
                                                         @else
-                                                            <div class="flex items-center ml-2">
-                                                                <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                                <div>
-                                                                    <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                                    <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                            @if ($match->is_guess == 1)
+                                                                @if($match->guessing_result == 1)
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                                @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                            @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         @endif
 
                                                     </div>
@@ -536,13 +615,33 @@
                                                                 @endif
                                                             @endif
                                                         @else
-                                                            <div class="flex items-center ml-2">
-                                                                <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                                <div>
-                                                                    <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                                    <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                            @if ($match->is_guess == 1)
+                                                                @if($match->guessing_result == 1)
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                                @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                            @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         @endif
 
                                                     </div>
@@ -682,15 +781,34 @@
                                                                 @endif
                                                             @endif
                                                         @else
-                                                            <div class="flex items-center ml-2">
-                                                                <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                                <div>
-                                                                    <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                                    <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                            @if ($match->is_guess == 1)
+                                                                @if($match->guessing_result == 1)
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                                @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                            @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         @endif
-
                                                     </div>
                                                 </div>
                                             </li>
@@ -904,13 +1022,33 @@
                                                                 @endif
                                                             @endif
                                                         @else
-                                                            <div class="flex items-center ml-2">
-                                                                <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
-                                                                <div>
-                                                                    <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
-                                                                    <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                            @if ($match->is_guess == 1)
+                                                                @if($match->guessing_result == 1)
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvcolor.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#FFA800]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#FFA800]">1000 Poin</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                                @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                            @else
+                                                                <div class="flex items-center ml-2">
+                                                                    <img src="{{asset('images/acvgrey.png')}}" class="h-[35px]"/>
+                                                                    <div>
+                                                                        <span class="block font-sans text-[10px] text-[#6D6D6D]">Anda dapat</span>
+                                                                        <span class="block font-sans text-[12px] font-bold text-[#6D6D6D]">0 Poin</span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         @endif
                                                     </div>
                                                 @endif
