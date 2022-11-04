@@ -403,7 +403,7 @@
                 </div>
             </div>
             {{-- grid-flow-col --}}
-            <div class="klasemen grid grid-cols-1 lg:grid-rows-4 lg:grid-flow-col  gap-4 lg:p-8"></div>
+            <div class="klasemen grid lg:grid-rows-4 lg:grid-flow-col gap-4 lg:p-8"></div>
             <div class="flex mt-5">
                 <nav class="m-auto" aria-label="Page navigation example">
                     <ul class="inline-flex items-center -space-x-px">
