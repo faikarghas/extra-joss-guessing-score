@@ -42,8 +42,8 @@ class HomeController extends Controller
         $currentTime = date("Y-m-d H:i:s", $time);
 
         $myguess=[];
-        $myranking;
-        $mypoint;
+        $myranking = 0;
+        $mypoint = 0;
         $myguessRound16=[];
         $myguessQuarter=[];
         $myguessSemiFinal=[];
