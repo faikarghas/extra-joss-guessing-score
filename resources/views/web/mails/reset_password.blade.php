@@ -1,8 +1,17 @@
+{{-- Header --}}
+@slot('header')
+@component('mail::header', ['url' => config('app.url')])
+{{-- {{ config('app.name') }} --}}
+testtt
+<img src="{{asset('storage/logo/logo.jpg')}}" style="height: 75px;width: 75px;">
+
+@endcomponent
+@endslot
+
 @component('mail::message')
 # Reset Kata Sandi
  
 Anda menerima email ini karena meminta untuk penyetelan ulang kata sandi akun Anda
-
 
  
 @component('mail::button', ['url' => $url])
@@ -21,6 +30,6 @@ ExtraJoss
     
     "Jika Anda kesulitan mengklik tombol Reset Kata Sandi , salin dan tempel URL di bawah ini ke\n". 'browser web Anda:',
 ) 
-<span class="break-all">{{ $url }}?{{ $email }}</span>
+<span class="break-all">{{ $url }}?email={{ $email }}</span>
 @endslot
 @endcomponent
