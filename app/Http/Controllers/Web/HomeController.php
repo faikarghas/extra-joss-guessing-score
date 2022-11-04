@@ -117,8 +117,14 @@ class HomeController extends Controller
         $latestMatch = [];
         foreach ($twoLatestMatch as $key => $value) {
             if(count($twoLatestMatch) > 0){
-                if ($twoLatestMatch[0]->match_time == $twoLatestMatch[1]->match_time) {
-                    array_push($latestMatch,$value);
+                if (count($twoLatestMatch) == 1) {
+                    if ($twoLatestMatch[0]->match_time) {
+                        array_push($latestMatch,$value);
+                    }
+                } elseif(count($twoLatestMatch) == 2) {
+                    if ($twoLatestMatch[0]->match_time == $twoLatestMatch[1]->match_time) {
+                        array_push($latestMatch,$value);
+                    }
                 }
             }
         }
@@ -128,7 +134,6 @@ class HomeController extends Controller
             array_push($latestMatch,$twoLatestMatch[0]);
             }
         }
-
         if (Auth::check()) {
             // Tebakan per user
             $myguess = Guessing::leftJoin('users','guessings.id_user','=','users.id')

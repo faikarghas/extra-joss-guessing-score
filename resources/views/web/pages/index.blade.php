@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="">
                                         <div class="h-[77px] flex items-center">
-                                            <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->guessing_score_a? $match->guessing_score_a : 0}}</h6>
+                                            <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->score_a? $match->score_a : 0}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                 <div class="text-white flex flex-row">
                                     <div class="">
                                         <div class="h-[77px] flex items-center">
-                                            <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->guessing_score_b ? $match->guessing_score_b : 0}}</h6>
+                                            <h6 class="text-[40px] md:text-[60px] font-sans leading-[45px]">{{$match->score_b ? $match->score_b : 0}}</h6>
                                         </div>
                                     </div>
                                     <div class="text-center ml-6 flex flex-col items-center w-[60px] md:w-[90px]">
