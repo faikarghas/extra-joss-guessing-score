@@ -42,7 +42,8 @@ class HomeController extends Controller
         $currentTime = date("Y-m-d H:i:s", $time);
 
         $myguess=[];
-        $myranking=[];
+        $myranking;
+        $mypoint;
         $myguessRound16=[];
         $myguessQuarter=[];
         $myguessSemiFinal=[];
@@ -181,23 +182,25 @@ class HomeController extends Controller
             ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","9"]])
             ->get();
 
-            $listranking = User::select(DB::raw('ROW_NUMBER() OVER(ORDER BY total_point DESC) AS rank,name,total_point,id'))
-            ->where('role',0)
+            // $listranking = User::select(DB::raw('ROW_NUMBER() OVER(ORDER BY total_point DESC) AS rank,name,total_point,id'))
+            $listranking = User::where([['role','=',0]])
             ->orderBy('total_point','DESC')
+            ->orderBy('name','ASC')
             ->get();
 
             $currenRound = $round[0]->id;
 
             $checkQuiz = QuizIndicator::where([['id_user',Auth::user()->id],['quiz_'.$currenRound,1]])->get();
 
-
             foreach ($listranking as $key => $data) {
                 if ($data->id == Auth::user()->id) {
-                    array_push($myranking,$data);
+                    $myranking = $key + 1;
+                    $mypoint = $data->total_point;
                 }
             }
 
         }
+
 
         $klasemens = User::where('role',0)
         ->orderBy('total_point','DESC')
@@ -208,7 +211,6 @@ class HomeController extends Controller
         ->get();
 
         $totalPage = (int) ceil(count($totalp) / 16);
-
         $data = [
             'latestMatch' => $latestMatch,
             'onGoingMatches' => $onGoingMatches,
@@ -225,6 +227,7 @@ class HomeController extends Controller
             'myguessFinal' => $myguessFinal,
             'klasemens' => $klasemens,
             'myranking' => $myranking,
+            'mypoint' => $mypoint,
             'checkQuiz' => $checkQuiz,
             'round' => $round,
             'totalPage' => $totalPage
