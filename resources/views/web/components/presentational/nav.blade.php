@@ -14,7 +14,7 @@
         @endguest
         @auth
         <li class="flex items-center list-none cursor-pointer">
-            <a href="{{ route('logout') }}" class="font-head text-black md:text-[18px] lg:text-[20px] leading-[20px]"><img alt="icon user" src="{{asset('images/user_black.png')}}" class="w-[14px] pb-1"/></a>
+            <a href="{{ route('profil') }}" class="font-head text-black md:text-[18px] lg:text-[20px] leading-[20px]"><img alt="icon user" src="{{asset('images/user_black.png')}}" class="w-[14px] pb-1"/></a>
             {{-- <a href="{{route('profil')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->email }}</a></li> --}}
         <li class="flex items-center list-none font-head text-black text-[20px] mx-2">|</li>
         <li class="flex items-center list-none cursor-pointer"><a href="{{ route('logout') }}" class="font-head text-black md:text-[18px] lg:text-[20px] leading-[20px]">LOGOUT</a></li>
