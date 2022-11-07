@@ -21,20 +21,20 @@
             <div class="basis-full relative">
                 <form class="flex flex-wrap justify-between" method="POST" action="{{ route('update.profile',$profil[0]->id) }}" >
                 @csrf
-                    <div class="basis-[48%] flex flex-wrap justify-between">
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                    <div class="basis-full lg:basis-[48%] flex flex-wrap justify-between">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="nama" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">NAMA*</label>
                             <input id="nama" type="text" name="nama" value="{{ $profil[0]->name }}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer"  required>
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="username" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">USERNAME*</label>
                             <input id="username" type="text" value="{{$profil[0]->username}}" name="username" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required="">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="instagram" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">AKUN INSTAGRAM</label>
                             <input id="instagram" type="text" name="instagram" value="{{$profil[0]->account_instagram}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="@">
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="email" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT EMAIL*</label>
                             <input id="email" type="text" name="email" value="{{$profil[0]->email}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
@@ -49,7 +49,7 @@
                     </div>
                     
 
-                    <div class="basis-[48%] flex flex-wrap justify-between">
+                    <div class="basis-full lg:basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">KOTA*</label>
                             <select id="provinsi" name="provinsi" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  focus:outline-none focus:ring-0 focus:border-black-600 peer">
@@ -77,11 +77,11 @@
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT RUMAH*</label>
                             <input type="text" name="address" value="{{$profil[0]->address}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN JERSEY*</label>
                             <input type="text" name="size_jersey" value="{{$profil[0]->size_jersey}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="S, M, L, XXL" required=>
                         </div>
-                        <div class="self-start relative z-0 mb-6 w-full group basis-[48%]">
+                        <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN SEPATU*</label>
                             <input type="text" name="size_sepatu" value="{{$profil[0]->size_sepatu}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="36, 37, 38, 39, 40, 41, 42, 43, 44, 45" required>
                         </div>
