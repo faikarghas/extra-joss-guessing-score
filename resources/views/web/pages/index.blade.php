@@ -445,13 +445,13 @@
 
     {{-- MODAL QUIZ --}}
     @include('web.components.modal.quiz')
-    <div class="modal-quizDis z-50 hidden flex-wrap bg-black w-[400px] md:w-[600px] p-4 lg:p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+    <div class="modal-quizDis z-50 hidden flex-wrap bg-black w-[80%] h-[150px] md:w-[600px] p-4 lg:p-14 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
         <div class="close">
             <div class="">
                 <img src="{{asset('/images/close.png')}}" />
             </div>
         </div>
-        <h3 class="text-[#FCEF0A] font-head text-[35px] leading-[25px]">Anda Sudah Mengikuti Quiz</h3>
+        <h3 class="text-[#FCEF0A] font-head text-[35px] leading-[35px] quizDone">Anda Sudah Mengikuti Quiz</h3>
     </div>
 </main>
 @endsection
