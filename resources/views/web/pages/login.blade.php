@@ -46,11 +46,11 @@
                    <p class="font-sans mr-2">Belum punya akun? </p>
                    <a href={{route('daftar')}} class="font-sans text-blue-700">Daftar sekarang</a>
                 </div>
-                 @if (Route::has('password.request'))
+                 {{-- @if (Route::has('password.request'))
                     <div class="flex mt-4 justify-center">
                         <a href={{ route('password.request.custom') }} class="font-sans text-blue-700">{{ __('Lupa Password ?') }}</a>
                     </div>
-                 @endif
+                 @endif --}}
 
             </div>
             <div class="basis-full lg:basis-[48%]">
