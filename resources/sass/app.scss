@@ -55,7 +55,7 @@
     vertical-align: middle;
     line-height: 2;
     text-align: center;
-    height: 135px;
+    min-height: 135px;
   }
 
   .team-item:nth-child(odd){
@@ -153,6 +153,18 @@
   }
 
   .bracket-4 {
+      .team-3rd-play-off{
+        background-color: #202124;
+        padding: .5rem;
+        margin: 0px 10px 10px 10px;
+        vertical-align: middle;
+        line-height: 2;
+        text-align: center;
+        min-height: 135px;
+        border: 1px solid #4A4A4A;
+        border-radius: 0.5em;
+      }
+
       .team-item:after {
         display: none;
       }

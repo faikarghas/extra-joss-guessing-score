@@ -84,6 +84,14 @@ class HomeController extends Controller
         ->where([["fmatches.status","1"],["fmatches.round","7"]])
         ->get();
 
+        // Daftar 3rd
+        $match_3rdplace = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+        ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+        ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+        ->select("fmatches.id","c1.name AS team1", "c2.name AS team2","score_a","score_b","stadium","match_time","expired_time","c3.title as round","c1.flag_image as flag_team1","c2.flag_image as flag_team2","match_status","c1.group")
+        ->where([["fmatches.status","1"],["fmatches.round","10"]])
+        ->get();
+
         // Daftar  final
         $match_final = Fmatch::join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
         ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
@@ -218,6 +226,7 @@ class HomeController extends Controller
             'match_round_16' => $match_round_16,
             'match_quarter' => $match_quarter,
             'match_semi_finals' => $match_semi_finals,
+            'match_3rdplace' => $match_3rdplace,
             'match_final' => $match_final,
             'currentTime' => $currentTime,
             'myguess' => $myguess,
