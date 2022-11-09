@@ -23,7 +23,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                <form method="POST" action="{{ route('password.update') }}">
+                <form method="POST" action="{{ route('reset.password.post') }}">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
                   <div class="relative z-0 mb-6 w-full group">

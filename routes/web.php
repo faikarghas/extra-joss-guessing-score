@@ -40,7 +40,7 @@ Route::get('reset-password/{token}', [HomeController::class, 'showResetPasswordF
 
 // Route::get('resetpassword', [HomeController::class, 'showResetPasswordForm'])->name('reset.password.get');
 
-//Route::post('reset-password', [HomeController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+Route::post('reset-password', [HomeController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 Route::group(['middleware' => ['guest']], function() {
@@ -51,7 +51,6 @@ Route::group(['middleware' => ['guest']], function() {
     /* facebook Login */
     Route::get('/login/facebook', [FacebookLoginController::class, 'redirect'])->name('login.facebook-redirect');
     Route::get('/login/facebook/callback', [FacebookLoginController::class, 'callback'])->name('login.facebook-callback');
-    
 });
 
 Auth::routes();

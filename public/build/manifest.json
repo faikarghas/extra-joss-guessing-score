@@ -8,17 +8,17 @@
     "src": "public/fonts/WorkSans-Regular.woff"
   },
   "resources/js/app.ts": {
-    "file": "assets/app.e509dba8.js",
+    "file": "assets/app.1ca429e5.js",
     "src": "resources/js/app.ts",
     "isEntry": true
   },
   "resources/sass/app.scss": {
-    "file": "assets/app.dcfa3b48.css",
+    "file": "assets/app.73ad9a73.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.d8f828af.css",
+    "file": "assets/app.31bb1938.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
