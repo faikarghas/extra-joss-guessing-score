@@ -303,7 +303,7 @@
                         </ul>
                         <ul class="bracket bracket-4 relative">
                             @auth
-                                @foreach($match_3rdplace as $match)
+                                @foreach($myguess3rdplayoff as $match)
                                     <div class="absolute top-[320px] team-3rd-play-off">
                                         @include('web.components.presentational.guessBoxWithLogic',['match'=>$match])
                                     </div>

@@ -47,6 +47,7 @@ class HomeController extends Controller
         $myguessRound16=[];
         $myguessQuarter=[];
         $myguessSemiFinal=[];
+        $myguess3rdplayoff=[];
         $myguessFinal=[];
         $checkQuiz=[];
 
@@ -181,6 +182,15 @@ class HomeController extends Controller
             ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","7"]])
             ->get();
 
+            $myguess3rdplayoff = Guessing::leftJoin('users','guessings.id_user','=','users.id')
+            ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
+            ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
+            ->join('countries as c2', 'fmatches.id_team_b', '=', 'c2.id')
+            ->join('rounds as c3', 'fmatches.round', '=', 'c3.id')
+            ->select('guessings.id as id_guess','c1.name AS team1', 'c2.name AS team2','guessings.id_match as id_match','users.name','fmatches.round','guessing_score_a','guessing_score_b','c1.flag_image as flag_team1','c2.flag_image as flag_team2','c3.title as round','match_time','is_guess','c1.group','guessing_result')
+            ->where([['guessings.id_user',Auth::user()->id],["fmatches.status","1"],["fmatches.round","10"]])
+            ->get();
+
             $myguessFinal = Guessing::leftJoin('users','guessings.id_user','=','users.id')
             ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
             ->join('countries as c1', 'fmatches.id_team_a', '=', 'c1.id')
@@ -233,6 +243,7 @@ class HomeController extends Controller
             'myguessRound16' => $myguessRound16,
             'myguessQuarter' => $myguessQuarter,
             'myguessSemiFinal' => $myguessSemiFinal,
+            'myguess3rdplayoff' => $myguess3rdplayoff,
             'myguessFinal' => $myguessFinal,
             'klasemens' => $klasemens,
             'myranking' => $myranking,
