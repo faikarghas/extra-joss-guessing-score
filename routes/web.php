@@ -40,7 +40,7 @@ Route::get('reset-password/{token}', [HomeController::class, 'showResetPasswordF
 
 // Route::get('resetpassword', [HomeController::class, 'showResetPasswordForm'])->name('reset.password.get');
 
-Route::post('reset-password', [HomeController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+//Route::post('reset-password', [HomeController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
 Route::group(['middleware' => ['guest']], function() {
