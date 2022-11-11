@@ -348,9 +348,21 @@ input:-webkit-autofill:active{
   }
 
 .slick-next{
-  right: 0;
+  right: 25px !important;
+  z-index: 5 !important;
+}
+
+.slick-next::before{
+  color: rgba(0, 0, 0, 0.377) !important;
+  font-size: 35px !important;
+}
+
+.slick-prev::before{
+  color: rgba(0, 0, 0, 0.377) !important;
+  font-size: 35px !important;
 }
 
 .slick-prev{
-  left: 0;
+  left: 25px !important;
+  z-index: 5 !important;
 }

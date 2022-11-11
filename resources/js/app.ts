@@ -67,7 +67,7 @@ import { getCurrentDate } from './utils/index';
                 autoplaySpeed: 2000,
                 focusOnSelect: false,
                 pauseOnFocus:false,
-                arrows: false
+                arrows: true
             });
             // let requiredField = ['name','email','username','password','phone','provinsi','city','address','size_jersey','size_sepatu','nik']
             // $('.modal-register form .required').each(function () {
