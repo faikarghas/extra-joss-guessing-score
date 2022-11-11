@@ -21,7 +21,7 @@
                             <span class="font-sans text-femmy-pdark">Tokopedia</span>
                         </div>
                     </a>
-                    <a href="" target="_blank" rel="noopener" class="bg-white w-[100%] lg:w-[244px] h-[192px] rounded-full rounded-[2rem] lg:rounded-3xl p-4 flex flex-row lg:flex-col justify-center items-center shadow-[7px_10px_18px_rgba(0,0,0,0.25)]">
+                    <a href="https://www.lazada.co.id/shop/bintang-toedjoe-official-store?path=index.htm&lang=id&pageTypeId=1" target="_blank" rel="noopener" class="bg-white w-[100%] lg:w-[244px] h-[192px] rounded-full rounded-[2rem] lg:rounded-3xl p-4 flex flex-row lg:flex-col justify-center items-center shadow-[7px_10px_18px_rgba(0,0,0,0.25)]">
                         <div class="w-[180px] flex flex-row lg:flex-col justify-left items-center">
                             <img
                             alt="image-femmy"
@@ -41,7 +41,7 @@
                             <span class="font-sans text-femmy-pdark">Shopee</span>
                         </div>
                     </a>
-                    <a href="" target="_blank" rel="noopener" class="bg-white w-[100%] lg:w-[244px] h-[192px] rounded-full rounded-[2rem] lg:rounded-3xl p-4 flex flex-row lg:flex-col justify-center items-center shadow-[7px_10px_18px_rgba(0,0,0,0.25)]">
+                    <a href="https://www.tiktok.com/@generasibejo?_t=8XGLsVCqmjR&_r=1" target="_blank" rel="noopener" class="bg-white w-[100%] lg:w-[244px] h-[192px] rounded-full rounded-[2rem] lg:rounded-3xl p-4 flex flex-row lg:flex-col justify-center items-center shadow-[7px_10px_18px_rgba(0,0,0,0.25)]">
                         <div class="w-[180px] flex flex-row lg:flex-col justify-left items-center">
                             <img
                             alt="image-femmy"
