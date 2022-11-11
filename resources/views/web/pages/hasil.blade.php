@@ -895,7 +895,7 @@
                                     @auth
                                         @foreach($myguess3rdplayoff as $match)
                                             <div class="absolute top-[320px] team-3rd-play-off">
-                                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">Group {{$match->group}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
+                                                <span class="block mb-2.5 text-[16px] font-sans text-[#acacac]">{{$match->round}} • {{date('M d, H:i', strtotime($match->match_time))}}</span>
                                                 <div class="flex flex-wrap">
                                                     <ul class="basis-1/2 border-r-[1px] border-[#383838]">
                                                         <li class="mb-2 flex items-center">
