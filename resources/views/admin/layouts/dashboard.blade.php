@@ -86,7 +86,7 @@
                   }
               },
               success:(response) => {
-                  console.log(response);
+                  // console.log(response);
                   location.reload()
               }
           })

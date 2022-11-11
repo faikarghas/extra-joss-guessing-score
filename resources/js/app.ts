@@ -61,6 +61,14 @@ import { getCurrentDate } from './utils/index';
             klasemen.nextPage();
             klasemen.prevPage();
 
+            $('.banner').slick({
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                focusOnSelect: false,
+                pauseOnFocus:false,
+                arrows: false
+            });
             // let requiredField = ['name','email','username','password','phone','provinsi','city','address','size_jersey','size_sepatu','nik']
             // $('.modal-register form .required').each(function () {
             //     $(this).on('input',function (el,i) {

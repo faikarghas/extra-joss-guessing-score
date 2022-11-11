@@ -5,7 +5,20 @@
 @endsection
 @section('header')
     <header class="relative pt-[85px] sm:pt-[130px] md:pt-0">
-        <img src="{{asset('/images/banner.jpg')}}" class="w-full h-full"/>
+        <div class="banner">
+            <picture>
+                <source media="(min-width:650px)" srcset="{{asset('/images/banner.jpg')}}">
+                <img src="{{asset('/images/banner/banner_mobile.jpg')}}" alt="Flowers" class="w-full">
+            </picture>
+            <picture>
+                <source media="(min-width:650px)" srcset="{{asset('/images/banner/photo_desktop.jpg')}}">
+                <img src="{{asset('/images/banner/photo_mobile.jpg')}}" alt="Flowers" class="w-full">
+            </picture>
+            <picture>
+                <source media="(min-width:650px)" srcset="{{asset('/images/banner/video_desktop.jpg')}}">
+                <img src="{{asset('/images/banner/video_mobile.jpg')}}" alt="Flowers" class="w-full">
+            </picture>
+        </div>
         @include('web.components.presentational.nav')
     </header>
 @endsection
