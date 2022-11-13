@@ -34,6 +34,7 @@ import { getCurrentDate } from './utils/index';
             const menu = new Menu();
             const klasemen = new Klasemen();
 
+
             // Init all functionality
             menu.openMenuMobile();
             menu.closeMenuMobile();
@@ -52,6 +53,7 @@ import { getCurrentDate } from './utils/index';
             quiz.nextQuiz();
             quiz.storeCheckedInput();
 
+            register.submitHandler();
             register.seletCity();
 
             klasemen.fetchKlasemenData();
@@ -69,20 +71,6 @@ import { getCurrentDate } from './utils/index';
                 pauseOnFocus:false,
                 arrows: true
             });
-            // let requiredField = ['name','email','username','password','phone','provinsi','city','address','size_jersey','size_sepatu','nik']
-            // $('.modal-register form .required').each(function () {
-            //     $(this).on('input',function (el,i) {
-            //         let crf:Array<string> = []
-            //         crf.push($(el.target).attr('name'))
-
-            //         let uniq = [...new Set(crf)];
-            //         console.log(crf);
-            //     })
-            // })
-
-            /**
-             * About Modules
-             */
 
         });
         console.log('The DOM may not be ready!')

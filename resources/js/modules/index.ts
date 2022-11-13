@@ -180,7 +180,6 @@ export class Quiz{
                     }
                 },
                 success:(data) => {
-                    console.log(data);
 
                     $('.qz').html('lihat quiz');
                     $('.modal-quiz').css('display','block')
@@ -326,7 +325,6 @@ export class Quiz{
                     }
                 },
                 success:function(data){
-                    console.log(data);
                     $(e.target).html('Terkirim')
                     $('.quiz-wrapper').remove();
                     $('.act-wrapper').remove();
@@ -352,9 +350,82 @@ export class Quiz{
 }
 
 export class Register{
+    checkInput: Array<any>
+
+    constructor(){
+        this.checkInput = [];
+    }
+
+    submitHandler(): void{
+        $('.modal-register form input').each( (i,ev) => {
+
+            $(ev).on('change', (e) => {
+                let id = $(e.target).attr('id')
+
+
+                if ($(e.target).val()) {
+                    this.checkInput.push(id)
+                    this.checkInput = this.checkInput.filter((v, i, a) => a.indexOf(v) === i);
+                    console.log(this.checkInput,'oke+');
+                } else {
+                    console.log('kosong');
+
+                    this.checkInput = this.checkInput.filter((v,a)=>{
+                        return v !== id
+                    })
+                    console.log(this.checkInput,'nok');
+
+                }
+
+                if (this.checkInput.length == 12) {
+                    $('.reg-submit').prop('disabled', false);
+                    $('.reg-submit').css('background-color','#FF0000')
+                    $('.reg-submit').css('color','#FFFFFF')
+                } else {
+                    // disable
+                    $('.reg-submit').prop('disabled', true);
+                    $('.reg-submit').css('background-color','#E5E7EB')
+                    $('.reg-submit').css('color','#000000')
+                }
+            })
+        })
+
+        $('.modal-register form select').each( (i,ev) => {
+
+            $(ev).on('change', (e) => {
+                let id = $(e.target).attr('id')
+
+
+                if ($(e.target).val()) {
+                    this.checkInput.push(id)
+                    this.checkInput = this.checkInput.filter((v, i, a) => a.indexOf(v) === i);
+                    console.log(this.checkInput,'oke+');
+                } else {
+                    console.log('kosong');
+
+                    this.checkInput = this.checkInput.filter((v,a)=>{
+                        return v !== id
+                    })
+                    console.log(this.checkInput,'nok');
+
+                }
+
+                if (this.checkInput.length == 12) {
+                    $('.reg-submit').prop('disabled', false);
+                    $('.reg-submit').css('background-color','#FF0000')
+                    $('.reg-submit').css('color','#FFFFFF')
+                } else {
+                    // disable
+                    $('.reg-submit').prop('disabled', true);
+                    $('.reg-submit').css('background-color','#E5E7EB')
+                    $('.reg-submit').css('color','#000000')
+                }
+            })
+        })
+    }
+
     seletCity(): void{
         $('#provinsi').on('change', function () {
-            console.log($(this).val());
 
             $.ajax({
                 type:'POST',
@@ -365,10 +436,8 @@ export class Register{
                     }
                 },
                 success:(response) => {
-                    console.log(response);
                     $('#city').empty();
                     $.each(response, function (index, item) {
-                        console.log(name);
                         $('#city').append(new Option(item.name, item.id))
                     })
                 }

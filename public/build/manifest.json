@@ -8,7 +8,7 @@
     "src": "public/fonts/WorkSans-Regular.woff"
   },
   "resources/js/app.ts": {
-    "file": "assets/app.e32afb23.js",
+    "file": "assets/app.41d7a9f4.js",
     "src": "resources/js/app.ts",
     "isEntry": true
   },
@@ -18,7 +18,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.3801cffe.css",
+    "file": "assets/app.d9fd9e10.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

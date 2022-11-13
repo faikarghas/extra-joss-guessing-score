@@ -97,11 +97,10 @@
                                 <span class="font-medium">{{ $errors->first('city') }}</span>
                                 </div>
                             @endif
-                            
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">ALAMAT RUMAH*</label>
-                            <input type="text" name="address" class="required font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required value="{{ old('address') }}">
+                            <input type="text" name="address" id="address" class="required font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required value="{{ old('address') }}">
                             @if ($errors->has('address'))
                                 <div class="p-1 mt-2 text-[12px] text-red-700  role="alert">
                                 <span class="font-medium">{{ $errors->first('address') }}</span>
@@ -110,7 +109,7 @@
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN JERSEY*</label>
-                            <input type="text" name="size_jersey" class="required font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="S, M, L, XL, XXL" required value="{{ old('size_jersey') }}">
+                            <input type="text" name="size_jersey" id="size_jersey" class="required font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="S, M, L, XL, XXL" required value="{{ old('size_jersey') }}">
                             @if ($errors->has('size_jersey'))
                                 <div class="p-1 mt-2 text-[12px] text-red-700  role="alert">
                                 <span class="font-medium">{{ $errors->first('size_jersey') }}</span>
@@ -119,7 +118,7 @@
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full lg:basis-[48%]">
                             <label for="password" class="block mb-2 text-sm font-medium text-[#A0A0A0] dark:text-gray-300">UKURAN SEPATU*</label>
-                            <input type="text" name="size_sepatu" class="required font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="36, 37, 38, 39, 40, 41, 42, 43, 44, 45" required value="{{ old('size_sepatu') }}">
+                            <input type="text" name="size_sepatu" id="size_sepatu" class="required font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="36, 37, 38, 39, 40, 41, 42, 43, 44, 45" required value="{{ old('size_sepatu') }}">
                             @if ($errors->has('size_sepatu'))
                                 <div class="p-1 mt-2 text-[12px] text-red-700  role="alert">
                                 <span class="font-medium">{{ $errors->first('size_sepatu') }}</span>
@@ -138,7 +137,7 @@
                             @endif
                         </div>
                     </div>
-                  <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans">KIRIM</button>
+                  <button type="submit" class="bg-gray-200 text-gray-600 p-4 w-full font-sans reg-submit">KIRIM</button>
                     @if($message = Session::get('email_duplicate'))
                         <div class="p-4 mt-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                             <span class="font-medium">{{$message}}</span>
