@@ -33,7 +33,7 @@
                         </div>
                     @endif
                   </div>
-                  <button type="submit" class="bg-[#FF0000] text-gray-600 p-4 w-full font-sans">LOG IN</button>
+                  <button type="submit" class="bg-[#FF0000] text-white p-4 w-full font-sans">LOG IN</button>
                 </form>
                 <div class="absolute right-[-15%] top-[50%] translate-y-[-50%] hidden lg:block">OR</div>
 
