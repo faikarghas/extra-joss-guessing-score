@@ -71,6 +71,22 @@ class DashboardController extends Controller
         return view('admin.dashboard.index',$data);
     }
 
+    public function leaderboard(){
+
+        $klasemens = User::where('role',0)
+        ->orderBy('total_point','DESC')
+        ->orderBy('name','ASC')
+        ->get();
+
+
+        $data = [
+            'klasemens' => $klasemens,
+        ];
+
+        return view('admin.dashboard.leaderboard',$data);
+    }
+
+
     public function updateScore(){
         $upPoint = new UpdatePointHelper();
         $upPoint->updatePoint();

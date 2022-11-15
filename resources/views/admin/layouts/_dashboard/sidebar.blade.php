@@ -16,40 +16,46 @@
 
    <ul class="menu-inner py-1">
      <!-- Dashboard -->
-     <li class="menu-item {{ set_active('dashboard.index') }}">
+    <li class="menu-item {{ set_active('dashboard.index') }}">
        <a href="{{ route('dashboard.index') }}" class="menu-link">
          <i class="menu-icon tf-icons bx bx-home-circle"></i>
          <div data-i18n="Analytics">Dashboard</div>
        </a>
-     </li>
-     <li class="menu-item {{ set_active(['sliders.index','sliders.create', 'sliders.edit']) }}">
+    </li>
+    <li class="menu-item {{ set_active('dashboard.leaderboard') }}">
+      <a href="{{ route('dashboard.leaderboard') }}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <div data-i18n="Analytics">Leaderboard</div>
+      </a>
+    </li>
+    <li class="menu-item {{ set_active(['sliders.index','sliders.create', 'sliders.edit']) }}">
       <a href="{{ route('sliders.index') }}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-image"></i>
         <div data-i18n="Analytics">Slider / Banner</div>
       </a>
     </li>
-     <li class="menu-header small text-uppercase">
+    <li class="menu-header small text-uppercase">
        <span class="menu-header-text">Pages</span>
-     </li>
+    </li>
       <!-- Pages -->
-      <li class="menu-item {{ set_active(['posts.index','posts.create', 'posts.edit']) }} {{ set_open(['posts.index','posts.create', 'posts.edit']) }} ">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-news"></i>
-          <div data-i18n="Layouts">Posts</div>
-        </a>
-        <ul class="menu-sub">
-          <li class="menu-item {{ set_active(['posts.index']) }} ">
-            <a href="{{ route('posts.index') }}" class="menu-link">
-              <div data-i18n="Without menu">List</div>
-            </a>
-          </li>
-          <li class="menu-item {{ set_active(['posts.create']) }}">
-            <a href="{{ route('posts.create') }}" class="menu-link">
-              <div data-i18n="Without navbar">Create</div>
-            </a>
-          </li>
-        </ul>
-      </li>
+    <li class="menu-item {{ set_active(['posts.index','posts.create', 'posts.edit']) }} {{ set_open(['posts.index','posts.create', 'posts.edit']) }} ">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-news"></i>
+        <div data-i18n="Layouts">Posts</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item {{ set_active(['posts.index']) }} ">
+          <a href="{{ route('posts.index') }}" class="menu-link">
+            <div data-i18n="Without menu">List</div>
+          </a>
+        </li>
+        <li class="menu-item {{ set_active(['posts.create']) }}">
+          <a href="{{ route('posts.create') }}" class="menu-link">
+            <div data-i18n="Without navbar">Create</div>
+          </a>
+        </li>
+      </ul>
+    </li>
 
      <!-- Components -->
      <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
