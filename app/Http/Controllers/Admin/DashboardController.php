@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Lib\UpdatePointHelper;
 use App\Models\Guessing;
+use App\Models\User;
+use Cache;
 
 
 use Illuminate\Http\Request;
@@ -40,8 +42,30 @@ class DashboardController extends Controller
         ->where([['fmatches.match_status','=',"CLOSE"],['guessings.status','=',0],['guessings.is_guess','=',1]]) // pertandingan sudah selesai,staus update point masih 0 dan sudah ditebak
         ->get();
 
+        $total_user = User::where('role',0)->get();
+
+        $klasemens = User::where('role',0)
+        ->orderBy('total_point','DESC')
+        ->orderBy('name','ASC')
+        ->get();
+
+        $user_online = User::select("*")
+                        ->whereNotNull('last_seen')
+                        ->orderBy('last_seen', 'DESC')
+                        ->paginate(10);
+        $total_online = 0;
+        foreach ($user_online as $key => $user) {
+            if (Cache::has('user-is-online-' . $user->id)) {
+                $total_online++;
+            }
+        }
+
         $data = [
-            'userNeedUpdateForGuess' => count($userNeedUpdateForGuess) + count($userWrongGuess)
+            'userNeedUpdateForGuess' => count($userNeedUpdateForGuess) + count($userWrongGuess),
+            'total_user' => count($total_user),
+            'total_online' => $total_online,
+            'klasemens' => $klasemens,
+            'user_online' => $user_online
         ];
 
         return view('admin.dashboard.index',$data);

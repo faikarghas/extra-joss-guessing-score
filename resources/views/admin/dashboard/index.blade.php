@@ -44,7 +44,7 @@
                 </div>
               </div>
               <span class="fw-semibold d-block mb-1">User Register</span>
-              <h3 class="card-title mb-2">12,628</h3>
+              <h3 class="card-title mb-2">{{$total_user}}</h3>
             </div>
           </div>
         </div>
@@ -57,11 +57,43 @@
                 </div>
               </div>
               <span class="fw-semibold d-block mb-1">User Online</span>
-              <h3 class="card-title text-nowrap mb-1">4,679</h3>
+              <h3 class="card-title text-nowrap mb-1">{{$total_online}}</h3>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-md-12 order-3">
+      <table class="table table-bordered data-table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Last Seen</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($user_online as $key => $user)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                        {{ Carbon\Carbon::parse($user->last_seen)->diffForHumans() }}
+                    </td>
+                    <td>
+                        @if(Cache::has('user-is-online-' . $user->id))
+                            <span class="text-success">Online</span>
+                        @else
+                            <span class="text-secondary">Offline</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
     </div>
   </div>
 @endsection 
