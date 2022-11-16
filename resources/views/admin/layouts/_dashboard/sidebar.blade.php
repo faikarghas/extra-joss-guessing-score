@@ -61,6 +61,7 @@
     </li>
     @endif
 
+    @if (!Auth::user()->email == 'syahril.anwar@b7leap.com')
      <!-- Components -->
      <li class="menu-header small text-uppercase"><span class="menu-header-text">Games / Quiz</span></li>
      <li class="menu-item {{ set_active(['teams.index','teams.edit','matchs.create', 'matchs.edit']) }} {{ set_open(['teams.index','matchs.index', 'teams.edit', 'matchs.create','rounds.index']) }} ">
@@ -115,6 +116,8 @@
         </li>
       </ul>
     </li>
+    @endif
+
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">User</span></li>
       <li class="menu-item  {{ set_active(['users.index']) }}">

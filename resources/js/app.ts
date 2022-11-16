@@ -38,6 +38,8 @@ import { getCurrentDate } from './utils/index';
             // Init all functionality
             menu.openMenuMobile();
             menu.closeMenuMobile();
+            menu.closeTooltip();
+
 
             guess.filterInput();
             guess.openGuessModal();

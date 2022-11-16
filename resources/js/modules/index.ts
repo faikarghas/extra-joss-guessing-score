@@ -461,6 +461,12 @@ export class Menu {
             $('body').css('overflow','auto')
         })
     }
+
+    closeTooltip(): void {
+        $('.close-tooltip').on('click',function (e) {
+            $('.lengkapi_pop').hide()
+        })
+    }
 }
 
 export class Klasemen {
