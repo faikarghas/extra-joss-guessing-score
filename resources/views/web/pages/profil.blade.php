@@ -47,7 +47,7 @@
                             <input id="nik" type="text" name="nik" value="{{$profil[0]->nik}}" class="font-sans block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-black-600 peer" placeholder="" required>
                         </div>
                     </div>
-                    
+
 
                     <div class="basis-full lg:basis-[48%] flex flex-wrap justify-between">
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
@@ -58,8 +58,8 @@
                                     <option @selected($row->id == $profil[0]->kota)
                                     value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
-                                
-                              
+
+
                             </select>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">
@@ -70,7 +70,7 @@
                                     <option @selected($row->id == $profil[0]->kecamatan)
                                     value="{{$row->id}}">{{$row->name}}</option>
                                 @endforeach
-                              
+
                             </select>
                         </div>
                         <div class="self-start relative z-0 mb-6 w-full group basis-full">

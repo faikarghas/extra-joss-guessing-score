@@ -145,6 +145,7 @@ class HomeController extends Controller
             }
         }
         if (Auth::check()) {
+
             // Tebakan per user
             $myguess = Guessing::leftJoin('users','guessings.id_user','=','users.id')
             ->leftJoin('fmatches','guessings.id_match','=','fmatches.id')
@@ -485,6 +486,7 @@ class HomeController extends Controller
         $profile->name= $request->input('nama');
         $profile->email= $request->input('email');
         $profile->username= $request->input('username');
+        $profile->account_instagram= $request->input('instagram');
         $profile->phone= $request->input('phone');
         $profile->nik= $request->input('nik');
         $profile->kota= $request->input('provinsi');

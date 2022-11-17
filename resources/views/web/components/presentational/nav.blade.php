@@ -18,12 +18,12 @@
                 <a href="{{ route('profil') }}" class="font-head text-black md:text-[18px] lg:text-[20px] leading-[20px] relative">
                     <img alt="icon user" src="{{asset('images/user_black.png')}}" class="w-[14px] pb-1"/>
                 </a>
-                @if (Auth::user()->google_id)
-                <div class="lengkapi_pop inline-block absolute left-[-10px] top-[42px] w-[190px] z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700">
-                    <p class="font-sans">Lengkapi Profilmu</p>
-                    <div class="tooltip-arrow top-[-5px]" data-popper-arrow></div>
-                    <div class="absolute cursor-pointer top-2 right-2 close-tooltip">X</div>
-                </div>
+                @if(Auth::user()->google_id && !Auth::user()->name && !Auth::user()->email &&!Auth::user()->username && !Auth::user()->phone && !Auth::user()->nik && !Auth::user()->kota && !Auth::user()->kecamatan && !Auth::user()->address && !Auth::user()->size_jersey && !Auth::user()->size_sepate )
+                        <div class="lengkapi_pop inline-block absolute left-[-10px] top-[42px] w-[190px] z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700">
+                        <p class="font-sans">Lengkapi Profilmu</p>
+                        <div class="tooltip-arrow top-[-5px]" data-popper-arrow></div>
+                        <div class="absolute cursor-pointer top-2 right-2 close-tooltip">X</div>
+                    </div>
                 @endif
             </div>
             {{-- <a href="{{route('profil')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->email }}</a> --}}
@@ -72,12 +72,14 @@
                             <a href="{{route('profil')}}" class=" w-[14px] mr-2 pb-1 relative">
                                 <img alt="icon user" src="{{asset('images/user.png')}}" class=""/>
                             </a>
-                            @if (Auth::user()->google_id)
-                                <div class="lengkapi_pop inline-block absolute left-[-12px] top-[42px] w-[190px] z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700">
-                                    <p class="font-sans">Lengkapi Profilmu</p>
-                                    <div class="tooltip-arrow top-[-5px]" data-popper-arrow></div>
-                                    <div class="absolute cursor-pointer top-2 right-2 close-tooltip">X</div>
-                                </div>
+                            @if(Auth::user()->google_id )
+                                @if (!Auth::user()->name && !Auth::user()->email &&!Auth::user()->username && !Auth::user()->phone && !Auth::user()->nik && !Auth::user()->kota && !Auth::user()->kecamatan && !Auth::user()->address && !Auth::user()->size_jersey && !Auth::user()->size_sepate)
+                                    <div class="lengkapi_pop inline-block absolute left-[-10px] top-[42px] w-[190px] z-10 py-3 px-4 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700">
+                                        <p class="font-sans">Lengkapi Profilmu</p>
+                                        <div class="tooltip-arrow top-[-5px]" data-popper-arrow></div>
+                                        <div class="absolute cursor-pointer top-2 right-2 close-tooltip">X</div>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                         <a href="{{route('profil')}}" class="font-head text-[#FFEC00] text-[20px] leading-[18px]">{{ Auth::user()->username }}</a>
