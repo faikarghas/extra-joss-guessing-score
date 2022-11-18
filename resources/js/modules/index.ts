@@ -479,6 +479,7 @@ export class Klasemen {
         this.offestLoad = 16
         this.currentRound = 5
         this.currentPage = 0
+        this.totalPage = 0
     }
 
     loadMore(): void {
@@ -589,6 +590,8 @@ export class Klasemen {
                 }
                 $('.klasemen').empty()
                 // this.offestLoad = 8
+                this.totalPage = res.data.length
+
                 res.data.forEach((el,i) => {
                     let splitName = el.name.split(' ')
                     let initialName = '';
@@ -641,44 +644,49 @@ export class Klasemen {
     // Pagination
     nextPage(): any{
         $('.nextPage').on('click', (e) => {
-            let page:any = $(e.target).attr('page');
-            let currentPage = this.currentPage + 1;
+            let tp = $(e.target).attr('tp');
+            console.log(this.currentPage);
+            console.log(tp);
 
-            $.ajax({
-                type:'GET',
-                url:`${base_url}/klasemen/${(currentPage * this.offestLoad)}/${this.currentRound}`,
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                error: function(xhr, error){
-                    if (xhr.status === 500) {
-                        console.log(error);
-                    }
-                },
-                success:(res)=>{
-                    $('.klasemen').empty()
+            if (this.currentPage + 1 !== tp) {
+                this.currentPage = this.currentPage + 1;
 
-                    res.data.forEach((el,i) => {
-                        let splitName = el.name.split(' ')
-                        let initialName = '';
-                        if(splitName.length>1) {
-                            initialName = el.name.split(' ')[1].split('')[0]
+                $.ajax({
+                    type:'GET',
+                    url:`${base_url}/klasemen/${(this.currentPage * this.offestLoad)}/${this.currentRound}`,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    error: function(xhr, error){
+                        if (xhr.status === 500) {
+                            console.log(error);
                         }
-                        $('.klasemen').append(`
-                        <div class="flex items-center w-260px">
-                            <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(currentPage * this.offestLoad) + (i + 1)}</span>
-                            <div class="basis-[25%]">
-                                <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
-                                    ${el.name.split('')[0]}${initialName}
+                    },
+                    success:(res)=>{
+                        $('.klasemen').empty()
+
+                        res.data.forEach((el,i) => {
+                            let splitName = el.name.split(' ')
+                            let initialName = '';
+                            if(splitName.length>1) {
+                                initialName = el.name.split(' ')[1].split('')[0]
+                            }
+                            $('.klasemen').append(`
+                            <div class="flex items-center w-260px">
+                                <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(this.currentPage * this.offestLoad) + (i + 1)}</span>
+                                <div class="basis-[25%]">
+                                    <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
+                                        ${el.name.split('')[0]}${initialName}
+                                    </div>
+                                </div>
+                                <div class="flex flex-col basis-[55%]">
+                                    <span class="block font-sans font-bold text-[17px]">${el.name}</span>
+                                    <span class="block font-sans ">${el.total_point} points</span>
                                 </div>
                             </div>
-                            <div class="flex flex-col basis-[55%]">
-                                <span class="block font-sans font-bold text-[17px]">${el.name}</span>
-                                <span class="block font-sans ">${el.total_point} points</span>
-                            </div>
-                        </div>
-                        `)
-                    });
-                }
-            });
+                            `)
+                        });
+                    }
+                });
+            }
         })
     }
 
@@ -728,44 +736,45 @@ export class Klasemen {
 
     prevPage(): any{
         $('.prevPage').on('click', (e) => {
-            let page:any = $(e.target).attr('page');
-            let currentPage = this.currentPage - 1;
+            if (this.currentPage !== 0) {
+                this.currentPage = this.currentPage - 1;
 
-            $.ajax({
-                type:'GET',
-                url:`${base_url}/klasemen/${(currentPage * this.offestLoad)}/${this.currentRound}`,
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                error: function(xhr, error){
-                    if (xhr.status === 500) {
-                        console.log(error);
-                    }
-                },
-                success:(res)=>{
-                    $('.klasemen').empty()
-
-                    res.data.forEach((el,i) => {
-                        let splitName = el.name.split(' ')
-                        let initialName = '';
-                        if(splitName.length>1) {
-                            initialName = el.name.split(' ')[1].split('')[0]
+                $.ajax({
+                    type:'GET',
+                    url:`${base_url}/klasemen/${(this.currentPage * this.offestLoad)}/${this.currentRound}`,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    error: function(xhr, error){
+                        if (xhr.status === 500) {
+                            console.log(error);
                         }
-                        $('.klasemen').append(`
-                        <div class="flex items-center w-260px">
-                            <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(currentPage * this.offestLoad) + (i + 1)}</span>
-                            <div class="basis-[25%]">
-                                <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
-                                    ${el.name.split('')[0]}${initialName}
+                    },
+                    success:(res)=>{
+                        $('.klasemen').empty()
+
+                        res.data.forEach((el,i) => {
+                            let splitName = el.name.split(' ')
+                            let initialName = '';
+                            if(splitName.length>1) {
+                                initialName = el.name.split(' ')[1].split('')[0]
+                            }
+                            $('.klasemen').append(`
+                            <div class="flex items-center w-260px">
+                                <span class="block font-sans font-bold text-[17px] mr-2 basis-[15%]">${(this.currentPage * this.offestLoad) + (i + 1)}</span>
+                                <div class="basis-[25%]">
+                                    <div class="w-[60px] h-[60px] bg-[#D6D6D8] rounded-full flex justify-center items-center mr-4">
+                                        ${el.name.split('')[0]}${initialName}
+                                    </div>
+                                </div>
+                                <div class="flex flex-col basis-[55%]">
+                                    <span class="block font-sans font-bold text-[17px]">${el.name}</span>
+                                    <span class="block font-sans ">${el.total_point} points</span>
                                 </div>
                             </div>
-                            <div class="flex flex-col basis-[55%]">
-                                <span class="block font-sans font-bold text-[17px]">${el.name}</span>
-                                <span class="block font-sans ">${el.total_point} points</span>
-                            </div>
-                        </div>
-                        `)
-                    });
-                }
-            });
+                            `)
+                        });
+                    }
+                });
+            }
         })
     }
 
