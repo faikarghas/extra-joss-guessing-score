@@ -66,6 +66,12 @@
     border-radius: 1.5rem;
 }
 
+@media (max-width:1024px) {
+  .modal-form .form-tebak{
+      width: 40%;
+  }
+}
+
 .modal-form button{
     color: white;
     border-radius: 1.5rem;
@@ -82,6 +88,16 @@
 
 .modal-form .basis40{
     flex-basis: 40%;
+}
+
+@media (max-width:1024px) {
+  .modal-form .basis60{
+    flex-basis: 100%;
+  }
+
+  .modal-form .basis40{
+      flex-basis: 100%;
+  }
 }
 
 .modal-form .mr-3{

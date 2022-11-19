@@ -604,27 +604,32 @@ class HomeController extends Controller
         $round = Round::where('status',1)->get();
 
         $currentRound = $round[0]->id;
-        QuizIndicator::updateOrCreate([
-            'id_user'   => Auth::user()->id,
-        ],[
-            'quiz_'.$currentRound => 0,
-        ]);
+        $findquizI = QuizIndicator::where('id_user', Auth::user()->id)->first();
+
+        if ( $findquizI ) {
+
+        } else {
+            QuizIndicator::create([
+                'quiz_'.$currentRound => 0,
+                'id_user' => Auth::user()->id
+            ]);
+        }
 
         $check_1 = QuizIndicator::where('id_user',Auth::user()->id)->get();
 
-
-        foreach ($req['result'] as $key => $res) {
-            UserQuestionAnswers::updateOrCreate([
-                'user_id'   => Auth::user()->id,
-                'question_id'  => $res['id_question'],
-            ],[
-                'choice_id' => $res['id_choice'],
-            ]);
-        }
         $userNeedUpdateForQuiz=[];
         $point = 40;
         if ($round[0]->id == 1) {
             if ($check_1[0]->quiz_1 == 0) {
+                foreach ($req['result'] as $key => $res) {
+                    UserQuestionAnswers::updateOrCreate([
+                        'user_id'   => Auth::user()->id,
+                        'question_id'  => $res['id_question'],
+                    ],[
+                        'choice_id' => $res['id_choice'],
+                    ]);
+                }
+
                 $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
                 ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
                 ->leftJoin('users','user_question_answers.user_id','=','users.id')
@@ -663,6 +668,14 @@ class HomeController extends Controller
 
         if ($round[0]->id == 2) {
             if ($check_1[0]->quiz_2 == 0) {
+                foreach ($req['result'] as $key => $res) {
+                    UserQuestionAnswers::updateOrCreate([
+                        'user_id'   => Auth::user()->id,
+                        'question_id'  => $res['id_question'],
+                    ],[
+                        'choice_id' => $res['id_choice'],
+                    ]);
+                }
                 $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
                 ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
                 ->leftJoin('users','user_question_answers.user_id','=','users.id')
@@ -705,6 +718,14 @@ class HomeController extends Controller
 
         if ($round[0]->id == 3) {
             if ($check_1[0]->quiz_3 == 0) {
+                foreach ($req['result'] as $key => $res) {
+                    UserQuestionAnswers::updateOrCreate([
+                        'user_id'   => Auth::user()->id,
+                        'question_id'  => $res['id_question'],
+                    ],[
+                        'choice_id' => $res['id_choice'],
+                    ]);
+                }
                 $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
                 ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
                 ->leftJoin('users','user_question_answers.user_id','=','users.id')
@@ -747,6 +768,14 @@ class HomeController extends Controller
 
         if ($round[0]->id == 4) {
             if ($check_1[0]->quiz_4 == 0) {
+                foreach ($req['result'] as $key => $res) {
+                    UserQuestionAnswers::updateOrCreate([
+                        'user_id'   => Auth::user()->id,
+                        'question_id'  => $res['id_question'],
+                    ],[
+                        'choice_id' => $res['id_choice'],
+                    ]);
+                }
                 $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
                 ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
                 ->leftJoin('users','user_question_answers.user_id','=','users.id')

@@ -118,7 +118,7 @@ export class GuessScore {
                     <div class="basis60">
                         <h2 class="text-black leading-[1] text-[40px] font-head mb-12">MASUKAN SKOR ANDA</h2>
                         <form class="">
-                            <div class="flex items-center mb-4">
+                            <div class="flex items-center justify-between mb-4">
                                 <div class="label">
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam1}" />
                                     <span class="text-black font-sans mr-6">${team1}</span>
@@ -126,7 +126,7 @@ export class GuessScore {
                                 <input value="${skor1}" min="0" class="form-tebak" type="number" name="guess_score_a"
                                 value=""></input>
                             </div>
-                            <div class="flex items-center mb-12">
+                            <div class="flex items-center justify-between mb-12">
                                 <div class="label">
                                     <img class="mr-3" width="32px" src="${base_url}/images/countries/${flagteam2}" />
                                     <span class="text-black font-sans mr-6">${team2}</span>
@@ -328,7 +328,7 @@ export class Quiz{
                 },
                 success:function(data){
                     console.log(data);
-                    
+
                     $(e.target).html('Terkirim')
                     $('.quiz-wrapper').remove();
                     $('.act-wrapper').remove();
