@@ -603,6 +603,9 @@ class HomeController extends Controller
         $req = $request->all();
         $round = Round::where('status',1)->get();
 
+        $check_1 = QuizIndicator::where('id_user',Auth::user()->id)->get();
+
+
         foreach ($req['result'] as $key => $res) {
             UserQuestionAnswers::updateOrCreate([
                 'user_id'   => Auth::user()->id,
@@ -611,96 +614,150 @@ class HomeController extends Controller
                 'choice_id' => $res['id_choice'],
             ]);
         }
-
-        $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
-        ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
-        ->leftJoin('users','user_question_answers.user_id','=','users.id')
-        ->whereRaw(
-            '(
-                CASE
-                    WHEN ( question_choices.point = 40 ) THEN true ELSE false
-                END
-            )'
-        )
-        ->where([['user_question_answers.status','=',0]])
-        ->get();
-
-
+        $userNeedUpdateForQuiz;
         $point = 40;
         if ($round[0]->id == 1) {
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('total_point', 20);
+            if ($check_1[0]->quiz_1 == 0) {
+                $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+                ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+                ->leftJoin('users','user_question_answers.user_id','=','users.id')
+                ->whereRaw(
+                    '(
+                        CASE
+                            WHEN ( question_choices.point = 40 ) THEN true ELSE false
+                        END
+                    )'
+                )
+                ->where([['user_question_answers.status','=',0]])
+                ->get();
 
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('point_1', 20);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('total_point', 20);
 
-            foreach ($userNeedUpdateForQuiz as $key => $value) {
-                if ($value->status == 0) {
-                    User::where([['id','=',$value->id]])
-                    ->increment('total_point', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('point_1', 20);
 
-                    User::where([['id','=',$value->id]])
-                    ->increment('point_1', 40);
+                foreach ($userNeedUpdateForQuiz as $key => $value) {
+                    if ($value->status == 0) {
+                        User::where([['id','=',$value->id]])
+                        ->increment('total_point', 40);
+
+                        User::where([['id','=',$value->id]])
+                        ->increment('point_1', 40);
+
+                        UserQuestionAnswers::where([['id','=',$value->uqa_id]])
+                        ->update(['status'=>1,'is_right'=>1]);
+                    }
                 }
             }
         }
 
         if ($round[0]->id == 2) {
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('total_point', 20);
+            if ($check_1[0]->quiz_2 == 0) {
+                $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+                ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+                ->leftJoin('users','user_question_answers.user_id','=','users.id')
+                ->whereRaw(
+                    '(
+                        CASE
+                            WHEN ( question_choices.point = 40 ) THEN true ELSE false
+                        END
+                    )'
+                )
+                ->where([['user_question_answers.status','=',0]])
+                ->get();
 
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('point_2', 20);
-            foreach ($userNeedUpdateForQuiz as $key => $value) {
-                if ($value->status == 0) {
-                    User::where([['id','=',$value->id]])
-                    ->increment('total_point', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('total_point', 20);
 
-                    User::where([['id','=',$value->id]])
-                    ->increment('point_2', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('point_2', 20);
+                foreach ($userNeedUpdateForQuiz as $key => $value) {
+                    if ($value->status == 0) {
+                        User::where([['id','=',$value->id]])
+                        ->increment('total_point', 40);
+
+                        User::where([['id','=',$value->id]])
+                        ->increment('point_2', 40);
+
+                        UserQuestionAnswers::where([['id','=',$value->uqa_id]])
+                        ->update(['status'=>1,'is_right'=>1]);
+                    }
                 }
             }
         }
 
         if ($round[0]->id == 3) {
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('total_point', 20);
+            if ($check_1[0]->quiz_3 == 0) {
+                $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+                ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+                ->leftJoin('users','user_question_answers.user_id','=','users.id')
+                ->whereRaw(
+                    '(
+                        CASE
+                            WHEN ( question_choices.point = 40 ) THEN true ELSE false
+                        END
+                    )'
+                )
+                ->where([['user_question_answers.status','=',0]])
+                ->get();
 
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('point_3', 20);
-            foreach ($userNeedUpdateForQuiz as $key => $value) {
-                if ($value->status == 0) {
-                    User::where([['id','=',$value->id]])
-                    ->increment('total_point', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('total_point', 20);
 
-                    User::where([['id','=',$value->id]])
-                    ->increment('point_3', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('point_3', 20);
+                foreach ($userNeedUpdateForQuiz as $key => $value) {
+                    if ($value->status == 0) {
+                        User::where([['id','=',$value->id]])
+                        ->increment('total_point', 40);
+
+                        User::where([['id','=',$value->id]])
+                        ->increment('point_3', 40);
+
+                        UserQuestionAnswers::where([['id','=',$value->uqa_id]])
+                        ->update(['status'=>1,'is_right'=>1]);
+                    }
                 }
+
             }
         }
 
         if ($round[0]->id == 4) {
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('total_point', 20);
+            if ($check_1[0]->quiz_4 == 0) {
+                $userNeedUpdateForQuiz = UserQuestionAnswers::select('user_question_answers.id as uqa_id','users.id','users.name','user_question_answers.status','user_question_answers.question_id','user_question_answers.choice_id','question_choices.point','question_choices.choice')
+                ->leftJoin('question_choices','user_question_answers.choice_id','=','question_choices.id')
+                ->leftJoin('users','user_question_answers.user_id','=','users.id')
+                ->whereRaw(
+                    '(
+                        CASE
+                            WHEN ( question_choices.point = 40 ) THEN true ELSE false
+                        END
+                    )'
+                )
+                ->where([['user_question_answers.status','=',0]])
+                ->get();
 
-            User::where([['id','=',Auth::user()->id]])
-            ->increment('point_4', 20);
-            foreach ($userNeedUpdateForQuiz as $key => $value) {
-                if ($value->status == 0) {
-                    User::where([['id','=',$value->id]])
-                    ->increment('total_point', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('total_point', 20);
 
-                    User::where([['id','=',$value->id]])
-                    ->increment('point_4', 40);
+                User::where([['id','=',Auth::user()->id]])
+                ->increment('point_4', 20);
+
+                foreach ($userNeedUpdateForQuiz as $key => $value) {
+                    if ($value->status == 0) {
+                        User::where([['id','=',$value->id]])
+                        ->increment('total_point', 40);
+
+                        User::where([['id','=',$value->id]])
+                        ->increment('point_4', 40);
+
+                        UserQuestionAnswers::where([['id','=',$value->uqa_id]])
+                        ->update(['status'=>1,'is_right'=>1]);
+                    }
                 }
             }
-        }
 
-        foreach ($userNeedUpdateForQuiz as $key => $value) {
-            if ($value->status == 0) {
-                UserQuestionAnswers::where([['id','=',$value->uqa_id]])
-                ->update(['status'=>1,'is_right'=>1]);
-            }
         }
 
         $currentRound = $round[0]->id;
@@ -712,7 +769,7 @@ class HomeController extends Controller
 
         return response()->json([
             'code' => '200',
-            'message' => 'success',
+            'message' => $check_1[0]->quiz_1,
             'totalTrue' => count($userNeedUpdateForQuiz),
             'quiz' => true
         ],200);

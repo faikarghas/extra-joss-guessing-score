@@ -306,7 +306,7 @@ export class Quiz{
     kirimJawabanQuiz(): void{
         $('.modal-quiz').on('click','button.send-answer', (e) => {
             let id = $(e.target).attr('data-id');
-            $(e.target).html('Loading...')
+            $(e.target).remove()
 
             $.ajax({
                 type:'POST',
@@ -320,7 +320,7 @@ export class Quiz{
                         $(e.target).html('Gagal Terkirim')
 
                         setTimeout(() => {
-                            $(e.target).html('Kirim')
+                            location.reload()
                         }, 2500);
                     }
                 },
