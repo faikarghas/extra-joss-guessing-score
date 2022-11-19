@@ -317,6 +317,8 @@ export class Quiz{
                 },
                 error: function(xhr, error){
                     if (xhr.status === 500) {
+                        console.log(error);
+
                         $(e.target).html('Gagal Terkirim')
 
                         setTimeout(() => {
@@ -325,6 +327,8 @@ export class Quiz{
                     }
                 },
                 success:function(data){
+                    console.log(data);
+                    
                     $(e.target).html('Terkirim')
                     $('.quiz-wrapper').remove();
                     $('.act-wrapper').remove();

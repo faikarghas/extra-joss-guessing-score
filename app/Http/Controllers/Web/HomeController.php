@@ -603,6 +603,13 @@ class HomeController extends Controller
         $req = $request->all();
         $round = Round::where('status',1)->get();
 
+        $currentRound = $round[0]->id;
+        QuizIndicator::updateOrCreate([
+            'id_user'   => Auth::user()->id,
+        ],[
+            'quiz_'.$currentRound => 0,
+        ]);
+
         $check_1 = QuizIndicator::where('id_user',Auth::user()->id)->get();
 
 
@@ -614,7 +621,7 @@ class HomeController extends Controller
                 'choice_id' => $res['id_choice'],
             ]);
         }
-        $userNeedUpdateForQuiz;
+        $userNeedUpdateForQuiz=[];
         $point = 40;
         if ($round[0]->id == 1) {
             if ($check_1[0]->quiz_1 == 0) {
@@ -649,6 +656,8 @@ class HomeController extends Controller
                         ->update(['status'=>1,'is_right'=>1]);
                     }
                 }
+
+
             }
         }
 
@@ -684,6 +693,13 @@ class HomeController extends Controller
                         ->update(['status'=>1,'is_right'=>1]);
                     }
                 }
+
+                $currentRound = $round[0]->id;
+                QuizIndicator::updateOrCreate([
+                    'id_user'   => Auth::user()->id,
+                ],[
+                    'quiz_'.$currentRound => 1,
+                ]);
             }
         }
 
@@ -720,6 +736,12 @@ class HomeController extends Controller
                     }
                 }
 
+                $currentRound = $round[0]->id;
+                QuizIndicator::updateOrCreate([
+                    'id_user'   => Auth::user()->id,
+                ],[
+                    'quiz_'.$currentRound => 1,
+                ]);
             }
         }
 
@@ -756,6 +778,13 @@ class HomeController extends Controller
                         ->update(['status'=>1,'is_right'=>1]);
                     }
                 }
+
+                $currentRound = $round[0]->id;
+                QuizIndicator::updateOrCreate([
+                    'id_user'   => Auth::user()->id,
+                ],[
+                    'quiz_'.$currentRound => 1,
+                ]);
             }
 
         }
@@ -766,10 +795,9 @@ class HomeController extends Controller
         ],[
             'quiz_'.$currentRound => 1,
         ]);
-
         return response()->json([
             'code' => '200',
-            'message' => $check_1[0]->quiz_1,
+            'message' => $check_1,
             'totalTrue' => count($userNeedUpdateForQuiz),
             'quiz' => true
         ],200);
